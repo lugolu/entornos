@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration> 
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value=" %d{dd/MM/yyyy HH:mm:ss} %-5p en Clase: %c{1} - MSN: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="LOG-Usuarios" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />  
+		<param name="File" value="ENTORNOS-Usuarios.log"/>
+		<param name="Append" value="true"/>
+		<param name="Threshold" value="WARN"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="===================================================================================================================================\n %d{dd/MM/yyyy HH:mm:ss} %-5p en Clase: %c{1} - MSN: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="LOG-Presentacion" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />  
+		<param name="File" value="ENTORNOS.log"/>
+		<param name="Append" value="true"/>
+		<param name="Threshold" value="WARN"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="===================================================================================================================================\n %d{dd/MM/yyyy HH:mm:ss} %-5p en Clase: %c{1} - MSN: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="LOG-Hibernate" class="org.apache.log4j.FileAppender">
+		<param name="File" value="ENTORNOS-Hibernate.log"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value=" %d{dd/MM/yyyy HH:mm:ss} %-5p en Clase: %c{1} - MSN: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="LOG-Business" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />  
+		<param name="File" value="ENTORNOS-Business.log"/>
+		<param name="Append" value="true"/>
+		<param name="Threshold" value="ERROR"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="===================================================================================================================================\n %d{dd/MM/yyyy HH:mm:ss} %-5p en Clase: %c{1} - MSN: %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="otros.usuarios">
+		<level value="warn"></level>
+		<appender-ref ref="LOG-Usuarios"/>
+	</logger>
+
+	<logger name="org.hibernate.SQL">
+		<level value="warn"></level>
+		<!-- Descomentar para loggear los valores de parametros -->
+		<!-- <level value="debug"></level> -->
+		<appender-ref ref="LOG-Hibernate"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="org.hibernate.type">
+		<level value="warn"></level>
+		<!-- Descomentar para loggear los valores de parametros -->
+		<!-- <level value="trace"></level> -->
+		<appender-ref ref="LOG-Hibernate"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="org.hibernate.hql">
+		<level value="warn"></level>
+		<appender-ref ref="LOG-Hibernate"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="org.hibernate.transaction">
+		<level value="warn"></level>
+		<appender-ref ref="LOG-Hibernate"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="org.hibernate.jdbc">
+		<level value="warn"></level>
+		<appender-ref ref="LOG-Hibernate"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="ar.com.thinksoft" >
+		<level value="info"></level>
+		<appender-ref ref="LOG-Business"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="ar.com.thinksoft.interfaces" additivity="false" >
+		<level value="info"></level>
+		<appender-ref ref="LOG-Presentacion"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<root>
+		<level value="error" />
+		<appender-ref ref="STDOUT"/>
+	</root>
+</log4j:configuration>
