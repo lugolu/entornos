@@ -57,11 +57,11 @@ public class GeneraMapeos {
 			String path = URLDecoder.decode(ClassLoader.getSystemClassLoader().getResource(".").getPath(), "UTF-8");
 
 			boolean java = !path.contains("target");
-			 if (java) {
-				 path = path.split("/bin")[0] + "/src/ar/com/thinksoft/dtos/";
-			 } else {
-				 path = path.split("/target")[0]+"/src/main/java/ar/com/thinksoft/dtos/";
-			 }
+			if (java) {
+				path = path.split("/bin")[0] + "/src/ar/com/thinksoft/dtos/";
+			} else {
+				path = path.split("/target")[0]+"/src/main/java/ar/com/thinksoft/dtos/";
+			}
 
 			File fDestino = new File(path);
 			List<ClaseMapeo> clases = getFiles(fDestino);
