@@ -101,21 +101,7 @@ public class HandlerException {
 				messageError.append("\n LastSQL:" + jdbc.getSQL().toString().trim());
 			}
 			messageError.append(stackTrace);
-			Logger logger = null;
-			if (stackTrace.contains("fCalcValorPrestacion")
-					|| stackTrace.contains("fCalcValorItem")) {
-				logger = Logger.getLogger("otros.valores");
-			}
-			else if (causeError.contains(MessageBundle.PACIENTE_NO_TIENE_PLAN_CONVENIO_CONFIGURADO)) {
-				logger = Logger.getLogger("otros.errores");
-			}
-			else if (messageError.toString().contains("ImpScores.calcularScore")
-					|| messageError.toString().contains("ImpScores.insertScorePac")) {
-				logger = Logger.getLogger("otros.scores");
-			}
-			else {
-				logger = Logger.getLogger(clase);
-			}
+			Logger logger = Logger.getLogger(clase);
 			if (jdbc.getErrorCode() == 942 || jdbc.getErrorCode() == 17002 || jdbc.getErrorCode() == 17008) {
 				logger.fatal(messageError);
 			} else {
@@ -241,24 +227,7 @@ public class HandlerException {
 				messageError.append("\n LastSQL:" + ge.getSQLState());
 			}
 			messageError.append(stackTrace);
-			Logger logger = null;
-			if (messageError.toString().contains("ORA-01017")
-					|| messageError.toString().contains("validateSecurity")
-					|| messageError.toString().contains(MessageBundle.PASSWORD_EXPIRED_WARN)
-					|| messageError.toString().contains("createUser")
-					|| messageError.toString().contains("changeUserPassword")) {
-				logger = Logger.getLogger("otros.usuarios");
-			}
-			else if (causeError.contains(MessageBundle.PACIENTE_NO_TIENE_PLAN_CONVENIO_CONFIGURADO)) {
-				logger = Logger.getLogger("otros.errores");
-			}
-			else if (messageError.toString().contains("ImpScores.calcularScore")
-					|| messageError.toString().contains("ImpScores.insertScorePac")) {
-				logger = Logger.getLogger("otros.scores");
-			}
-			else {
-				logger = Logger.getLogger(clase);
-			}
+			Logger logger = Logger.getLogger(clase);
 			if (ge.getErrorCode() == 942 || ge.getErrorCode() == 17002 || ge.getErrorCode() == 17008) {
 				logger.fatal(messageError);
 			} else {
@@ -328,7 +297,7 @@ public class HandlerException {
 		case 942:   throw new BusinessException(MessageBundle.TABLE_DOES_NOT_EXIST_FATAL,SeverityBundle.FATAL, error, cause);
 		case 988:	throw new BusinessException(MessageBundle.INVALID_PASSWORD_ERROR, SeverityBundle.WARN);
 		case 1017:  throw new BusinessException(MessageBundle.INVALID_USER_PASSWORD_ERROR,SeverityBundle.WARN, error, cause);
-		case 1045:  throw new BusinessException(MessageBundle.PERSONAL_NO_ACCESS_ERROR, SeverityBundle.ERROR, error, cause);
+		case 1045:  throw new BusinessException(MessageBundle.USUARIO_NO_ACCESS_ERROR, SeverityBundle.ERROR, error, cause);
 		// error de SQL Server
 		case 515:
 		case 1400:  throw new BusinessException(MessageBundle.REQUIRED_FIELD_ERROR,SeverityBundle.WARN, error, cause);

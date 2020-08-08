@@ -30,26 +30,6 @@ import ar.com.thinksoft.exception.BusinessException;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class Utils {
 
-	public static final String LOGO_APP_CENTRO_ATENCION = Constants.STRING_LOGO_APP + "_" + Constants.STRING_CENTRO_ATENCION + "_";
-	public static final String LOGO_INICIO_APP_CENTRO_ATENCION =  Constants.STRING_LOGO_INICIO_APP + "_" + Constants.STRING_CENTRO_ATENCION + "_";
-	public static final String LOGO_IMPRESION_CENTRO_ATENCION = Constants.STRING_LOGO_IMPRESION + "_" + Constants.STRING_CENTRO_ATENCION + "_";
-	public static final String LOGO_IMPRESION_SMALL_CENTRO_ATENCION = Constants.STRING_LOGO_IMPRESION_SMALL + "_" + Constants.STRING_CENTRO_ATENCION + "_";
-	public static final String LOGO_TERM_AUTO_RECEP_CENTRO_ATENCION = Constants.STRING_LOGO_TERM_AUTO_RECEP + "_" + Constants.STRING_CENTRO_ATENCION + "_";
-	public static final String LOGO_COMP_INT_CENTRO_ATENCION = Constants.STRING_LOGO_COMP_INT + "_" + Constants.STRING_CENTRO_ATENCION + "_";
-
-	public static final String LOGO_APP_EMPRESA = Constants.STRING_LOGO_APP + "_" + Constants.STRING_EMPRESA + "_";
-	public static final String LOGO_INICIO_APP_EMPRESA =  Constants.STRING_LOGO_INICIO_APP + "_" + Constants.STRING_EMPRESA + "_";
-	public static final String LOGO_IMPRESION_EMPRESA = Constants.STRING_LOGO_IMPRESION + "_" + Constants.STRING_EMPRESA + "_";
-	public static final String LOGO_IMPRESION_SMALL_EMPRESA = Constants.STRING_LOGO_IMPRESION_SMALL + "_" + Constants.STRING_EMPRESA + "_";
-	public static final String LOGO_TERM_AUTO_RECEP_EMPRESA = Constants.STRING_LOGO_TERM_AUTO_RECEP + "_" + Constants.STRING_EMPRESA + "_";
-	public static final String LOGO_COMP_INT_EMPRESA = Constants.STRING_LOGO_COMP_INT + "_" + Constants.STRING_EMPRESA + "_";
-
-	public static final String LOGO_APP_PTO_VTA_EMPRESA = Constants.STRING_LOGO_APP + "_" + Constants.STRING_PTO_VTA_EMPRESA + "_";
-	public static final String LOGO_INICIO_APP_PTO_VTA_EMPRESA =  Constants.STRING_LOGO_INICIO_APP + "_" + Constants.STRING_PTO_VTA_EMPRESA + "_";
-	public static final String LOGO_IMPRESION_PTO_VTA_EMPRESA = Constants.STRING_LOGO_IMPRESION + "_" + Constants.STRING_PTO_VTA_EMPRESA + "_";
-	public static final String LOGO_TERM_AUTO_RECEP_PTO_VTA_EMPRESA = Constants.STRING_LOGO_TERM_AUTO_RECEP + "_" + Constants.STRING_PTO_VTA_EMPRESA + "_";
-	public static final String LOGO_COMP_INT_PTO_VTA_EMPRESA = Constants.STRING_LOGO_COMP_INT + "_" + Constants.STRING_PTO_VTA_EMPRESA + "_";
-
 	private Utils() {}
 
 	// METODOS DE SESSION

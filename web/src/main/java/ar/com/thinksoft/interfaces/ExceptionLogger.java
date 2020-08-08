@@ -52,16 +52,6 @@ public class ExceptionLogger {
 				|| messageError.toString().contains("createUser")) {
 			logger = Logger.getLogger("otros.usuarios");
 		}
-		else if (causeError.contains("NN_21_TMP_RECEPCION_AMB")) {
-			logger = Logger.getLogger("otros.errores");
-		}
-		else if (causeError.contains(MessageBundle.PACIENTE_NO_TIENE_PLAN_CONVENIO_CONFIGURADO)) {
-			logger = Logger.getLogger("otros.errores");
-		}
-		else if (messageError.toString().contains("ImpScores.calcularScore")
-				|| messageError.toString().contains("ImpScores.insertScorePac")) {
-			logger = Logger.getLogger("otros.scores");
-		}
 		else {
 			logger = Logger.getLogger(ExceptionLogger.class);
 		}
