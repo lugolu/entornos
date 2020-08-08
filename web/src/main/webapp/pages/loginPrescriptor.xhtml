@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagenes/favicon.ico" />
+	    <title>#{msg.bienvenido_completo_prescriptores}</title>
+        <h:outputScript name="js/nanoscroller.js" library="#{guestPreferences.contract}-layout" />
+        <h:outputScript name="js/layout.js" library="#{guestPreferences.contract}-layout" />
+        <ui:insert name="head"/>
+        <f:facet name="last">
+			<h:outputScript name="common.js" library="javascripts" />
+        </f:facet>
+    </h:head>
+
+    <h:body styleClass="login-body">
+		<h:form id="formLogin" styleClass="">
+			<div class="login-panel"></div>
+		    <div class="login-content">
+		        <p:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg" />
+
+		        <br/>
+		        <h:outputText value="#{msg.bienvenido_completo_prescriptores}" styleClass="Fs20" />
+		        <br/>		        
+		        <h:outputText value="(#{msg.ingrese_email_contrasena})" />
+		        <br/>
+		        <br/>
+		        <br/>
+		        <br/>
+		
+		        <div class="login-input-wrapper">
+					<p:inputText onkeydown="javascript:tab(event,this);" autocomplete="off" id="txtUser" 
+								 value="#{bbLoginPrescriptor.email}" placeholder="#{msg.correo_electronico}">
+						<p:focus />
+				    </p:inputText>
+		            <i class="fa fa-user" />
+		        </div>
+
+		        <div class="login-input-wrapper">
+                    <p:password value="#{bbLoginPrescriptor.contrasena}" autocomplete="off" placeholder="#{msg.contrasena}" feedback="false" />
+		            <i class="fa fa-lock" />
+		        </div>
+
+               	<p:commandButton value="#{msg.ingresar}" styleClass="Wid100px"
+								 actionListener="#{bbLoginPrescriptor.onLogin()}"
+								 disabled="#{bbLoginPrescriptor.contadorIntentos eq 3}" />
+				<div class="MarTop10px">
+					<h:outputLink styleClass="Fs12" 
+								  value="#{facesContext.externalContext.requestContextPath}/pages/prescriptor/recuperarContrasena.faces">
+						<h:outputText value="#{msg.olvido_contrasena}" />
+					</h:outputLink>
+				</div>
+
+		    </div>
+		</h:form>
+		<!-- AGREGADOS -->
+		<!-- GROWLS -->
+		<h:panelGroup id="messages">
+			<p:growl showDetail="true" sticky="false" autoUpdate="false" life="4000" severity="info">
+				<p:autoUpdate />
+			</p:growl>
+			<p:growl showDetail="true" sticky="false" autoUpdate="false" life="8000" severity="warn">
+				<p:autoUpdate />
+			</p:growl>
+			<p:growl showDetail="true" sticky="true" autoUpdate="false" severity="error">
+				<p:autoUpdate />
+			</p:growl>
+		</h:panelGroup>
+		
+       	<script>
+	        var ajaxInProgress;
+	        function startHandler() {
+	            ajaxInProgress = setTimeout(function () {
+	            	PF('statusDialog').show();
+	            }, 500);
+	        }
+	        function endHandler() {
+	            clearTimeout(ajaxInProgress);
+	            PF('statusDialog').hide();
+	            ajaxInProgress = null;
+	        }
+	    </script>
+		<p:ajaxStatus onstart="startHandler();" oncomplete="endHandler();"/>
+		<p:dialog id="LoadingDialog" modal="true" widgetVar="statusDialog"
+				  closable="false" resizable="false" draggable="false">
+			<i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+		</p:dialog>
+
+        <pe:blockUI widgetVar="$blockUI" autoShow="true" event="change">  
+		    <h:panelGrid>
+		        <h:outputText value="Por favor espere..." styleClass="nowrap FontBold Fs20" />  
+		    </h:panelGrid>  
+		</pe:blockUI>
+        
+        <h:outputStylesheet name="css/nanoscroller.css" library="#{guestPreferences.contract}-layout" />
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="#{guestPreferences.contract}-layout" />
+        <h:outputStylesheet name="commonV2.css" library="estilos" />
+        <h:outputStylesheet name="autogestion.css" library="estilos" />
+    </h:body>
+
+</html>

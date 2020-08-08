@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ar.com.thinksoft</groupId>
+	<artifactId>entornosJsf</artifactId>
+	<packaging>pom</packaging>
+	<version>0.0.1</version>
+	<name>entornos</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+<!-- 	commons-test -->
+<!-- 		<easymock.version>4.0.2</easymock.version> -->
+		<junit.version>4.13</junit.version>
+		<mockito.version>3.3.3</mockito.version>
+<!-- 		<powermock.version>2.0.4</powermock.version> -->
+<!-- 	commons-web -->
+		<jstl.version>1.2</jstl.version>
+		<faces.version>2.2.13</faces.version>
+		<primefaces.version>6.1.14</primefaces.version>
+		<primefaces.babylon.version>3.0.1</primefaces.babylon.version>
+		<primefaces.california.version>1.0.1</primefaces.california.version>
+		<primefaces.extensions.version>6.1.1</primefaces.extensions.version>
+		<primefaces.rio.version>2.0</primefaces.rio.version>
+		<primefaces.roma.version>2.0.1</primefaces.roma.version>
+		<primefaces.spark.version>1.3.1</primefaces.spark.version>
+		<primefaces.ultima.version>1.0.7</primefaces.ultima.version>
+		<primefaces.verona.version>2.1.1</primefaces.verona.version>
+		<quartz.version>2.1.0</quartz.version>
+		<selenium.version>4.0.0-alpha-2</selenium.version>
+		<servlet.version>3.0.1</servlet.version>
+<!-- 	commons-ws -->
+		<axiom.version>1.2.13</axiom.version>
+		<axis2.version>1.6.2</axis2.version>
+<!-- 	plugins -->
+		<compiler.plugin>3.8.1</compiler.plugin>
+		<build.tools.version>1.0.7</build.tools.version>
+		<checkstyle.version>8.34</checkstyle.version>
+		<checkstyle.plugin>3.1.1</checkstyle.plugin>
+		<jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.it.execution.data.file>
+		<jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.ut.execution.data.file>
+		<jacoco.version>0.8.5</jacoco.version>
+		<jar.plugin>3.2.0</jar.plugin>
+		<pmd.plugin.version>3.12.0</pmd.plugin.version>
+		<pmdVersion>6.19.0</pmdVersion>
+		<war.plugin>3.2.3</war.plugin>
+<!-- 	afip -->
+<!-- 	age -->
+<!-- 	agi -->
+<!-- 	agp -->
+<!-- 	anmat -->
+<!-- 	bionexo -->
+<!-- 	business -->
+		<poi.version>3.12</poi.version>
+<!-- 	core -->
+		<commons.io.version>2.4</commons.io.version>
+		<gson.version>2.2.4</gson.version>
+		<hapi.version>2.0</hapi.version>
+		<hibernate.version>4.2.6.Final</hibernate.version>
+		<itextpdf.version>5.5.7</itextpdf.version>
+<!-- 	dicom -->
+		<dcm4che.version>5.11.0</dcm4che.version>
+<!-- 	dtos -->
+<!-- 	persistance -->
+<!-- 	scheduler -->
+<!-- 	web -->
+<!-- 	web-report -->
+<!-- 	ws -->
+		<jersey.version>2.29.1</jersey.version>
+<!-- 	validadores -->
+
+		<antrun.version>1.8</antrun.version>
+		<commons.fileupload.version>1.2.2</commons.fileupload.version>
+		<dependency.locations.enabled>false</dependency.locations.enabled>
+		<derby.version>10.14.2.0</derby.version>
+		<mail.version>1.6.2</mail.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<repositories>
+<!-- 		<repository> -->
+<!-- 			<id>dcm4che</id> -->
+<!-- 			<name>dcm4che</name> -->
+<!-- 			<url>http://www.dcm4che.org/maven2/</url> -->
+<!-- 		</repository> -->
+<!-- 		<repository> -->
+<!-- 			<id>enonic</id> -->
+<!-- 			<name>enonic</name> -->
+<!-- 			<url>https://repo.enonic.com/public/</url> -->
+<!-- 		</repository> -->
+<!-- 		<repository> -->
+<!-- 			<id>jabylon</id> -->
+<!-- 			<name>jabylon</name> -->
+<!-- 			<url>http://www.jabylon.org/maven/</url> -->
+<!-- 		</repository> -->
+<!-- 		<repository> -->
+<!-- 			<id>openmindonline</id> -->
+<!-- 			<name>openmindonline</name> -->
+<!-- 			<url>http://repository.openmindonline.it/</url> -->
+<!-- 		</repository> -->
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler.plugin}</version>
+				<configuration>
+					<encoding>Cp1252</encoding>
+					<parameters>true</parameters>
+					<source>1.8</source>
+					<target>1.8</target>
+					<failOnError>false</failOnError>
+					<fork>true</fork>
+					<meminitial>512m</meminitial>
+					<maxmem>1048m</maxmem>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.8.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<argLine>${argLine} -Xmx1024m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<configuration>
+					<destFile>${project.basedir}/target/jacoco.exec</destFile>
+					<append>true</append>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-pmd-plugin</artifactId> -->
+<!-- 				<version>${pmd.plugin.version}</version> -->
+<!-- 				<configuration> -->
+<!-- 					<rulesets> -->
+<!-- 						<ruleset>pmd-ruleset.xml</ruleset> -->
+<!-- 					</rulesets> -->
+<!-- 					<failOnViolation>false</failOnViolation> -->
+<!-- 					<printFailingErrors>false</printFailingErrors> -->
+<!-- 				</configuration> -->
+<!-- 				<dependencies> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>ar.com.thinksoft</groupId> -->
+<!-- 						<artifactId>build-tools</artifactId> -->
+<!-- 						<version>${build.tools.version}</version> -->
+<!-- 					</dependency> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>net.sourceforge.pmd</groupId> -->
+<!-- 						<artifactId>pmd-core</artifactId> -->
+<!-- 						<version>${pmdVersion}</version> -->
+<!-- 					</dependency> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>net.sourceforge.pmd</groupId> -->
+<!-- 						<artifactId>pmd-java</artifactId> -->
+<!-- 						<version>${pmdVersion}</version> -->
+<!-- 					</dependency> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>net.sourceforge.pmd</groupId> -->
+<!-- 						<artifactId>pmd-javascript</artifactId> -->
+<!-- 						<version>${pmdVersion}</version> -->
+<!-- 					</dependency> -->
+<!-- 					<dependency> -->
+<!-- 						<groupId>net.sourceforge.pmd</groupId> -->
+<!-- 						<artifactId>pmd-jsp</artifactId> -->
+<!-- 						<version>${pmdVersion}</version> -->
+<!-- 					</dependency> -->
+<!-- 				</dependencies> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<goals> -->
+<!-- 							<goal>check</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.plugin}</version>
+				<configuration>
+					<configLocation>checkstyle/min.xml</configLocation>
+					<consoleOutput>false</consoleOutput>
+					<failsOnError>false</failsOnError>
+					<failOnViolation>false</failOnViolation>
+					<logViolationsToConsole>false</logViolationsToConsole>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>ar.com.thinksoft</groupId>
+						<artifactId>build-tools</artifactId>
+						<version>${build.tools.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${checkstyle.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<outputName>fails</outputName>
+					<showSuccess>false</showSuccess>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
+			<!-- 			<plugin> -->
+			<!-- 				<groupId>com.github.spotbugs</groupId> -->
+			<!-- 				<artifactId>spotbugs-maven-plugin</artifactId> -->
+			<!-- 				<version>3.1.12.2</version> -->
+			<!-- 			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-pmd-plugin</artifactId> -->
+<!-- 				<version>${pmd.plugin.version}</version> -->
+<!-- 				<configuration> -->
+<!-- 					<rulesets> -->
+<!-- 						<ruleset>pmd-ruleset.xml</ruleset> -->
+<!-- 					</rulesets> -->
+<!-- 				</configuration> -->
+<!-- 				<reportSets> -->
+<!-- 					<reportSet> -->
+<!-- 						<reports> -->
+<!-- 							<report>pmd</report> -->
+<!-- 						</reports> -->
+<!-- 					</reportSet> -->
+<!-- 				</reportSets> -->
+<!-- 			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.plugin}</version>
+				<configuration>
+					<configLocation>checkstyle/min.xml</configLocation>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+	<modules>
+		<module>core</module>
+		<module>dtos</module>
+		<module>persistance</module>
+ 		<module>business</module>
+		<module>web</module>
+		<module>report</module>
+	</modules>
+</project>

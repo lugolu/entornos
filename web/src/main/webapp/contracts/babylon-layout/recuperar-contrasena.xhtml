@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" >
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{msg.olvido_contrasena}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagenes/favicon.ico" />
+        <style>
+        	.login-body .login-panel .logo-container img {
+    			width: 200px !important;
+			}
+			.login-body {
+    			background: radial-gradient(circle at 50% 100%, #dcdfe0, #abadae);
+    			border-top: 10px solid #9fc9dd;
+    		}
+        </style>
+    </h:head>
+	
+    <h:body styleClass="login-body">
+    	<script>
+	    	function redirect(){
+		    	window.setTimeout(function () {
+		            location.href = '#{facesContext.externalContext.requestContextPath}'+'/pages/login.faces';
+		        }, 10000);
+	    	}
+    	</script>
+    	<h:form id="formLogin" styleClass="">
+	        <div class="login-panel ui-fluid">
+	        	<ui:fragment rendered="#{!bbRecuperarContrasena.mensaje}">
+		            <div class="ui-g">
+		            	<div class="ui-g-12 logo-container">
+	                    	<h:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg"  width="100%" />
+	                    	<h1>#{msg.olvido_contrasena}</h1>
+	                	</div>
+						<div class="ui-g-12">
+							<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" showSummary="false" />
+						</div>
+						<div class="ui-g-12">
+	                        <p:inputText value="#{bbRecuperarContrasena.paciente.eMail}" placeholder="#{msg.correo_electronico}" 
+										 onkeydown="tab(event,this);" styleClass="InputWid100" />
+		                </div>
+							
+						<div class="ui-g-12">
+							<p:commandButton value="#{msg.recuperar}" styleClass="Wid150px"
+											 actionListener="#{bbRecuperarContrasena.recuperar()}" 
+											 update=":formLogin"/>
+						</div>
+							
+						<div class="ui-g-12">
+							<h:outputText value="#{msg.recordo_contrasena}: " styleClass="Fs12" />
+							<h:outputLink value="#{facesContext.externalContext.requestContextPath}/pages/login.faces">
+								<h:outputText value="#{msg.iniciar_sesion}" />
+							</h:outputLink>
+						</div>
+		            </div>
+		        </ui:fragment>
+	        	<ui:fragment rendered="#{bbRecuperarContrasena.mensaje}">
+		            <div class="ui-g">
+		            	<div class="ui-g-12 logo-container">
+	                    	<h:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg"  width="100%" />
+	                    	<h1>#{msg.recuperar_contrasena}</h1>
+	                	</div>
+						<div class="ui-g-12">
+							<h:outputText value="#{msg.mensaje_recuperar_contrasena}" styleClass="" />
+						</div>
+						<div class="ui-g-12">
+							<h:outputText value="#{msg.redirect_login_mensaje}" styleClass="MarRig5px" />
+							<h:outputLink value="#{facesContext.externalContext.requestContextPath}/pages/login.faces">
+								<h:outputText value="#{msg.aqui}" />
+							</h:outputLink>
+						</div>
+		            </div>
+	        		<script>
+	        			redirect();
+	        		</script>
+	        	</ui:fragment>
+        	</div>
+	        
+        </h:form>
+        
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px"
+        			  onstart="PF('$blockUI').block();" oncomplete="PF('$blockUI').unblock();" >
+           <f:facet name="start">
+               <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+           </f:facet>
+
+           <f:facet name="complete">
+           </f:facet>
+        </p:ajaxStatus>
+        
+        <pe:blockUI widgetVar="$blockUI" autoShow="true" event="change">  
+		    <h:panelGrid>  
+		        <h:outputText value="Por favor espere..." styleClass="nowrap FontBold Fs20" />  
+		    </h:panelGrid>  
+		</pe:blockUI>  
+        
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="#{guestPreferences.contract}-layout" />
+        <h:outputStylesheet name="commonV2.css" library="estilos" />
+        <h:outputStylesheet name="autogestion.css" library="estilos" />
+    </h:body>
+
+</html>

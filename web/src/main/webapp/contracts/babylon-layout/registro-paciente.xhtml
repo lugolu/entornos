@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" >
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{msg.formulario_registro}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagenes/favicon.ico" />
+        <style>
+        	.login-body .login-panel{
+        		width: 1000px;
+       		    padding: 50px 100px;
+        	}
+        	
+        	@media (max-width: 640px) {
+				.login-body .login-panel {
+    				width: 100%;
+    				padding: 50px;
+				}
+			}
+        	
+        	.step-div {
+        		text-align: left;
+        	}
+        	.login-body .login-panel .logo-container img {
+    			width: 200px !important;
+			}
+			.login-body {
+    			background: radial-gradient(circle at 50% 100%, #dcdfe0, #abadae);
+    			border-top: 10px solid #9fc9dd;
+    		}
+    		.login-body .login-panel .ui-g-12 {
+    			padding: .5em;
+			}
+			body .ui-chkbox .ui-chkbox-box {
+    			border: 1px solid #c6cbcf;
+   			}
+        </style>
+        <f:facet name="last">
+			<h:outputScript name="common.js" library="javascripts" />
+        </f:facet>
+    </h:head>
+	
+    <h:body styleClass="login-body">
+    	<script>
+	    	function redirect(){
+		    	window.setTimeout(function () {
+		            location.href = '#{facesContext.externalContext.requestContextPath}'+'/pages/login.faces';
+		        }, 10000);
+	    	}
+    	</script>
+   		<div class="login-panel ui-fluid">
+   			<h:form id="formRegistro" styleClass="" >
+	   			 <div class="ui-g">
+	            	<div class="ui-g-12" style="padding-top: 0 !important;">
+	            		<div class="ui-g-12 logo-container">
+	                    	<h:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg"  width="100%" />
+	                    	<ui:fragment rendered="#{! bbRegistroPaciente.registroCompletado}">
+	                    		<h1>#{msg.formulario_registro}</h1>
+	                    	</ui:fragment>
+	                    	<ui:fragment rendered="#{ bbRegistroPaciente.registroCompletado}">
+								<h1>#{msg.registro_exitoso}</h1>
+							</ui:fragment>			           		
+	                	</div>
+						
+						<ui:fragment rendered="#{! bbRegistroPaciente.registroCompletado}">
+		                	<div class="ui-g-12">
+					    		<!-- STEPS HEADER -->
+								<p:remoteCommand name="stepChange" actionListener="#{bbRegistroPaciente.onStepChange()}" 
+												 process="@form" update="@form" />
+					    		<p:steps activeIndex="#{bbRegistroPaciente.currentStep}" styleClass="custom-steps MarBot20px" readonly="true">
+								    <p:menuitem value="#{msg.datos_cuenta}"
+								    			onclick="stepChange([{name: 'step', value: 0}])" />
+								    <p:menuitem value="#{msg.datos_del_paciente}" 
+								    			onclick="stepChange([{name: 'step', value: 1}])" />
+								    <p:menuitem value="#{msg.comunicacion}" 
+								    			onclick="stepChange([{name: 'step', value: 2}])" />
+								    <p:menuitem value="#{msg.confirmacion}" 
+								    			onclick="stepChange([{name: 'step', value: 3}])" />
+								</p:steps>
+							</div>
+						</ui:fragment>
+					</div>
+				</div>
+				
+				<div class="step-div">
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12 no-padding">
+	              			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" showSummary="false" />
+	              		</div>
+	              		<ui:fragment rendered="#{! bbRegistroPaciente.registroCompletado}">
+							<!-- STEPS 0: -->
+							<ui:fragment rendered="#{bbRegistroPaciente.currentStep eq 0}" id="step0">
+								<div class="ui-g-12 TexAlCenter">
+									<h:outputText value="Ingrese un nombre de usuario y contraseña para su cuenta web." 
+												  styleClass="Fs16" />
+								</div>
+								<div class="ui-g-12 no-padding">
+			            			<div class="ui-md-12 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.email}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);" 
+														 value="#{bbRegistroPaciente.paciente.eMail}" autocomplete="off" validator="emailValidator"
+														 feedback="true" />
+										</div>
+									</div>
+								</div>
+								<div class="ui-g-12 no-padding">
+			            			<div class="ui-md-12 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.contrasena}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:password styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+														value="#{bbRegistroPaciente.paciente.contrasenaWeb}" autocomplete="off" 
+														feedback="false" />
+										</div>																		
+									</div>
+								</div>
+								
+								<div class="ui-g-12 ">
+									<h:panelGrid columns="2" width="100%" columnClasses="Wid50 TexAlLeft, Wid50 TexAlRight" styleClass="MarTop20px">
+										<p:spacer />										
+										<p:commandButton value="#{msg.siguiente}" styleClass="Wid150px"  
+														 actionListener="#{bbRegistroPaciente.actBtnNextStep()}" 
+														 update="@form" process="@form" />
+									</h:panelGrid>
+								</div>
+							</ui:fragment>
+							<!-- STEPS 1: -->
+							<ui:fragment rendered="#{bbRegistroPaciente.currentStep eq 1}" id="step1">
+								<div class="ui-g-12 TexAlCenter">
+									<h:outputText value="Ingrese sus datos personales." 
+												  styleClass="Fs16" />
+								</div>
+								<div class="ui-g-12 no-padding">
+			            			<!-- TIPO DOC -->
+			            			<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.tipo_documento}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:selectOneMenu styleClass="InputWid100" converter="omnifaces.SelectItemsConverter"
+												value="#{bbRegistroPaciente.selectedtipoDocPersona}" onkeydown="javascript:tab(event,this);"
+												disabled="#{bbRegistroPaciente.disableTipoNroDoc}" >
+												<p:ajax listener="#{bbRegistroPaciente.onChangeTipoDoc()}" />
+												<f:selectItems value="#{bbRegistroPaciente.selItemTipoDocPersona}" />
+											</p:selectOneMenu>
+										</div>																		
+									</div>
+									<!-- NRO DOC -->
+									<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.nro_documento}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+												value="#{bbRegistroPaciente.paciente.nroDocPersona}" 
+												disabled="#{bbRegistroPaciente.disableTipoNroDoc}" />
+										</div>																		
+									</div>
+								</div>
+								<div class="ui-g-12 no-padding">
+			            			<!-- APELLIDO -->
+			            			<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.apellido}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+														 value="#{bbRegistroPaciente.paciente.apellidoRazonSocial}" />
+										</div>																		
+									</div>
+									<!-- NOMBRE --> 
+									<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.nombre}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+														 value="#{bbRegistroPaciente.paciente.nombre}"  />
+										</div>																		
+									</div> 
+								</div>
+								<div class="ui-g-12 no-padding">
+									<!-- SEXO -->
+			            			<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.sexo}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:selectOneMenu styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+														 	 value="#{bbRegistroPaciente.paciente.sexo}" >
+												<f:selectItem itemValue="" itemLabel="" />
+												<f:selectItem itemValue="MASCULINO" itemLabel="#{msg.MASCULINO}" />
+												<f:selectItem itemValue="FEMENINO" itemLabel="#{msg.FEMENINO}" />			 	 
+											</p:selectOneMenu>
+										</div>																		
+									</div>
+									<!-- FECHA NACIMIENTO -->
+									<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.fecha_nacimiento}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<p:calendar styleClass="InputWid100" mask="true" pattern="dd/MM/yyyy"
+														value="#{bbRegistroPaciente.paciente.fechaNacimiento}" onkeydown="javascript:tab(event,this);"
+														yearRange="c-120:c+0" maxdate="#{bbRegistroPaciente.fechaActual}" />
+										</div>																		
+									</div>
+								</div>
+								<div class="ui-g-12 no-padding">
+			            			<!-- TEL-PART -->
+			            			<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.telefono_particular}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<h:panelGrid columns="4" width="100%" cellspacing="0" cellpadding="0" columnClasses="C1, Wid50, C3, Wid50">
+												<h:outputText value="0" styleClass="MarRig5px"/>
+												<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+															 value="#{bbRegistroPaciente.telefonoParticular.codArea}"
+														 	 readonly="#{bbRegistroPaciente.paciente.estadoDatosPac eq 'CONFIRMADO'}" />
+												<h:outputText value="-" styleClass="MarLef10px MarRig10px" />
+												<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+															 value="#{bbRegistroPaciente.telefonoParticular.nroTe}"
+														 	 readonly="#{bbRegistroPaciente.paciente.estadoDatosPac eq 'CONFIRMADO'}" />
+											</h:panelGrid>
+										</div>																		
+									</div>
+									<!-- TEL-CELULAR -->
+									<div class="ui-md-6 ui-g-12 ">
+			            				<div class="ui-g-12 no-padding">
+											<h:outputText value="#{msg.telefono_celular}" styleClass="FontBold" />
+										</div>
+										<div class="ui-g-12 no-padding">
+											<h:panelGrid columns="5" width="100%" cellspacing="0" cellpadding="0" columnClasses="C1, Wid50, C3, C4, Wid50">
+												<h:outputText value="0" styleClass="MarRig5px"/>
+												<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+															 value="#{bbRegistroPaciente.telefonoCelular.codArea}"
+														 	 readonly="#{bbRegistroPaciente.paciente.estadoDatosPac eq 'CONFIRMADO'}" />
+												<h:outputText value="-" styleClass="MarLef10px MarRig10px" />
+												<h:outputText value="15" styleClass="MarRig5px"/>
+												<p:inputText styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+															 value="#{bbRegistroPaciente.telefonoCelular.nroTe}"
+														 	 readonly="#{bbRegistroPaciente.paciente.estadoDatosPac eq 'CONFIRMADO'}" />
+											</h:panelGrid>
+										</div>																		
+									</div>
+								</div>
+								<div class="ui-g-12 ">
+									<h:panelGrid columns="2" width="100%" columnClasses="Wid50 TexAlLeft, Wid50 TexAlRight" styleClass="MarTop20px">
+										<p:commandButton value="#{msg.anterior}" styleClass="Wid150px"  
+														 actionListener="#{bbRegistroPaciente.actBtnPrevStep()}" 
+														 update="@form" process="@form" />
+										<p:commandButton value="#{msg.siguiente}" styleClass="Wid150px"  
+														 actionListener="#{bbRegistroPaciente.actBtnNextStep()}" 
+														 update="@form" process="@form" />
+									</h:panelGrid>
+								</div>
+			           		</ui:fragment>
+			           		<!-- STEPS 2: -->
+							<ui:fragment rendered="#{bbRegistroPaciente.currentStep eq 2}" id="step2">
+								<div class="ui-g-12 TexAlCenter">
+									<h:outputText value="Seleccione que avisos quiere recibir y a través de que medio." 
+												  styleClass="Fs16" />
+								</div>
+								<div class="ui-g-12 no-padding">
+									<div class="ui-g-12 ui-md-6">
+										<p:panel header="#{msg.email}">
+											<h:panelGrid columns="2">
+												<h:outputText value="#{msg.confirmacion_turno}: " />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaMailConfirmaTurBoolean}" />
+												
+												<h:outputText value="#{msg.recordatorio_turno}: " />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaMailRecordatorioTurBoolean}" />
+												
+												<h:outputText value="#{msg.reprogramacion_turno}: " />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaMailReprogramaTurBoolean}" />
+												
+												<h:outputText value="#{msg.estudio_disponible}: " rendered="false" />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaMailEstudioDisponibleBoolean}" rendered="false"/>
+											</h:panelGrid>
+										</p:panel>
+									</div>
+									<div class="ui-g-12 ui-md-6">
+										<p:panel header="#{msg.mensaje_texto}" rendered="#{bbRegistroPaciente.paramGeneral.enviaSmsTurnoBoolean}">
+											<h:panelGrid columns="2">
+												<h:outputText value="#{msg.confirmacion_turno}: " />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaSmsConfirmaTurBoolean}" />
+												
+												<h:outputText value="#{msg.recordatorio_turno}: " />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaSmsRecordatorioTurBoolean}" />
+												
+												<h:outputText value="#{msg.reprogramacion_turno}: " />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaSmsReprogramaTurBoolean}" />
+												
+												<h:outputText value="#{msg.estudio_disponible}: " rendered="false" />
+												<p:selectBooleanCheckbox value="#{bbRegistroPaciente.comunicacionPaciente.enviaSmsEstudioDisponibleBoolean}" rendered="false"/>
+											</h:panelGrid>
+										</p:panel>
+									</div>
+								</div>
+								
+								<div class="ui-g-12 ">
+									<h:panelGrid columns="2" width="100%" columnClasses="Wid50 TexAlLeft, Wid50 TexAlRight" styleClass="MarTop20px">
+										<p:commandButton value="#{msg.anterior}" styleClass="Wid150px"  
+														 actionListener="#{bbRegistroPaciente.actBtnPrevStep()}" 
+														 update="@form" process="@form" />
+										<p:commandButton value="#{msg.siguiente}" styleClass="Wid150px"  
+														 actionListener="#{bbRegistroPaciente.actBtnNextStep()}" 
+														 update="@form" process="@form" />
+									</h:panelGrid>
+								</div>
+			           		</ui:fragment>
+			           		<!-- STEPS 3: -->
+							<ui:fragment rendered="#{bbRegistroPaciente.currentStep eq 3}" id="step3">
+								<p:panel header="Términos de Servicio">
+									<div style="max-height: 300px; overflow:auto;" class="TexAlJustify" id="legalPane" >
+										<h:outputText value="#{bbApplicationData.legales}" escape="false" styleClass="TexAlJustify"/>
+										
+										<div class="MarTop10px MarBot10px">
+											Acepto los <span class="FontBold">Términos de Servicio</span>
+											<p:selectBooleanCheckbox value="#{bbRegistroPaciente.aceptaTerminosDeServicio}" styleClass="MarLef10px" >
+												<p:ajax update="btnConfirm" />
+											</p:selectBooleanCheckbox>
+										</div>
+									</div>
+								</p:panel>
+								
+								<script>
+									$(document).ready(function () {
+									    $('#legalPane').bind('scroll', checkScroll);
+									});
+					
+									function checkScroll(e) {
+									    var elem = $(e.currentTarget);
+									    if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+									        console.log("bottom");
+									    }
+									}
+								</script>
+								
+								
+								<div class="ui-g-12 ">
+									<h:panelGrid columns="2" width="100%" columnClasses="Wid50 TexAlLeft, Wid50 TexAlRight" styleClass="MarTop20px">
+										<p:commandButton value="#{msg.anterior}" styleClass="Wid150px"  
+														 actionListener="#{bbRegistroPaciente.actBtnPrevStep()}" 
+														 update="@form" process="@form" />
+										<p:commandButton value="#{msg.confirmar}" styleClass="Wid150px green-btn Uppercase FontBold" id="btnConfirm"  
+														 actionListener="#{bbRegistroPaciente.actBtnNextStep()}" 
+														 update="@form" process="@form"
+														 disabled="#{! bbRegistroPaciente.aceptaTerminosDeServicio}" />
+									</h:panelGrid>
+								</div>
+			           		</ui:fragment>
+			           	</ui:fragment>
+			           	
+			           	<ui:fragment rendered="#{ bbRegistroPaciente.registroCompletado}">
+							<div class="ui-g-12 TexAlCenter" >
+								<h:outputText value="#{msg.mensaje_registro_paciente_exitoso}" styleClass="Fs16" />
+							</div>
+							<div class="ui-g-12 TexAlCenter">
+								<h:outputText value="#{msg.redirect_login_mensaje}" styleClass="MarRig5px Fs16" />
+								<h:outputLink value="#{facesContext.externalContext.requestContextPath}/">
+									<h:outputText value="#{msg.aqui}" styleClass="Fs16" />
+								</h:outputLink>
+							</div>
+							<script>
+			        			redirect();
+			        		</script>
+			           	</ui:fragment>
+            		</div>
+				</div>
+			</h:form>
+		</div>
+        
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px"
+        			  onstart="PF('$blockUI').block();" oncomplete="PF('$blockUI').unblock();" >
+           <f:facet name="start">
+               <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+           </f:facet>
+
+           <f:facet name="complete">
+           </f:facet>
+        </p:ajaxStatus>
+        
+        <pe:blockUI widgetVar="$blockUI" autoShow="true" event="change">  
+		    <h:panelGrid>  
+		        <h:outputText value="Por favor espere..." styleClass="nowrap FontBold Fs20" />  
+		    </h:panelGrid>  
+		</pe:blockUI>  
+        
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="#{guestPreferences.contract}-layout" />
+        <h:outputStylesheet name="commonV2.css" library="estilos" />
+        <h:outputStylesheet name="autogestion.css" library="estilos" />
+    </h:body>
+
+</html>

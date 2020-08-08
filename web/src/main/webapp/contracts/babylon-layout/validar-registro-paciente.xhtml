@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{msg.validar_cuenta}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagenes/favicon.ico" />
+        <style>
+        	.login-body .login-panel .logo-container img {
+    			width: 200px !important;
+			}
+			.login-body {
+    			background: radial-gradient(circle at 50% 100%, #dcdfe0, #abadae);
+    			border-top: 10px solid #9fc9dd;
+    		}
+        </style>
+    </h:head>
+    
+ 	<h:body styleClass="login-body">
+    	<h:form id="formValidar" styleClass="">
+    		#{bbValidarRegistroPaciente.dummy}
+	        <div class="login-panel ui-fluid">
+	            <div class="ui-g">
+	            	<div class="ui-g-12 logo-container">
+                    	<h:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg"  width="100%" />
+                    	<h1>#{msg.validar_cuenta}</h1>
+                	</div>
+					<div class="ui-g-12">
+						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="false" showSummary="false" />
+					</div>
+					<div class="ui-g-12">
+						<p:commandButton value="#{msg.ingresar}" styleClass="#{bbValidarRegistroPaciente.dummy}"
+										 actionListener="#{bbValidarRegistroPaciente.login()}" />
+					</div>
+	            </div>
+	        </div>
+       	</h:form>  
+                 
+        
+		<p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px" >
+           <f:facet name="start">
+               <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+           </f:facet>
+
+           <f:facet name="complete">
+           </f:facet>
+        </p:ajaxStatus>
+        
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="#{guestPreferences.contract}-layout" />
+        <h:outputStylesheet name="commonV2.css" library="estilos" />
+        <h:outputStylesheet name="autogestion.css" library="estilos" />
+	</h:body>
+</html>

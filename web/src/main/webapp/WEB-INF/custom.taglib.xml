@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
+    <namespace>http://thinksoft.com.ar/jsf/facelets</namespace>
+    
+    <tag>
+    	<tag-name>topbarOptions</tag-name>
+    	<source>tags/topbarOptions.xhtml</source>
+    	<attribute>
+        	<name>logout</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>about</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>password</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>home</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>back</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>profile</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+        	<name>compact</name>
+        	<type>java.lang.String</type>
+        </attribute>
+    </tag>
+    
+    <tag>
+    	<tag-name>topbar</tag-name>
+    	<source>tags/topbar.xhtml</source>
+    	
+    	<attribute>
+        	<name>pageTitle</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>otherText</name>
+        	<type>java.lang.String</type>
+        </attribute>
+    	<attribute>
+        	<name>logout</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>about</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>password</name>
+        	<type>java.lang.String</type>
+        </attribute>
+        <attribute>
+        	<name>home</name>
+        	<type>java.lang.String</type>
+        </attribute>
+    </tag>
+    
+</facelet-taglib>

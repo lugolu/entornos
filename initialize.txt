@@ -1,0 +1,55 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] entornos                                                           [pom]
+[INFO] entornos-core                                                      [jar]
+[INFO] entornos-dtos                                                      [jar]
+[INFO] persistance                                                        [jar]
+[INFO] business                                                           [jar]
+[INFO] ENTORNOS                                                           [war]
+[INFO] report                                                             [jar]
+[INFO] 
+[INFO] --------------------< ar.com.thinksoft:entornosJsf >--------------------
+[INFO] Building entornos 0.0.1                                            [1/7]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.5:prepare-agent (default-prepare-agent) @ entornosJsf ---
+[INFO] argLine set to -javaagent:C:\\Users\\lugol\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.5\\org.jacoco.agent-0.8.5-runtime.jar=destfile=D:\\Desarrollo\\workspace\\entornosJsf\\target\\jacoco.exec,append=true
+[INFO] 
+[INFO] -------------------< ar.com.thinksoft:entornos-core >-------------------
+[INFO] Building entornos-core 0.0.1                                       [2/7]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.5:prepare-agent (default-prepare-agent) @ entornos-core ---
+[INFO] argLine set to -javaagent:C:\\Users\\lugol\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.5\\org.jacoco.agent-0.8.5-runtime.jar=destfile=D:\\Desarrollo\\workspace\\entornosJsf\\core\\target\\jacoco.exec,append=true
+[INFO] 
+[INFO] -------------------< ar.com.thinksoft:entornos-dtos >-------------------
+[INFO] Building entornos-dtos 0.0.1                                       [3/7]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for entornos 0.0.1:
+[INFO] 
+[INFO] entornos ........................................... SUCCESS [  0.572 s]
+[INFO] entornos-core ...................................... SUCCESS [  0.135 s]
+[INFO] entornos-dtos ...................................... FAILURE [  0.044 s]
+[INFO] persistance ........................................ SKIPPED
+[INFO] business ........................................... SKIPPED
+[INFO] ENTORNOS ........................................... SKIPPED
+[INFO] report ............................................. SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.857 s
+[INFO] Finished at: 2020-08-08T01:47:19-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project entornos-dtos: Could not resolve dependencies for project ar.com.thinksoft:entornos-dtos:jar:0.0.1: Failure to find ar.com.thinksoft:entornos-core:jar:0.0.1 in https://repo.maven.apache.org/maven2 was cached in the local repository, resolution will not be reattempted until the update interval of central has elapsed or updates are forced -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :entornos-dtos

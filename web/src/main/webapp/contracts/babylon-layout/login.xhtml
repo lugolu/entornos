@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>#{msg.autogestion_pacientes}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagenes/favicon.ico" />
+        <style>
+			.blockUI.blockMsg{
+				width: 250px !important;
+				left: calc(50% - 125px) !important;;
+				top: calc(50% - 22.5px) !important;;
+			}
+        </style>
+    </h:head>
+	
+	 <h:body styleClass="login-body">
+	 	<style>
+	 		.logo-container{
+	 			max-height: 150px;
+	 		}
+	 		.logo-container img {
+	 			width: 100% !important;
+	 			height: 100% !important;
+	 		}
+	 		.chkbox-container{
+	 			padding:  0px !important;
+	 		}
+	 	</style>
+	 
+        <div class="login-panel ui-fluid">
+        	<h:form prependId="false">
+	            <div class="ui-g">
+	                <div class="ui-g-12 logo-container" >
+	                    <h:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg" />
+	                </div>
+	                <div class="ui-g-12">
+	                    <h2 class="">#{msg.autogestion_pacientes}</h2>
+	                </div>
+	                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" showSummary="false" />
+	                <div class="ui-g-12">
+	                    <p:inputText placeholder="#{msg.correo_electronico}" 
+	                    	value="#{bbLogin.email}" 
+	                    	disabled="#{bbLogin.disableEmail}" />
+	                </div>
+	                <div class="ui-g-12">
+	                    <p:password placeholder="#{msg.contrasena}" feedback="false"
+	                    			value="#{bbLogin.contrasena}" />
+	                </div>
+	                <div class="ui-g-12 button-container">
+	                    <p:commandButton value="#{msg.ingresar}" styleClass="Wid100px green-btn"
+										 actionListener="#{bbLogin.login()}" />
+	                </div>
+	                <ui:fragment rendered="#{return_url eq null}"  >
+		                <div class="ui-g-12 chkbox-container" style="text-align: center;">
+		                	<h:link value="#{msg.olvido_contrasena}"   
+	            					outcome="/pages/recuperar-contrasena.faces" />
+		                </div>
+	                </ui:fragment>
+	                <div class="ui-g-12 button-container">
+	                	<p:commandButton value="#{msg.registrarse}" styleClass="Wid100px"
+										 actionListener="#{bbLogin.actBtnRegistrarse()}"/>
+	                </div>
+	                <ui:fragment rendered="false">
+		                <div class="ui-g-12 chkbox-container" style="text-align: center;">
+				            <h:link value="#{msg.sugerencias_y_observaciones}" styleClass="" outcome="/pages/reclamo.faces" />
+			            </div>
+	                </ui:fragment>
+	            </div>
+			</h:form>
+        </div>
+        
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px"
+        			  onstart="PF('$blockUI').block();" oncomplete="PF('$blockUI').unblock();" >
+           <f:facet name="start">
+               <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+           </f:facet>
+
+           <f:facet name="complete">
+           </f:facet>
+        </p:ajaxStatus>
+        
+        <pe:blockUI widgetVar="$blockUI" autoShow="true" event="change">  
+		    <h:panelGrid>  
+		        <h:outputText value="Por favor espere..." styleClass="nowrap FontBold Fs20" />  
+		    </h:panelGrid>  
+		</pe:blockUI>
+        
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="#{guestPreferences.contract}-layout" />
+        <h:outputStylesheet name="commonV2.css" library="estilos" />
+        <h:outputStylesheet name="autogestion.css" library="estilos" />
+    </h:body>
+
+</html>

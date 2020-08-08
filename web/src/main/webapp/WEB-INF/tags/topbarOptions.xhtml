@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:c="http://java.sun.com/jstl/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+	  	 
+	<!-- Ultima -->
+	<ui:fragment rendered="false">
+		<ui:fragment rendered="#{logout eq 'true'}">
+			<li>
+	            <a onclick="disconnect();" href="javascript:void(null)"> 
+	            	<i class="topbar-icon material-icons">&#xE8AC;</i>
+	            	<span class="topbar-item-name">#{msg.desconectar}</span>
+				</a>	                
+                <p:remoteCommand name="disconnect" actionListener="#{bbUserData.logOut()}" />
+	        </li>
+        </ui:fragment>
+        
+        <ui:fragment rendered="#{password eq 'true'}">
+	        <li>
+	            <a onclick="PF('$panelPopUpCambiarPass').show(); return false;" href="javascript:void(null)"> 
+	            	<i class="topbar-icon material-icons fa fa-vpn-key"></i> 
+	            	<span class="topbar-item-name">#{msg.cambiar_contrasena}</span>
+				</a>	                
+	        </li>
+        </ui:fragment>
+        
+        <ui:fragment rendered="#{home eq 'true'}">
+        	<ui:fragment rendered="#{UserSession.modulo eq 'AUTOGESTION_PACIENTE'}">
+				<li>
+		            <a onclick="volver();" href="javascript:void(null)"> 
+		            	<i class="topbar-icon fa fa-home"></i> 
+		            	<span class="topbar-item-name">#{msg.volver_al_inicio}</span>
+					</a>	                
+		            <p:remoteCommand name="volver" action="/pages/turnos/inicio.faces?faces-redirect=true" />
+		        </li>
+	        </ui:fragment>
+        </ui:fragment>
+        
+        <ui:fragment rendered="#{UserSession ne null and 
+        						 UserSession.proveedor ne null and 
+        						 UserSession.proveedor.idProveedor ne null}">
+	        <li>
+	            <a> 
+	            	<i class="topbar-icon material-icons fa fa-person"></i> 
+	            	<span style="color: white; float: left; line-height: 30px;">#{UserSession.proveedor.fullName}</span>
+				</a>	                
+	        </li>
+        </ui:fragment>
+        
+        <ui:insert name="otherTopbarOptions"></ui:insert>
+        
+        <ui:fragment rendered="#{profile eq 'true'}">
+        	<ui:fragment rendered="#{UserSession.paciente ne null}">
+			    <li class="profile-item">
+			        <a href="#">                            
+			            <i class="topbar-icon material-icons">&#xE7FD;</i>
+			            <span class="topbar-item-name">#{UserSession.paciente.fullName}</span>
+			        </a>
+			        
+			        <ul class="ultima-menu animated">
+			            <li role="menuitem">
+			                <a href="#">
+			                    <div><span>#{UserSession.paciente.eMail}</span></div>
+			                    <div><span class="FontBold">#{UserSession.paciente.fullName}</span></div>
+			                    <div><span>#{UserSession.paciente.tipoNroDocumento}</span></div>
+			                    <div><span>#{UserSession.paciente.sexo}</span></div>
+			                </a>
+			            </li>
+			        </ul>
+			    </li>
+		    </ui:fragment>
+		    
+		    <ui:fragment rendered="#{UserSession.prescriptor ne null}">
+			    <li class="profile-item">
+			        <a href="#">                            
+			            <i class="topbar-icon material-icons">&#xE7FD;</i>
+			            <span class="topbar-item-name">#{UserSession.prescriptor.fullName}</span>
+			        </a>
+			        
+			        <ul class="ultima-menu animated">
+			            <li role="menuitem">
+			                <a href="#">
+			                    <div><span>#{UserSession.prescriptor.eMail}</span></div>
+			                    <div><span class="FontBold">#{UserSession.prescriptor.fullName}</span></div>
+			                    <div><span>#{UserSession.prescriptor.tipoNroMatricula}</span></div>
+			                    <div><span>#{UserSession.prescriptor.sexo}</span></div>
+			                </a>
+			            </li>
+			        </ul>
+			    </li>
+		    </ui:fragment>
+		    
+		</ui:fragment>
+		
+	</ui:fragment>
+</html>

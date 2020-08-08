@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:c="http://java.sun.com/jstl/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+	  	 
+	<!-- Ultima -->
+	<div class="fullPageTopbar">
+		<ui:fragment rendered="false">
+			<style>
+				.fullPageTopbar{ height: 20px; background-color: transparent; overflow: hidden; margin-left: 7px; margin-right: 7px;}
+				.fullPageTopbar .topbar-items { float: right; margin: 0; padding: 1px 0 0 0; list-style-type: none; }
+    			.fullPageTopbar .topbar-items > li { float: right; position: relative; margin-left: 8px; }
+      			.fullPageTopbar .topbar-items > li > a { position: relative; display: block; }
+        		.fullPageTopbar .topbar-items > li > a .topbar-item-name { display: none; }        		
+      			.fullPageTopbar .topbar-items > li .topbar-icon { font-size: 18px; color: #ffffff; -moz-transition: color 0.3s; -o-transition: color 0.3s; -webkit-transition: color 0.3s; transition: color 0.3s; }
+        		.fullPageTopbar .topbar-items > li .topbar-icon:hover { color: #e8e8e8; }
+				
+			</style>
+			
+			<div class="DispInBlock Fleft" style="max-width: calc(100% - 300px);">
+				<h:panelGroup  id="title">
+				<ui:fragment rendered="#{bbUserData.usuario.modulo ne null}">
+	            	<h:outputLabel value="#{bbUserData.usuario.modulo}" styleClass="FontBold Fs20 White MarRig20px"  style="line-height: 20px;" />		            		            	
+	          	</ui:fragment>
+				
+				<ui:fragment rendered="#{pageTitle ne null}">
+					<h:outputLabel value="/" styleClass="FontBold Fs20 White MarRig20px"  style="line-height: 20px;" />
+					<h:outputText value="#{pageTitle}" styleClass="Fs16 FontBold White MarRig20px" style="line-height: 20px; text-transform: uppercase; " />					
+				</ui:fragment>
+				
+				<ui:fragment rendered="#{bbUserData.usuario.centroParteLogueado ne null}">           
+					<h:outputText value="/" styleClass="Fs16 FontBold MarRig20px" style="line-height: 20px;" />
+	            	<h:outputLabel value="#{bbUserData.usuario.centroParteLogueado}" styleClass="Fs16 White MarRig20px"  style="line-height: 20px;" />
+	          	</ui:fragment>
+	          	
+	          	<ui:fragment rendered="#{otherText ne null}">
+	          		<h:outputText value="/" styleClass="Fs16 FontBold White MarRig20px" style="line-height: 20px;" />           
+	            	<h:outputLabel value="#{otherText}" styleClass="Fs16 White"  style="line-height: 20px;" />
+	          	</ui:fragment>
+	          	</h:panelGroup>
+			</div>
+			<pe:tooltip for="title" >
+				<h:panelGrid style="max-width: 500px; width: 500px;">
+					<ui:fragment rendered="#{bbUserData.usuario.modulo ne null}">
+		            	<h:outputLabel value="#{bbUserData.usuario.modulo}" styleClass="MarRig5px " />		            		            	
+		          	</ui:fragment>
+					
+					<ui:fragment rendered="#{pageTitle ne null}">
+						<h:outputText value="#{pageTitle}" styleClass="MarRig5px" style="text-transform: uppercase; " />					
+					</ui:fragment>
+					
+					<ui:fragment rendered="#{bbUserData.usuario.centroParteLogueado ne null}">           
+		            	<h:outputLabel value="#{bbUserData.usuario.centroParteLogueado}" styleClass="MarRig5px" />
+		          	</ui:fragment>
+		          	
+		          	<ui:fragment rendered="#{otherText ne null}">
+		            	<h:outputLabel value="#{otherText}" styleClass="MarRig5px" />
+		          	</ui:fragment>
+	          	</h:panelGrid>
+			</pe:tooltip>
+			
+			<div class="DispInBlock topbar-right" style="min-width: 300px;">
+				<h:form>
+					<ul class="topbar-items animated">
+						<ui:fragment rendered="#{logout eq 'true'}">
+							<li>
+					            <a onclick="disconnect();" href="javascript:void(null)"> 
+					            	<i class="topbar-icon material-icons fa fa-exit-to-app"></i> 
+					            	<span class="topbar-item-name">#{msg.desconectar}</span>
+								</a>	                
+				                <p:remoteCommand name="disconnect" actionListener="#{bbUserData.logOut()}" />
+					        </li>
+				        </ui:fragment>
+				        <ui:fragment rendered="#{about eq 'true'}">
+					        <li>
+					            <a onclick="PF('$panelPopUpAcercaDe').show(); return false;" href="javascript:void(null)"> 
+					            	<i class="topbar-icon material-icons fa fa-help"></i> 
+					            	<span class="topbar-item-name">#{msg.acerca_de}</span>
+								</a>	                
+				                <p:remoteCommand name="disconnect" actionListener="#{bbUserData.logOut()}" />
+					        </li>
+				        </ui:fragment>
+				        <ui:fragment rendered="#{password eq 'true'}">
+					        <li>
+					            <a onclick="PF('$panelPopUpCambiarPass').show(); return false;" href="javascript:void(null)"> 
+					            	<i class="topbar-icon material-icons fa fa-vpn-key"></i> 
+					            	<span class="topbar-item-name">#{msg.cambiar_contrasena}</span>
+								</a>	                
+					        </li>
+				        </ui:fragment>
+				        <ui:fragment rendered="#{home eq 'true'}">
+					        <li>
+					            <a onclick="cambiarModulo();" href="javascript:void(null)"> 
+					            	<i class="topbar-icon material-icons fa fa-home"></i> 
+					            	<span class="topbar-item-name">#{msg.cambiar_de_modulo}</span>
+								</a>	                
+				                <p:remoteCommand name="cambiarModulo" actionListener="#{bbUserData.cambiarModulo()}" />
+					        </li>
+				        </ui:fragment>
+				        
+				        <ui:insert name="otherTopbarOptions"></ui:insert>
+				        
+				        <ui:fragment rendered="#{UserSession ne null and UserSession.usuario ne null and  UserSession.usuario.idPersonal ne null}">
+					        <li>
+					            <a> 
+					            	<i class="topbar-icon material-icons fa fa-person"></i> 
+					            	<span style="color: white; float: left; line-height: 20px;">#{UserSession.usuario.fullName}</span>
+								</a>	                
+					        </li>
+				        </ui:fragment>
+			        </ul>
+		        </h:form>
+	        </div>
+		</ui:fragment>
+	</div>
+	<ui:include src="/pages/acercaDe.xhtml" />
+	<ui:include src="/pages/cambiarPassword.xhtml" />
+</html>

@@ -1,0 +1,152 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ba="http://primefaces.org/babylon">
+    <div class="layout-menu-container">
+        <div class="layout-menu-logo">
+            <h:link onclick="redirectHome()" styleClass="Hei100">
+	        	<h:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg" 
+	        		styleClass="logo"
+	        		rendered="#{pathLogoApp eq null}" />
+	       		<h:graphicImage value="#{pathLogoApp}" 
+					styleClass="logo"
+					rendered="#{pathLogoApp ne null}" />
+            </h:link>
+        </div>
+        <div class="nano layout-menu-wrapper">
+            <div class="nano-content sidebar-scroll-content">
+				<h:form id="formMenuIzquierdo">
+					<div class="layout-profile">
+						<a class="layout-profile-button TexAlCenter" href="#">
+							<div style="width:100%; text-align: center;">
+		                    <ui:fragment rendered="#{UserSession.fotoPersonal ne null and  UserSession.fotoPersonal.pathToFile ne null}">
+								<img src="#{facesContext.externalContext.requestContextPath}#{UserSession.fotoPersonal.pathToFile}" />
+							</ui:fragment>
+							</div>
+							<div class="layout-profile-userinfo">
+								<span class="layout-profile-name">#{UserSession.prescriptor.fullName}</span>
+								<span class="layout-profile-role">#{UserSession.prescriptor.tipoNroMatricula}</span>
+							</div>
+<!-- 							<i class="layout-profile-icon fa fa-angle-down"></i> -->
+						</a>
+						<ul class="layout-profile-menu">
+						    <li>
+						        <a onclick="PF('$panelPopUpCambiarPass').show(); return false;" href="javascript:void(null)">
+						            <i class="fa fa-fw fa-user"></i>
+						            <span>#{msg.cambiar_contrasena}</span>
+						        </a>
+						    </li>
+						    <li>
+						        <a onclick="actBtnFotoAgregar();" href="javascript:void(null)">
+						            <i class="fa fa-fw fa-image"></i>
+						            <span>#{msg.foto}</span>
+						        </a>
+						    </li>
+						    <li>
+						        <a onclick="redirectLogin()" href="javascript:void(null)">
+						            <i class="fa fa-fw fa-sign-out"></i>
+						            <span>#{msg.salir}</span>
+						        </a>
+						    </li>
+						</ul>
+					</div>
+				    <ba:menu widgetVar="me">
+			            <ui:insert name="opcionesMenu" />
+				    </ba:menu>
+				    <script>
+						$(function(){
+					        var $this = PF('me');
+					        if($this) {
+					            /* clear state */
+					            $this.expandedMenuitems = [];
+					            $this.deactivateItems($this.menu.find('li.active-menuitem'));
+// 					            console.error($('.current-menu').parent().attr('id'));
+					            $this.addMenuitem($('.current-menu').parent().attr('id'));
+					            $this.restoreMenuState();
+					            $('.active-route').removeClass('active-route');
+					            $('.current-menu').addClass('active-route');
+					        }
+						});
+				    </script>
+				</h:form>
+            </div>
+        </div>
+    </div>
+    <h:form prependId="false">
+        <p:remoteCommand name="redirectLogin" actionListener="#{bbUserData.redirectLogin()}" />
+        <p:remoteCommand name="actBtnFotoAgregar" actionListener="#{UserSession.actBtnFotoAgregar()}" update=":popUpFoto" />
+	</h:form>
+	<ui:include src="/pages/cambiarPassword.xhtml" />
+	<p:dialog id="popUpFoto"
+		widgetVar="$popUpFoto" appendTo="@(body)"
+		closable="false" draggable="false" dynamic="true"
+		header="#{msg.foto}" maximizable="false"
+		minimizable="false" modal="true" resizable="false"
+		visible="#{UserSession.displayFoto}"
+		onShow="positionDialogTop (this)" width="300" height="330">
+		<h:form id="formPopUpFoto" enctype="multipart/form-data" rendered="#{UserSession.displayFoto}">
+			<style>
+				.ui-fileupload-buttonbar {
+					border: none !important;
+					background-color: inherit !important;
+					padding: 0 !important;
+					margin: 0 !important;
+				}
+				.ui-fileupload-content {
+					display:none !important;
+				}
+				.ui-fluid .ui-fileupload .ui-button {
+					width: 125px !important;
+				}
+			</style>
+			<div class="ui-g ui-fluid Hei100" >
+				<div class="ui-g-12 TexAlCenter">
+					<h:panelGrid id="panelGridImage" style="background: white; border: 1px solid #e2e2e2; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.80);" styleClass="MarAuto">
+                        <h:panelGrid styleClass="contenedor"
+                                rendered="#{UserSession.fotoPersonal.pathToFile eq null}"
+                                style="height: 200px; width: 200px; vertical-align: middle; text-align: center">
+                               <h:outputText value="#{msg.sin_imagen}" style="text-align: center" />
+                        </h:panelGrid>
+                        <h:panelGrid styleClass="contenedor"
+                                rendered="#{UserSession.fotoPersonal.pathToFile ne null}"
+                                style="height: 200px; width: 200px;" id="imagen">
+                               <img src="#{facesContext.externalContext.requestContextPath}#{UserSession.fotoPersonal.pathToFile}" width="200" height="200" />
+                        </h:panelGrid>
+                   </h:panelGrid>
+				</div>
+				<div class="ui-g-12 TexAlCenter">
+                    <h:panelGrid columns="2" width="100%" styleClass="TexAlCenter MarAuto" columnClasses="MarAuto">
+						<p:fileUpload styleClass="Wid125px"
+							fileUploadListener="#{UserSession.listenerArchivo}"
+							multiple="false" fileLimit="1"
+							allowTypes="/(\.|\/)(gno|gif|jpe?g|png|GNO|GIF|JPE?G|PNG)$/" label="#{msg.agregar}"
+							sizeLimit="1000000" uploadLabel="#{msg.cargar_archivo}"
+							cancelLabel="#{msg.cancelar}"
+							auto="true" mode="advanced" skinSimple="true"
+							transferErrorLabel="#{msg.file_upload_transfer_error_control_label}"
+							invalidSizeMessage="#{msg.tamano_no_valido}"
+							invalidFileMessage="#{msg.archivo_no_valido}"
+							update=":formPopUpFoto:panelGridImage"
+							dragDropSupport="true" process="@this,:formPopUpFoto" />
+						<p:commandButton icon="fa fa-trash" value="#{msg.eliminar}" update="panelGridImage"
+							 actionListener="#{UserSession.quitarArchivo()}" styleClass="Wid125px" />
+                    </h:panelGrid>
+				</div>
+			</div>
+		</h:form>
+		<f:facet name="footer">
+			<h:form prependId="false">
+				<div class="TexAlCenter">
+					<p:commandButton actionListener="#{UserSession.actionBtnFotoAceptar()}"
+						update=":formMenuIzquierdo"
+						value="#{msg.aceptar}" />
+					<p:commandButton style="width:60px;" value="#{msg.volver}" update=":formMenuIzquierdo"
+						actionListener="#{UserSession.actionBtnFotoCerrar()}" />
+				</div>
+			</h:form>
+		</f:facet>
+	</p:dialog>
+</ui:composition>

@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ar.com.thinksoft</groupId>
+		<artifactId>entornosJsf</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<artifactId>entornos-report</artifactId>
+	<name>report</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<build.directory.project.business>../business/target</build.directory.project.business>
+		<build.directory.project.core>../core/target</build.directory.project.core>
+		<build.directory.project.dtos>../dtos/target</build.directory.project.dtos>
+		<build.directory.project.persistance>../persistance/target</build.directory.project.persistance>
+		<build.directory.project.web>../web/target</build.directory.project.web>
+
+		<classes.directory.project.business>../business/target/classes</classes.directory.project.business>
+		<classes.directory.project.core>../core/target/classes</classes.directory.project.core>
+		<classes.directory.project.dtos>../dtos/target/classes</classes.directory.project.dtos>
+		<classes.directory.project.persistance>../persistance/target/classes</classes.directory.project.persistance>
+		<classes.directory.project.validadores>../validadores/target/classes</classes.directory.project.validadores>
+<!-- 		<classes.directory.project.web>../web/target/classes</classes.directory.project.web> -->
+<!-- 		<classes.directory.project.web.report>../web-report/target/classes</classes.directory.project.web.report> -->
+<!-- 		<classes.directory.project.ws>../ws/target/classes</classes.directory.project.ws> -->
+
+<!-- 		<sources.directory.project.afip>../afip/src/main/java</sources.directory.project.afip> -->
+<!-- 		<sources.directory.project.age>../age/src/main/java</sources.directory.project.age> -->
+<!-- 		<sources.directory.project.agi>../agi/src/main/java</sources.directory.project.agi> -->
+<!-- 		<sources.directory.project.agp>../agp/src/main/java</sources.directory.project.agp> -->
+		<sources.directory.project.bionexo>../bionexo/src/main/java</sources.directory.project.bionexo>
+		<sources.directory.project.business>../business/src/main/java</sources.directory.project.business>
+		<sources.directory.project.core>../core/src/main/java</sources.directory.project.core>
+		<sources.directory.project.dtos>../dtos/src/main/java</sources.directory.project.dtos>
+		<sources.directory.project.persistance>../persistance/src/main/java</sources.directory.project.persistance>
+		<sources.directory.project.validadores>../validadores/src/main/java</sources.directory.project.validadores>
+<!-- 		<sources.directory.project.web>../web/src/main/java</sources.directory.project.web> -->
+<!-- 		<sources.directory.project.web.report>../web-report/src/main/java</sources.directory.project.web.report> -->
+<!-- 		<sources.directory.project.ws>../ws/src/main/java</sources.directory.project.ws> -->
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>${antrun.version}</version>
+				<executions>
+					<execution>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<!-- Execute an ant task within maven -->
+								<echo message="Generating JaCoCo Reports" />
+								<taskdef name="report" classname="org.jacoco.ant.ReportTask">
+									<classpath path="${basedir}/target/jacoco-jars/org.jacoco.ant.jar" />
+								</taskdef>
+								<mkdir dir="${basedir}/target/coverage-report" />
+								<report>
+									<executiondata>
+<!-- 										<fileset dir="${build.directory.project.afip}"> -->
+<!-- 											<include name="jacoco.exec" /> -->
+<!-- 										</fileset> -->
+<!-- 										<fileset dir="${build.directory.project.age}"> -->
+<!-- 											<include name="jacoco.exec" /> -->
+<!-- 										</fileset> -->
+<!-- 										<fileset dir="${build.directory.project.agi}"> -->
+<!-- 											<include name="jacoco.exec" /> -->
+<!-- 										</fileset> -->
+<!-- 										<fileset dir="${build.directory.project.agp}"> -->
+<!-- 											<include name="jacoco.exec" /> -->
+<!-- 										</fileset> -->
+										<fileset dir="${build.directory.project.bionexo}">
+											<include name="jacoco.exec" />
+										</fileset>
+										<fileset dir="${build.directory.project.business}">
+											<include name="jacoco.exec" />
+										</fileset>
+										<fileset dir="${build.directory.project.core}">
+											<include name="jacoco.exec" />
+										</fileset>
+										<fileset dir="${build.directory.project.dtos}">
+											<include name="jacoco.exec" />
+										</fileset>
+										<fileset dir="${build.directory.project.persistance}">
+											<include name="jacoco.exec" />
+										</fileset>
+										<fileset dir="${build.directory.project.validadores}">
+											<include name="jacoco.exec" />
+										</fileset>
+<!-- 										<fileset dir="${build.directory.project.web}"> -->
+<!-- 											<include name="jacoco.exec" /> -->
+<!-- 										</fileset> -->
+<!-- 										<fileset dir="${build.directory.project.web.report}"> -->
+<!-- 											<include name="jacoco.exec" /> -->
+<!-- 										</fileset> -->
+<!-- 										<fileset dir="${build.directory.project.ws}"> -->
+<!-- 											<include name="jacoco.exec" /> -->
+<!-- 										</fileset> -->
+									</executiondata>
+									<structure name="jacoco-multi Coverage Project">
+<!-- 										<group name="afip"> -->
+<!-- 											<classfiles> -->
+<!-- 												<fileset dir="${classes.directory.project.afip}"> -->
+<!-- 												</fileset> -->
+<!-- 											</classfiles> -->
+<!-- 											<sourcefiles encoding="UTF-8"> -->
+<!-- 												<fileset dir="${sources.directory.project.afip}"> -->
+<!-- 												</fileset> -->
+<!-- 											</sourcefiles> -->
+<!-- 										</group> -->
+<!-- 										<group name="age"> -->
+<!-- 											<classfiles> -->
+<!-- 												<fileset dir="${classes.directory.project.age}"> -->
+<!-- 												</fileset> -->
+<!-- 											</classfiles> -->
+<!-- 											<sourcefiles encoding="UTF-8"> -->
+<!-- 												<fileset dir="${sources.directory.project.age}"> -->
+<!-- 												</fileset> -->
+<!-- 											</sourcefiles> -->
+<!-- 										</group> -->
+<!-- 										<group name="agi"> -->
+<!-- 											<classfiles> -->
+<!-- 												<fileset dir="${classes.directory.project.agi}"> -->
+<!-- 												</fileset> -->
+<!-- 											</classfiles> -->
+<!-- 											<sourcefiles encoding="UTF-8"> -->
+<!-- 												<fileset dir="${sources.directory.project.agi}"> -->
+<!-- 												</fileset> -->
+<!-- 											</sourcefiles> -->
+<!-- 										</group> -->
+<!-- 										<group name="agp"> -->
+<!-- 											<classfiles> -->
+<!-- 												<fileset dir="${classes.directory.project.agp}"> -->
+<!-- 												</fileset> -->
+<!-- 											</classfiles> -->
+<!-- 											<sourcefiles encoding="UTF-8"> -->
+<!-- 												<fileset dir="${sources.directory.project.agp}"> -->
+<!-- 												</fileset> -->
+<!-- 											</sourcefiles> -->
+<!-- 										</group> -->
+										<group name="bionexo">
+											<classfiles>
+												<fileset dir="${classes.directory.project.bionexo}">
+												</fileset>
+											</classfiles>
+											<sourcefiles encoding="UTF-8">
+												<fileset dir="${sources.directory.project.bionexo}">
+												</fileset>
+											</sourcefiles>
+										</group>
+										<group name="business">
+											<classfiles>
+												<fileset dir="${classes.directory.project.business}">
+													<exclude name="**/ar/com/thinksoft/business/generix/**" />
+													<exclude name="**/ar/com/thinksoft/utils/**" />
+												</fileset>
+											</classfiles>
+											<sourcefiles encoding="UTF-8">
+												<fileset dir="${sources.directory.project.business}">
+													<exclude name="**/ar/com/thinksoft/business/generix/**" />
+													<exclude name="**/ar/com/thinksoft/utils/**" />
+												</fileset>
+											</sourcefiles>
+										</group>
+										<group name="core">
+											<classfiles>
+												<fileset dir="${classes.directory.project.core}">
+												</fileset>
+											</classfiles>
+											<sourcefiles encoding="UTF-8">
+												<fileset dir="${sources.directory.project.core}">
+												</fileset>
+											</sourcefiles>
+										</group>
+										<group name="dtos">
+											<classfiles>
+												<fileset dir="${classes.directory.project.dtos}">
+												</fileset>
+											</classfiles>
+											<sourcefiles encoding="UTF-8">
+												<fileset dir="${sources.directory.project.dtos}">
+												</fileset>
+											</sourcefiles>
+										</group>
+										<group name="persistance">
+											<classfiles>
+												<fileset dir="${classes.directory.project.persistance}">
+												</fileset>
+											</classfiles>
+											<sourcefiles encoding="UTF-8">
+												<fileset dir="${sources.directory.project.persistance}">
+												</fileset>
+											</sourcefiles>
+										</group>
+										<group name="validadores">
+											<classfiles>
+												<fileset dir="${classes.directory.project.validadores}">
+												</fileset>
+											</classfiles>
+											<sourcefiles encoding="UTF-8">
+												<fileset dir="${sources.directory.project.validadores}">
+												</fileset>
+											</sourcefiles>
+										</group>
+<!-- 										<group name="web"> -->
+<!-- 											<classfiles> -->
+<!-- 												<fileset dir="${classes.directory.project.web}"> -->
+<!-- 													<include name="/ar/com/thinksoft/beans/**" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/application/BBApplicationData*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/seguridad/BBModulos*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/seguridad/MenuBuilder*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/BBSessionData*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/BBUserAgentProcessor*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/BBUserData*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/UAgentInfo*" /> -->
+<!-- 													<include name="/ar/com/thinksoft/delegators/**" /> -->
+<!-- 												</fileset> -->
+<!-- 											</classfiles> -->
+<!-- 											<sourcefiles encoding="UTF-8"> -->
+<!-- 												<fileset dir="${sources.directory.project.web}"> -->
+<!-- 													<include name="/ar/com/thinksoft/beans/**" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/application/BBApplicationData*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/seguridad/BBModulos*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/seguridad/MenuBuilder*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/BBSessionData*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/BBUserAgentProcessor*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/BBUserData*" /> -->
+<!-- 													<exclude name="/ar/com/thinksoft/beans/session/UAgentInfo*" /> -->
+<!-- 													<include name="/ar/com/thinksoft/delegators/**" /> -->
+<!-- 												</fileset> -->
+<!-- 											</sourcefiles> -->
+<!-- 										</group> -->
+<!-- 										<group name="web-report"> -->
+<!-- 											<classfiles> -->
+<!-- 												<fileset dir="${classes.directory.project.web.report}"> -->
+<!-- 												</fileset> -->
+<!-- 											</classfiles> -->
+<!-- 											<sourcefiles encoding="UTF-8"> -->
+<!-- 												<fileset dir="${sources.directory.project.web.report}"> -->
+<!-- 												</fileset> -->
+<!-- 											</sourcefiles> -->
+<!-- 										</group> -->
+<!-- 										<group name="ws"> -->
+<!-- 											<classfiles> -->
+<!-- 												<fileset dir="${classes.directory.project.ws}"> -->
+<!-- 												</fileset> -->
+<!-- 											</classfiles> -->
+<!-- 											<sourcefiles encoding="UTF-8"> -->
+<!-- 												<fileset dir="${sources.directory.project.ws}"> -->
+<!-- 												</fileset> -->
+<!-- 											</sourcefiles> -->
+<!-- 										</group> -->
+									</structure>
+									<html destdir="${basedir}/target/coverage-report/html" />
+									<xml destfile="${basedir}/target/coverage-report/coverage-report.xml" />
+									<csv destfile="${basedir}/target/coverage-report/coverage-report.csv" />
+								</report>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.jacoco</groupId>
+						<artifactId>org.jacoco.ant</artifactId>
+						<version>${jacoco.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>

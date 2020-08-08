@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      lang="en">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagenes/favicon.ico" />
+        <title><ui:insert name="pageTitle">#{msg.bienvenido_completo}</ui:insert></title>
+        <h:outputScript name="js/nanoscroller.js" library="#{guestPreferences.contract}-layout" />
+        <h:outputScript name="js/layout.js" library="#{guestPreferences.contract}-layout" />
+        <ui:insert name="head"/>
+        <f:facet name="last">
+			<ui:insert name="customStyles" />
+			<ui:insert name="customScriptsFirst" />
+			<h:outputScript name="common.js" library="javascripts" />
+			<h:outputScript name="mascara.js" library="javascripts" />
+        </f:facet>
+    </h:head>
+
+    <h:body>
+        <div class="layout-wrapper layout-menu-dark #{guestPreferences.menuMode} ">
+            <ui:include src="./topbar.xhtml" />
+    		<ui:include src="./menu.xhtml" />
+	        <div class="layout-main">
+				<div class="route-bar">
+					<h:form id="formCabecera">
+						<div class="route-bar-breadcrumb">
+							<i class="fa fa-home"></i>
+							<span>/</span>
+							<ui:insert name="viewname" />
+						</div>
+					</h:form>
+				</div>
+                <div class="layout-content" style="min-height:300px">
+	                <ui:insert name="content"/>
+            	</div>
+            </div>
+            <div class="layout-content-mask"></div>
+        </div>
+
+        <ui:insert name="popupDefault" />
+
+       	<script>
+	        var ajaxInProgress;
+	        function startHandler() {
+	            ajaxInProgress = setTimeout(function () {
+	            	PF('statusDialog').show();
+	            }, 500);
+	        }
+	        function endHandler() {
+	            clearTimeout(ajaxInProgress);
+	            PF('statusDialog').hide();
+	            ajaxInProgress = null;
+	        }
+	    </script>
+		<p:ajaxStatus onstart="startHandler();" oncomplete="endHandler();"/>
+
+		<p:dialog id="LoadingDialog" modal="true" widgetVar="statusDialog"
+				  closable="false" resizable="false" draggable="false">
+			<i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+		</p:dialog>
+
+        <pe:blockUI widgetVar="$blockUI" autoShow="true" event="change">  
+		    <h:panelGrid>
+		        <h:outputText value="Por favor espere..." styleClass="nowrap FontBold Fs20" />  
+		    </h:panelGrid>  
+		</pe:blockUI>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="Wid400px">
+			<h:panelGrid columns="2" styleClass="MarAuto">
+		        <p:commandButton value="#{msg.aceptar}" type="button" styleClass="ui-confirmdialog-yes Wid150px" icon="fa fa-check" />
+		        <p:commandButton value="#{msg.cancelar}" type="button" styleClass="ui-confirmdialog-no Wid150px" icon="fa fa-close" />
+	        </h:panelGrid>
+	    </p:confirmDialog>
+	    
+	    <p:idleMonitor timeout="500000">
+	        <p:ajax event="idle" listener="#{bbUserData.redirectLogin()}" />
+	    </p:idleMonitor>
+
+		<!-- GROWLS -->
+		<h:panelGroup id="messages">
+			<p:growl showDetail="true" sticky="false" autoUpdate="false" life="4000" severity="info">
+				<p:autoUpdate />
+			</p:growl>
+			<p:growl showDetail="true" sticky="false" autoUpdate="false" life="8000" severity="warn">
+				<p:autoUpdate />
+			</p:growl>
+			<p:growl showDetail="true" sticky="true" autoUpdate="false" severity="error">
+				<p:autoUpdate />
+			</p:growl>
+		</h:panelGroup>
+		
+	    <!-- PNLPRINT -->
+		<h:form id="pnlPrint">
+			<ui:insert name="defineApplet">
+				<script type="text/javascript">
+					function clickLink(link) {
+					  var fireOnThis = link;
+					  if (document.createEvent) {
+					    var evObj = document.createEvent('MouseEvents');
+					    evObj.initEvent('click', true, false);
+					    fireOnThis.dispatchEvent(evObj);
+					  }
+					  else if (document.createEventObject) {
+					    fireOnThis.fireEvent('onclick');					    
+					  } 
+					  else{
+						  link.click();
+					  }
+					}
+				</script>
+				<p:commandLink id="processClientFiles" style="visibility: hidden;"
+							   onclick="processClientFiles('#{bbSessionData.files2ExplorerView}','#{bbSessionData.files2Download}');" />
+		
+				<p:commandLink id="removeLink" style="visibility: hidden;" immediate="true" 
+							   actionListener="#{bbSessionData.actionBtnPrint()}" update="pnlPrint" />
+
+				<p:outputPanel rendered="#{bbSessionData.processClientFiles}">
+					<script type="text/javascript">
+						clickLink(document.getElementById('pnlPrint:processClientFiles'));
+						clickLink(document.getElementById('pnlPrint:removeLink'));
+					</script>
+				</p:outputPanel>
+				<p:outputPanel rendered="#{bbSessionData.doPost}">
+					<script type="text/javascript">
+						a( "#{bbSessionData.postUrl}", { a1: "#{bbSessionData.postParam}", a2: "#{bbSessionData.postEMail}" });
+						clickLink(document.getElementById('pnlPrint:removeLink'));
+					</script>
+				</p:outputPanel>
+			</ui:insert>
+		</h:form>
+        
+        <h:outputStylesheet name="css/nanoscroller.css" library="#{guestPreferences.contract}-layout" />
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="#{guestPreferences.contract}-layout" />
+        <!--  -->
+        <h:outputStylesheet name="font-awesome-animation.min.css" library="estilos" />
+       	<h:outputStylesheet name="commonV2.css" library="estilos" />
+        <h:outputStylesheet name="autogestion.css" library="estilos" />
+    </h:body>
+</html>

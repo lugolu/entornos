@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>PrimeFaces Babylon</title>
+        <script type="text/javascript">
+            hideMenu = function() {
+                $('#landing-menu').removeClass('fadeInDown').addClass('fadeOutUp');
+
+                setTimeout(function () {
+                    $('#landing-menu').removeClass('landing-menu-active fadeOutUp');
+                    $(document.body).removeClass('landing-body-block-scroll');
+                }, 150);
+            }
+
+            showMenu = function() {
+                $('#landing-menu').addClass('landing-menu-active fadeInDown');
+                $(document.body).addClass('landing-body-block-scroll');
+            }
+
+            $(function() {
+                $('#landing-menu-button').on('click', function(e) {
+                    var menu = $('#landing-menu');
+
+                    if(menu.hasClass('landing-menu-active'))
+                        hideMenu();
+                    else
+                        showMenu();
+
+                    e.preventDefault();
+                });
+
+                $('#landing-menu').find('a').on('click', function(e) {
+                    hideMenu();
+                });
+            });
+        </script>
+    </h:head>
+
+    <h:body styleClass="landing-body">
+        <div class="landing-wrapper">
+            <div id="home" class="landing-header">
+                <div class="landing-topbar">
+                    <span>BABYLON</span>
+
+                    <a href="#" id="landing-menu-button">
+                        <i class="fa fa-bars"></i>
+                    </a>
+
+                    <ul id="landing-menu">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#multimedia">Multimedia</a></li>
+                    </ul>
+                </div>
+
+                <div class="landing-header-content">
+                    <h1>PrimeFaces Presents Babylon</h1>
+                    <p>Modern and elegant responsive application template with a premium look for PrimeFaces components.</p>
+                    <p:button outcome="/dashboard" value="Learn More" />
+                </div>
+            </div>
+
+            <div id="features" class="landing-features">
+                <div class="features-topic-shadow">
+                    <div class="features-topic">FEATURES</div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-lg-4">
+                        <div class="feature-box">
+                            <p:graphicImage name="images/landing/icon-responsive@2x.png" library="#{guestPreferences.contract}-layout" />
+                            <div>
+                                <h3>Responsive Layout</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-g-12 p-lg-4">
+                        <div class="feature-box">
+                            <p:graphicImage name="images/landing/icon-design@2x.png" library="#{guestPreferences.contract}-layout" />
+                            <div>
+                                <h3>Modern Design</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-lg-4">
+                        <div class="feature-box">
+                            <p:graphicImage name="images/landing/icon-document@2x.png" library="#{guestPreferences.contract}-layout" />
+                            <div>
+                                <h3>Well Documented</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-lg-4">
+                        <div class="feature-box">
+                            <p:graphicImage name="images/landing/icon-code@2x.png" library="#{guestPreferences.contract}-layout" />
+                            <div>
+                                <h3>Clean Code</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-lg-4">
+                        <div class="feature-box">
+                            <p:graphicImage name="images/landing/icon-gorgeous@2x.png" library="#{guestPreferences.contract}-layout" />
+                            <div>
+                                <h3>Gorgeous Pages</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-lg-4">
+                        <div class="feature-box">
+                            <p:graphicImage name="images/landing/icon-you@2x.png" library="#{guestPreferences.contract}-layout" />
+                            <div>
+                                <h3>Crafted for You</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="news" class="landing-news">
+                <h3>PrimeFaces Premium Template</h3>
+                <p>Take advantage of media's most prominent business trend, and empowers your internal advertising teams. </p>
+
+                <p:button type="button" outcome="/dashboard" value="Learn More" />
+            </div>
+
+            <div id="pricing" class="landing-pricing">
+                <div class="pricing-topic-shadow">
+                    <div class="pricing-topic">PRICING</div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-lg-4">
+                        <div class="pricing-box">
+                            <div class="pricing-box-header">
+                                <h3>Beginner</h3>
+                                <h2>$5.00</h2>
+                                <p>per month</p>
+                            </div>
+                            <div class="pricing-box-content">
+                                <ul>
+                                    <li>Responsive</li>
+                                    <li>Push Messages</li>
+                                </ul>
+                                <p:commandButton type="button" value="Buy Now" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-lg-4">
+                        <div class="pricing-box">
+                            <div class="pricing-box-header">
+                                <h3>Professional</h3>
+                                <h2>$10.00</h2>
+                                <p>per month</p>
+                            </div>
+                            <div class="pricing-box-content">
+                                <ul>
+                                    <li>Responsive</li>
+                                    <li>Push Messages</li>
+                                    <li>10 Support Tickets</li>
+                                </ul>
+                                <p:commandButton type="button" value="Buy Now" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12 p-lg-4">
+                        <div class="pricing-box">
+                            <div class="pricing-box-header">
+                                <h3>Enterprise</h3>
+                                <h2>Get a Quote</h2>
+                                <p>per month</p>
+                            </div>
+                            <div class="pricing-box-content">
+                                <ul>
+                                    <li>Responsive</li>
+                                    <li>Push Messages</li>
+                                    <li>10 Support Tickets</li>
+                                    <li>Free Shipping</li>
+                                </ul>
+                                <p:commandButton type="button" value="Buy Now" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="multimedia" class="landing-multimedia">
+                <div class="multimedia-topic-shadow">
+                    <div class="multimedia-topic">MULTIMEDIA</div>
+                </div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/OgwFrGMb8Y8" frameborder="0" allowfullscreen="true"></iframe>
+                </div>
+                <h3>babylon | Teaser Trailer [HD] </h3>
+                <p>Time and Space constrain us, but they also define who we are, creating inexplicable bonds with the others that flow with us at the same time and through the same places.</p>
+            </div>
+
+            <div class="landing-footer">
+                <div class="p-grid">
+                    <div class="p-col-12 p-lg-3">
+                        <p:graphicImage name="images/logo-babylon-white.svg" library="#{guestPreferences.contract}-layout" />
+                    </div>
+                    <div class="p-col-12 p-lg-2">
+                        <h4>OVERVIEW</h4>
+                        <ul>
+                            <li><a href="#">Why Babylon</a></li>
+                            <li><a href="#">Get Started</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">License</a></li>
+                        </ul>
+                    </div>
+                    <div class="p-col-12 p-lg-2">
+                        <h4>DEMOS</h4>
+                        <ul>
+                            <li><a href="#">PrimeFaces</a></li>
+                            <li><a href="#">PrimeNG</a></li>
+                            <li><a href="#">PrimeReact</a></li>
+                            <li><a href="#">PrimeElements</a></li>
+                        </ul>
+                    </div>
+                    <div class="p-col-12 p-lg-2">
+                        <h4>SUPPORT</h4>
+                        <ul>
+                            <li><a href="#">Support Options</a></li>
+                            <li><a href="#">Pro</a></li>
+                            <li><a href="#">Elite</a></li>
+                            <li><a href="#">Forum</a></li>
+                        </ul>
+                    </div>
+                    <div class="p-col-12 p-lg-3">
+                        <h4>SOCIAL</h4>
+                        <a href="#">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="#{guestPreferences.contract}-layout" />
+   
+        <script>
+                //<![CDATA[
+                    var $this = this;
+                    
+                    $(document).ready(function(){
+                        $('html').animate({scrollTop:0}, 1);
+                        $('body').animate({scrollTop:0}, 1);
+                    });
+                    
+                    /* Scroll Animate */
+                    $('a[href*="#"]:not([href="#"])').click(function() {
+                        var target = $(this.hash);
+                        if (target.length) {
+                            $('html, body').animate({
+                                scrollTop: target.offset().top - 60
+                            }, 500);
+                            return false;
+                        }   
+                    });
+                    
+                    //window and animation items
+                  var animation_elements = $.find('.animation-element');
+                  var web_window = $(window);
+        
+                  //check to see if any animation containers are currently in view
+                  function check_if_in_view() {
+                        //get current window information
+                        var window_height = web_window.height();
+                        var window_top_position = web_window.scrollTop();
+                        var window_bottom_position = (window_top_position + window_height);
+        
+                        //iterate through elements to see if its in view
+                        $.each(animation_elements, function() {
+                              //get the element sinformation
+                              var element = $(this);
+                              var element_height = $(element).outerHeight();
+                              var element_top_position = $(element).offset().top;
+                              var element_bottom_position = (element_top_position + element_height);
+                              
+                              //check to see if this current container is visible (its viewable if it exists between the viewable space of the viewport)
+                            
+                              if ((element_top_position <= window_bottom_position)) {
+                                element.addClass('in-view');
+                              }
+                              
+                        });
+                  }
+        
+                  //on or scroll, detect elements in view
+                  $(window).on('scroll resize', function() {
+                      check_if_in_view()
+                    })
+                    //trigger our scroll event on initial load
+                  $(window).trigger('scroll');
+                //]]>
+                </script>
+    </h:body>
+
+    <h:outputStylesheet name="css/primeflex.css" library="#{guestPreferences.contract}-layout" />
+
+</html>

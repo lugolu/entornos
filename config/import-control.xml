@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE import-control PUBLIC
+    "-//Checkstyle//DTD ImportControl Configuration 1.4//EN"
+    "https://checkstyle.org/dtds/import_control_1_4.dtd">
+<import-control pkg="ar.com.thinksoft">
+<!-- 		remove -->
+ 		<allow class="ar.com.thinksoft.exception.ReportPrinterException" />
+ 		<allow class="ar.com.thinksoft.interfaces.ExceptionLogger" />
+ 		<allow class="ar.com.thinksoft.jdbc.HibernateSessionFactory" />
+ 		<allow class="com.ibm.icu.text.SimpleDateFormat" />
+ 		<allow class="com.ibm.icu.util.Calendar" />
+ 		<allow class="java.text.DateFormat" />
+ 		<allow class="java.text.SimpleDateFormat" />
+ 		<allow class="java.util.Calendar" />
+<!-- 		remove -->
+
+	<allow class="ar.com.thinksoft.core.DateCommonFunctions" />
+	<allow class="ar.com.thinksoft.dtos.DefaultBuilder" />
+	<allow class="ar.com.thinksoft.exception.BusinessException" />
+	<allow class="ar.com.thinksoft.persistance.storedprocedures.HibernateDateResult" />
+	<allow class="ar.com.thinksoft.persistance.storedprocedures.HibernateLongResult" />
+	<allow class="ar.com.thinksoft.persistance.storedprocedures.HibernateResult" />
+	<allow class="ar.com.thinksoft.utils.CommonFunctions" />
+	<allow class="ar.com.thinksoft.utils.DateCommonFunctions" />
+	<allow class="ar.com.thinksoft.utils.SeverityBundle" />
+	<allow class="java.util.Date" />
+	<allow class="java.util.ArrayList" />
+	<allow class="java.util.HashMap" />
+	<allow class="java.util.LinkedList" />
+	<allow class="java.util.List" />
+	<allow class="java.util.Map" />
+	<allow class="org.apache.log4j.Logger" />
+
+	<subpackage name="beans">
+		<allow pkg="ar.com.thinksoft.beans.buscadores" />
+		<allow pkg="ar.com.thinksoft.beans.documentEditor" />
+		<allow pkg="ar.com.thinksoft.delegators" />
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow pkg="ar.com.thinksoft.jsf" />
+		<allow pkg="ar.com.thinksoft.utils" />
+		<allow pkg="javax.faces" />
+		<allow pkg="org.primefaces" />
+		<allow class="ar.com.thinksoft.beans.application.BBApplicationData" />
+		<allow class="ar.com.thinksoft.beans.seguridad.UserSession" />
+		<allow class="ar.com.thinksoft.beans.session.SelectItems" />
+		<allow class="ar.com.thinksoft.exception.BusinessException" />
+		<allow class="ar.com.thinksoft.ws.ValidadorWS" />
+		<allow class="java.io.Serializable" />
+		<allow class="javax.inject.Named" />
+
+		<subpackage name="ambulatoria">
+			<allow class="ar.com.thinksoft.beans.guardia.guardia.BBGuidelineTemplate" />
+			<allow class="ar.com.thinksoft.beans.guardia.guardia.BBSintesisGuardia" />
+			<allow class="ar.com.thinksoft.beans.guardia.guardia.IntBBGuidelineGuardia" />
+			<allow class="ar.com.thinksoft.beans.guardia.guardia.IntBBSintesisGuardia" />
+		</subpackage>
+
+		<subpackage name="application">
+			<allow class="javax.enterprise.context.ApplicationScoped" />
+		</subpackage>
+
+		<subpackage name="session">
+			<allow class="javax.enterprise.context.SessionScoped" />
+		</subpackage>
+	</subpackage>
+
+	<subpackage name="business">
+<!-- 		remove -->
+ 		<allow class="ar.com.thinksoft.persistance.generix.interfaces.IntDomain" />
+<!-- 		remove -->
+<!-- 		<allow pkg="ar.com.thinksoft.business" /> -->
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow pkg="org.apache.poi" />
+		<allow class="ar.com.thinksoft.exception.BusinessException" />
+		<allow class="ar.com.thinksoft.exception.FileProcessError" />
+		<allow class="ar.com.thinksoft.jdbc.HibernateSessionFactory" />
+		<allow class="ar.com.thinksoft.persistance.PersistanceFactory" />
+		<allow class="ar.com.thinksoft.utils.CommonFunctions" />
+		<allow class="ar.com.thinksoft.utils.Constants" />
+		<allow class="ar.com.thinksoft.utils.Error" />
+		<allow class="ar.com.thinksoft.utils.FileStatus" />
+		<allow class="ar.com.thinksoft.utils.HandlerException" />
+		<allow class="ar.com.thinksoft.utils.IgnoreTest" />
+		<allow class="ar.com.thinksoft.utils.IgnoreTestClass" />
+		<allow class="ar.com.thinksoft.utils.MessageBundle" />
+		<allow class="ar.com.thinksoft.utils.RemapTest" />
+		<allow class="java.io.File" />
+		<allow class="java.io.FileInputStream" />
+		<allow class="java.io.InputStream" />
+		<allow class="java.io.RandomAccessFile" />
+		<allow class="java.text.ParseException" />
+		<allow class="java.text.SimpleDateFormat" />
+		<allow class="java.util.Comparator" />
+		<allow class="java.util.Iterator" />
+		<allow class="java.util.NoSuchElementException" />
+		<allow class="org.hibernate.StatelessSession" />
+		<allow class="org.hibernate.Transaction" />
+		<allow class="org.hibernate.engine.transaction.spi.TransactionContext" />
+
+		<subpackage name="afip">
+			<allow pkg="ar.com.thinksoft.ws.wsafip" />
+		</subpackage>
+
+		<subpackage name="bionexo">
+			<allow pkg="ar.com.thinksoft.ws.bionexo" />
+		</subpackage>
+
+		<subpackage name="generix">
+			<allow class="ar.com.thinksoft.persistance.generix.interfaces.IntDomain" />
+			<allow class="ar.com.thinksoft.utils.Setter" />
+			<allow class="java.io.Serializable" />
+			<allow class="java.lang.reflect.ParameterizedType" />
+		</subpackage>
+
+		<subpackage name="interfaces">
+			<subpackage name="lab">
+				<allow pkg="ar.com.thinksoft.interfaces.lab" />
+			</subpackage>
+		</subpackage>
+	</subpackage>
+
+	<subpackage name="common">
+		<allow pkg="java.io" />
+		<allow pkg="java.lang" />
+		<allow pkg="java.util" />
+		<allow class="java.net.URLDecoder" />
+		<allow class="java.text.ParseException" />
+	</subpackage>
+
+	<subpackage name="delegators">
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow class="ar.com.thinksoft.business.BusinessFactory" />
+		<allow class="ar.com.thinksoft.exception.BusinessException" />
+		<allow class="org.hibernate.StatelessSession" />
+	</subpackage>
+
+	<subpackage name="dtos">
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow pkg="javax.persistence" />
+		<allow class="ar.com.thinksoft.utils.CommonFunctions" />
+		<allow class="ar.com.thinksoft.utils.Constants" />
+		<allow class="ar.com.thinksoft.utils.CustomMethod" />
+		<allow class="ar.com.thinksoft.utils.ExcludeCommonFunctions" />
+		<allow class="ar.com.thinksoft.utils.IgnoreTest" />
+		<allow class="ar.com.thinksoft.utils.IgnoreTestClass" />
+		<allow class="ar.com.thinksoft.utils.RemapTest" />
+		<allow class="ar.com.thinksoft.utils.Resources" />
+		<allow class="java.io.Serializable" />
+		<allow class="java.lang.reflect.Method" />
+		<allow class="java.sql.Blob" />
+		<allow class="java.text.DecimalFormat" />
+		<allow class="java.text.NumberFormat" />
+		<allow class="java.text.ParseException" />
+		<allow class="java.text.SimpleDateFormat" />
+		<allow class="java.util.Objects" />
+		<allow class="org.hibernate.annotations.Formula" />
+		<allow class="org.hibernate.annotations.GenericGenerator" />
+	</subpackage>
+
+	<subpackage name="exception">
+		<allow class="java.io.PrintWriter" />
+		<allow class="java.io.StringWriter" />
+		<allow class="org.eclipse.birt.core.exception.BirtException" />
+		<allow class="ar.com.thinksoft.dtos.configuracion.PersonalNotMapped" />
+	</subpackage>
+
+	<subpackage name="fileuploader">
+		<allow pkg="ar.com.thinksoft.delegators" />
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow pkg="ar.com.thinksoft.utils" />
+		<allow pkg="java.io" />
+		<allow pkg="org.apache.poi" />
+		<allow class="org.hibernate.StatelessSession" />
+	</subpackage>
+
+	<subpackage name="hibernate">
+		<allow pkg="java.sql" />
+		<allow pkg="org.hibernate" />
+		<allow class="ar.com.thinksoft.utils.HandlerException" />
+		<allow class="java.util.Properties" />
+	</subpackage>
+
+	<subpackage name="interfaces">
+		<subpackage name="lab">
+			<allow pkg="ar.com.thinksoft.dtos.laboratorio" />
+			<allow pkg="ar.com.thinksoft.dtos.interfaces.infinity" />
+			<allow pkg="java.io" />
+			<allow pkg="java.net" />
+			<allow pkg="java.text" />
+			<allow class="java.io.Serializable" />
+			<allow class="ar.com.thinksoft.business.BusinessFactory" />
+			<allow class="ar.com.thinksoft.persistance.PersistanceFactory" />
+			<allow class="ar.com.thinksoft.utils.CommonFunctions" />
+			<allow class="ar.com.thinksoft.utils.Constants" />
+			<allow class="ar.com.thinksoft.utils.HandlerException" />
+			<allow class="ar.com.thinksoft.utils.MessageBundle" />
+		</subpackage>
+	</subpackage>
+
+	<subpackage name="jdbc">
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow pkg="java.sql" />
+		<allow pkg="org.hibernate" />
+		<allow class="ar.com.thinksoft.dtos.configuracion.Personal" />
+		<allow class="ar.com.thinksoft.persistance.PersistanceFactory" />
+		<allow class="ar.com.thinksoft.persistance.storedprocedures.HibernateResult" />
+		<allow class="ar.com.thinksoft.utils.HandlerException" />
+		<allow class="ar.com.thinksoft.utils.MessageBundle" />
+	</subpackage>
+
+	<subpackage name="jsf">
+		<allow pkg="java.text" />
+		<allow pkg="javax.faces" />
+		<allow class="ar.com.thinksoft.utils.Constants" />
+		<allow class="ar.com.thinksoft.utils.MessageBundle" />
+	</subpackage>
+
+	<subpackage name="interfaces">
+		<allow class="java.io.PrintWriter" />
+		<allow class="java.io.StringWriter" />
+	</subpackage>
+
+	<subpackage name="persistance">
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow pkg="org.hibernate" />
+		<allow class="ar.com.thinksoft.persistance.storedprocedures.HibernateDateResult" />
+		<allow class="ar.com.thinksoft.persistance.storedprocedures.HibernateLongResult" />
+		<allow class="ar.com.thinksoft.persistance.storedprocedures.HibernateResult" />
+		<allow class="ar.com.thinksoft.utils.HandlerException" />
+		<allow class="ar.com.thinksoft.utils.MessageBundle" />
+		<allow class="ar.com.thinksoft.utils.CommonFunctions" />
+		<allow class="ar.com.thinksoft.utils.Constants" />
+		<allow class="ar.com.thinksoft.utils.IgnoreTest" />
+		<allow class="ar.com.thinksoft.utils.IgnoreTestClass" />
+		<allow class="ar.com.thinksoft.utils.RemapTest" />
+		<allow class="ar.com.thinksoft.utils.RemapClass" />
+
+		<subpackage name="generix">
+			<allow class="ar.com.thinksoft.utils.Reflection" />
+			<allow class="java.io.Serializable" />
+		</subpackage>
+
+		<subpackage name="storedprocedures">
+			<allow class="javax.persistence.Column" />
+			<allow class="javax.persistence.Entity" />
+			<allow class="javax.persistence.Id" />
+		</subpackage>
+
+		<subpackage name="test">
+			<allow class="org.hibernate.StatelessSession" />
+			<allow class="ar.com.thinksoft.jdbc.HibernateSessionFactory" />
+		</subpackage>
+	</subpackage>
+
+	<subpackage name="resources">
+		<allow pkg="java.io" />
+		<allow pkg="java.util" />
+		<allow pkg="javax.faces" />
+		<allow class="javax.enterprise.context.ApplicationScoped" />
+		<allow class="javax.enterprise.context.RequestScoped" />
+	</subpackage>
+
+	<subpackage name="scheduler">
+		<allow pkg="org.quartz" />
+		<allow class="ar.com.thinksoft.scheduler.jobs.BorradoArchivosTmpJob" />
+	</subpackage>
+
+	<subpackage name="utils">
+<!-- 		remove -->
+		<allow pkg="ar.com.thinksoft.dtos" />
+<!-- 		remove -->
+
+		<allow pkg="java.io" />
+		<allow pkg="java.lang.annotation" />
+		<allow pkg="java.lang.reflect" />
+		<allow pkg="java.math" />
+		<allow pkg="java.net" />
+		<allow pkg="java.sql" />
+		<allow pkg="java.text" />
+		<allow pkg="java.util" />
+		<allow pkg="javax.el" />
+		<allow pkg="javax.faces" />
+		<allow pkg="javax.servlet" />
+		<allow pkg="org.hibernate" />
+		<allow pkg="org.w3c.dom" />
+		<allow class="javax.xml.parsers.DocumentBuilder" />
+		<allow class="javax.xml.parsers.DocumentBuilderFactory" />
+		<allow class="org.primefaces.context.RequestContext" />
+
+		<subpackage name="poi">
+			<allow pkg="org.apache.poi" />
+			<allow class="org.jsoup.Jsoup" />
+		</subpackage>
+
+		<subpackage name="report">
+			<allow pkg="ar.com.thinksoft.utils" />
+			<allow pkg="com.itextpdf.text" />
+			<allow pkg="org.apache.commons.compress.archivers" />
+			<allow pkg="org.apache.commons.compress.utils" />
+			<allow pkg="org.apache.commons.io" />
+			<allow pkg="org.eclipse.birt.report.engine.api" />
+			<allow class="ar.com.thinksoft.delegators.Delegator" />
+			<allow class="ar.com.thinksoft.exception.ReportExceptionLogger" />
+			<allow class="ar.com.thinksoft.jdbc.Conexion" />
+		</subpackage>
+
+		<subpackage name="test">
+			<allow pkg="junit.framework" />
+			<allow pkg="org.junit" />
+			<allow class="ar.com.thinksoft.utils.HandlerException" />
+			<allow class="ar.com.thinksoft.jdbc.HibernateSessionFactory" />
+			<allow class="java.net.URLDecoder" />
+		</subpackage>
+	</subpackage>
+
+	<subpackage name="ws">
+		<allow pkg="ar.com.thinksoft.dtos" />
+		<allow pkg="ar.com.thinksoft.ws" />
+		<allow pkg="com.google.gson" />
+		<allow pkg="javax.ws.rs" />
+		<allow pkg="javax.xml" />
+		<allow pkg="javax.xml.datatype" />
+		<allow pkg="org.w3c.dom" />
+		<allow class="ar.com.thinksoft.delegators.Delegator" />
+		<allow class="ar.com.thinksoft.jdbc.Conexion" />
+		<allow class="ar.com.thinksoft.jdbc.HibernateSessionFactory" />
+		<allow class="ar.com.thinksoft.utils.Constants" />
+		<allow class="ar.com.thinksoft.utils.IgnoreTestClass" />
+		<allow class="ar.com.thinksoft.utils.LoggerException" />
+		<allow class="ar.com.thinksoft.utils.MessageBundle" />
+		<allow class="com.google.gson.Gson" />
+		<allow class="com.google.gson.GsonBuilder" />
+		<allow class="java.io.BufferedReader" />
+		<allow class="java.io.DataOutputStream" />
+		<allow class="java.io.File" />
+		<allow class="java.io.FileInputStream" />
+		<allow class="java.io.InputStreamReader" />
+		<allow class="java.io.StringReader" />
+		<allow class="java.io.StringWriter" />
+		<allow class="java.io.Writer" />
+		<allow class="java.lang.reflect.InvocationTargetException" />
+		<allow class="java.lang.reflect.Method" />
+		<allow class="java.math.BigDecimal" />
+		<allow class="java.math.BigInteger" />
+		<allow class="java.net.HttpURLConnection" />
+		<allow class="java.net.URL" />
+		<allow class="java.text.ParseException" />
+		<allow class="java.text.SimpleDateFormat" />
+		<allow class="org.apache.axis2.AxisFault" />
+		<allow class="org.codehaus.plexus.util.FileUtils" />
+
+		<subpackage name="conexia">
+			<allow class="java.util.Calendar" />
+		</subpackage>
+
+		<subpackage name="conexiaUP">
+			<allow class="java.util.Calendar" />
+		</subpackage>
+
+		<subpackage name="hms">
+			<allow class="java.rmi.RemoteException" />
+			<allow class="java.util.Calendar" />
+			<allow class="javax.xml.datatype.XMLGregorianCalendar" />
+		</subpackage>
+
+		<subpackage name="jaxrs">
+			<allow class="ar.com.thinksoft.business.BusinessFactory" />
+			<allow class="ar.com.thinksoft.utils.HandlerException" />
+		</subpackage>
+
+		<subpackage name="traditum">
+			<allow pkg="javax.crypto" />
+			<allow pkg="sun.misc" />
+		</subpackage>
+	</subpackage>
+</import-control>

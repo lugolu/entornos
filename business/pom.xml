@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ar.com.thinksoft</groupId>
+		<artifactId>entornosJsf</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<artifactId>entornos-business</artifactId>
+	<name>business</name>
+	<url>http://maven.apache.org</url>
+	<packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>ar.com.thinksoft</groupId>
+			<artifactId>entornos-persistance</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- <dependency> -->
+			<!-- <groupId>org.apache.poi</groupId> -->
+			<!-- <artifactId>poi</artifactId> -->
+			<!-- <version>${poi.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+			<!-- <groupId>org.apache.poi</groupId> -->
+			<!-- <artifactId>poi-ooxml</artifactId> -->
+			<!-- <version>${poi.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+			<!-- <groupId>org.apache.poi</groupId> -->
+			<!-- <artifactId>poi-scratchpad</artifactId> -->
+			<!-- <version>${poi.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+			<!-- <groupId>org.apache.poi</groupId> -->
+			<!-- <artifactId>poi-ooxml-schemas</artifactId> -->
+			<!-- <version>${poi.version}</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>com.linuxense</groupId>
+			<artifactId>javadbf</artifactId>
+			<version>0.4.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${jar.plugin}</version>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/java/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+</project>
