@@ -30,25 +30,25 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
 
+import ar.com.thinksoft.exception.BusinessException;
 import ar.com.thinksoft.utils.CommonFunctions;
 import ar.com.thinksoft.utils.Constants;
 import ar.com.thinksoft.utils.CustomMethod;
 import ar.com.thinksoft.utils.CustomType;
 import ar.com.thinksoft.utils.DontAddGenerator;
 import ar.com.thinksoft.utils.ExcludeCommonFunctions;
+import ar.com.thinksoft.utils.SeverityBundle;
 
 @SuppressWarnings({"checkstyle:CustomImportControl", "checkstyle:IllegalInstantiation", "checkstyle:ModifiedControlVariable", "checkstyle:UnusedImports"})
 public class GeneraMapeos {
 
 	private final String SALTO = "\n";
-	//	private final String url = "jdbc:oracle:thin:@192.168.150.25:1521:HOSENF";
-	//	private final String url = "jdbc:oracle:thin:@192.168.150.25:1521:HOSMAT";
-	//	private final String url = "jdbc:oracle:thin:@192.168.150.25:1521:HOSDESA";
-	private final String url = "jdbc:oracle:thin:@192.168.150.25:1521:HOSDESA2";
+	private final String url = "jdbc:postgresql://localhost:5432/db";
+	//	private final String url = "jdbc:oracle:thin:@192.168.150.25:1521:HOSDESA2";
 
-	private final String user = "ts";
-	private final String pass = "desarro";
-	private final String DEFAULT_SCHEMA = "TS";
+	private final String user = "demo";
+	private final String pass = "example";
+	private final String DEFAULT_SCHEMA = "public";
 	private static int mapeoNumero = 0;
 
 	@SuppressWarnings("unchecked")
@@ -56,12 +56,12 @@ public class GeneraMapeos {
 		try {
 			String path = URLDecoder.decode(ClassLoader.getSystemClassLoader().getResource(".").getPath(), "UTF-8");
 
-			// if (java) {
-			path = path.split("/bin")[0] + "/src/ar/com/thinksoft/dtos/";
-			// } else {
-			// pathDestino =
-			// path.split("/target")[0]+"/src/test/java/ar/com/thinksoft/business/persistance/";
-			// }
+			boolean java = !path.contains("target");
+			 if (java) {
+				 path = path.split("/bin")[0] + "/src/ar/com/thinksoft/dtos/";
+			 } else {
+				 path = path.split("/target")[0]+"/src/main/java/ar/com/thinksoft/dtos/";
+			 }
 
 			File fDestino = new File(path);
 			List<ClaseMapeo> clases = getFiles(fDestino);
@@ -238,340 +238,13 @@ public class GeneraMapeos {
 		Id id = null;
 		Table table = null;
 
-		boolean java = true;
-		//TODO inicio
-		//		/*new GeneraMapeos().genera(java, "TS", "MIGRA_PERSONAL", null, null, "interfaces", true, false);//V8*/
-		//		new GeneraMapeos().genera(java, "INTERFACE", "MIGRA_INTERNACION", null, null, "interfaces", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ADMIN_ITEM_INT_PAC", null, null, "enfermeria", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ALICUOTA_IIBB", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "AMBIENTE_AMB", "AMBIENTE_AMB_NOT_MAPPED", null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "AMBIENTE_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "AMBIENTE_INT", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ANALISIS_INFORME_LAB", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ANALISIS_LAB", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ANALISIS_LAB_PAC", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ANTIBIOTICO_PAC", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ANTROPOMETRIA_PAC", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ANUNCIADOR", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ANUNCIADOR_AMBIENTE_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ARCHIVO_ANEXO_MAIL", null, null, "envioMailSms", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ARM_CAMA_INTERNACION", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ATC_DDD", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ATENCION_AMB", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ATENCION_INT", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "BOLETIN_OPERATORIO", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CAMA_AMBIENTE_INT", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CAMA_INTERNACION", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CATEGORIA_EMPRESA_BIONEXO", null, null, "compras", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "CENTRO_ATENCION", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CENTRO_PROCEDIMIENTO", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CICLO_ESQUEMA", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CICLO_ESQUEMA_PAC", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CIRUGIA", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COD_PRESTACION", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COD_PREST_FUNCION_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COD_PREST_TIEMPO_FACT_CONV", null, null, "facturacionInternado", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "COLA_ESPERA_ADMISION", null, null, "admision", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COLA_ESPERA_RECEP", "COLA_ESPERA_RECEP_NOT_MAPPED", null, "recepcion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COLA_ESPERA_RECEP", null, null, "recepcion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COLA_ESPERA_SERV_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COLA_ESPERA_TRIAGE", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "COLOR_TRIAGE_DF", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "COMPROBANTE", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CONDICION_TIPO_IVA_DF", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "CONVENIO", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CONV_PLAN_CONV_EXT", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "CONV_TIPO_DOCUMENTO_EXT", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "COSEGURO_GRP_CTRO_PLAN", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "COSEGURO_GRP_PLAN", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "COSTO_ITEM", null, null, "depositoFarmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "COSTO_REPOSICION", null, null, "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "CP_SERV_PLAN", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DEPOSITO", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DEP_SEC_SERV_SECTOR_INT", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_ATENCION_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_BALANCE_HIDRICO_PAC", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_COSE_GRP_CTRO_PREST_FACT", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_COSE_GRP_PREST_FACT", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DETERMINACION_ANALISIS_INF_LAB", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DETERMINACION_ANALISIS_LAB", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_FORM_ENCUESTA", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_INDICA_ITEM_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_INDICA_PREST_INT", null, null, "paciente", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_ITEM_ATENCION_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_ITEM_ATENCION_INT", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_ITEM_INT", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_LIQ_HS_PERS_SERV", null, null, "liquidacionHonorario", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_OCUPACION_AMBIENTE_AMB", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_PED_RECETA", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_PRESCRIP_PREST_AMB", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_PRESCRIP_PREST_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_PREST_INT", null, null, "facturacionInternado", true, false);
-		//      new GeneraMapeos().genera(java, "TS", "DET_PREST_CIRUGIA", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_PREST_RECEP_AMB", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_RECETA_ITEM_PAC", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_RECETA_OFTALMO_PAC", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_REG_ENF_INT", null, null, "enfermeria", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_RESERVA_AMBIENTE_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_VADEMECUM_COMERCIAL", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DET_VADEMECUM_GENERICO", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DIA_HORA_ESP_TUR_GRP_EQUI", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DIA_HORA_ESP_TUR_GRP_PERS", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DIA_HORA_ESP_TUR_GRP_SERV", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DICCIONARIO_ANUNCIADOR", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DOC_ADI_ADM_DET_PREST", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DOC_MENU_APLICACION", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DOC_REQ_ADMISION", null, null, "admision", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DOC_REQ_PLAN_CONV_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DOC_REQ_PLAN_CONV_TIPO_INT", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "DOSIS_MAXIMA_TOLERADA", null, null, "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "DOSIS_MAXIMA_TOLERADA_AUC", null, null, "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ENCUESTA_ATENCION_AMB", null, null, "configuracion", true, true);
-		//		new GeneraMapeos().genera(java, "TS", "ENCUESTA_PAC", null, null, "paciente", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ENCUESTA_TIPO_ALTA", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ENCUESTA_TURNO", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "EQUIV_USUARIO_DOSYS", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ESQUEMA_TRATAMIENTO", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ESQUEMA_TRATAMIENTO_PAC", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ETIQUETA_ADI_LAB", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "EXC_COSEGURO_GRP_CTRO_SERV", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "EXC_COSEGURO_GRP_SERV", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_FARMACIA_EXTERNA", "FARMACIA_EXTERNA_NOT_MAPPED", "ID_FARMACIA_EXTERNA", "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "FASE_ESTADO_CIRUGIA_DF", null, null, "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "FMT_ARCH_ENT", null, null, "facturacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "FORMA_PAGO_BIONEXO", null, null, "compras", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "FORM_ENCUESTA", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "FUNCION_INT", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "GARANTIA_CONV_TIPO_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "GARANTIA_TIPO_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "GRP_CENTRO_ATENCION", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "GRP_INFORME_LAB", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "GRP_PREST_FACT", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "INCUBADORA_CAMA_INTERNACION", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "INDICACION_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "INDICACION_INT", null, null, "paciente", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "INDICA_PREST_INT", null, null, "paciente", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "INDICE_ACT_PRECIO_ITEM", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ITEM", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "ITEM_FARM_MANUAL_FARM", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ITEM_FARM", "ITEM_FARM_NOT_MAPPED", "COD_ITEM_FARM", "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ITEM_VARIOS", "ITEM_VARIOS", "COD_ITEM_VARIOS", "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "LIBRO_INT_CENTRO", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "LICENCIA_MEDICA", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "LISTA_VALORES_POSIBLE", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "LLAMADO_ANUNCIADOR", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "LMT_CAMA_INTERNACION", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MARKUP_PRECIO_SUB_TIPO_ITEM", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MENSAJE_BIONEXO", null, null, "compras", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MENSAJE_DOSYS", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MENSAJE_INTERFACE_PAC", null, null, "interfaces", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MENSAJE_PROF_ACCESO_WEB", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MENSAJE_RECIBIDO_TOKEN_EXTERNO", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MENSAJE_VALIDADOR", null, null, "paciente", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MENSAJE_WHATSAPP", null, null, "envioMailSms", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MICROORGANISMO_AISLADO_PAC", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MODELO_DOC_ADMISION", null, null, "admision", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MODELO_DOC_TIPO_INT", null, null, "admision", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MODELO_INFORME_LAB", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MODIF_MODULO_INT", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MOD_TIENE_ALGUN_COD_PREST", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MOD_TIENE_ALGUN_COD_PREST_ANT", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MOD_TIENE_TODOS_COD_PREST", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MONODROGA", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "MOV_DEP", null, null, "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "MUESTRA_LAB_PAC", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "NACIMIENTO_PAC", null, null, "obstetricia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "NIVEL_ESI_TERMINAL_TRIAGE", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "OCUPACION_AMBIENTE_AMB", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "OCUPACION_QUIROFANO", null, null, "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "OPCION_TERMINAL_AG", null, null, "recepcion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "ORD_CAJA", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "OXIDO_NITRICO_CAMA_INTERNACION", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PACK_LOGOS", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_ATENCION_SERV", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_AUTOGESTION_PAC", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_DOSYS", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_GENERAL", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_INTERFACE_PAC_IMG", null, null, "interfaces", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_INTERNACION", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_LABORATORIO", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_WS_AFIP", null, null, "facturacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARAM_WS_RECETAS", null, null, "interfaces", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PARTE_ANESTESIA_CIRUGIA", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PDF_RIS_RECIBIDO", null, null, "interfaces", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PED_RECETA", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PERS_ADM_CENTRO_PROC", null, null, "configuracion", false, false);
-		//new GeneraMapeos().genera(java, "TS", "PLH_GP", null, null, "liquidacionHonorario", true, false);
-		//new GeneraMapeos().genera(java, "TS", "PLH_GP_SERV_CONV", null, null, "liquidacionHonorario", true, false);
-		//new GeneraMapeos().genera(java, "TS", "PLH_GP_CONV", null, null, "liquidacionHonorario", true, false);
-		//new GeneraMapeos().genera(java, "TS", "PLH_GP_SERV", null, null, "liquidacionHonorario", true, false);
-		//new GeneraMapeos().genera(java, "TS", "PLH_GI", null, null, "liquidacionHonorario", true, false);
-		//new GeneraMapeos().genera(java, "TS", "PLH_GI_SERV", null, null, "liquidacionHonorario", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PERSONAL_SERVICIO", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PRE_AGENDA_TURNO", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PRECIO_VTA_ITEM", null, null, "depositoFarmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PREFIJO_TICKET", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PRESCRIP_PREST_AMB", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PRESCRIP_PREST_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PRESTACION", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PRESTACION_CONV", null, null, "facturacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PRESTACION_RESULTADO_POS_MICRO", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PREST_PRE_AGENDA_SERV", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PROCESA_MANUAL_FARM", null, null, "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "PTO_VTA_EMPRESA", null, null, "facturacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "PUESTO_SECTOR_ADMISION", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "QUIROFANO", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "RANGO_MARKUP_PRECIO_SUB_TIPO", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "RECEPCION_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "RECETA_PAC", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "REG_ENF_INT", null, null, "enfermeria", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "REGISTRO_INFORME_LAB", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "REGISTRO_TURNO_ENF_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "REQ_ADI_CIRUGIA", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "RESERVA_AMBIENTE_AMB", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "RESERVA_CAMA_CIRUGIA", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "RESERVA_TIPO_INT", null, null, "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "RESPUESTA_RECETA_PAC_WS", null, null, "interfaces", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "SECTOR_ADMISION_TIPO_INT", null, null, "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "SECTOR_AMB_CENTRO_ATE", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SECTOR_INT_CENTRO_ATE", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SECTOR_TIPO_INT_CENTRO", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SERV_CENTRO_PRESCRIP_WEB", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "SERV_CENTRO_PROC", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "SERVICIO_CENTRO", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SERVICIO_TERMINAL_TRIAGE", null, null, "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "SITIO_ANATOMICO", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SOL_INTERNACION_DERIVACION", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SOL_RESERVA_PROC_PAC", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SUB_GRP_INFORME_LAB", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "SUCURSAL_EMPRESA", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TE_PERSONA_WHATSAPP", null, null, "envioMailSms", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TERMINAL_AG", null, null, "recepcion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TERMINAL_TRIAGE", null, null, "recepcion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_ADMISION_DF", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_ALTA", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_AMBIENTE_DF", "TIPO_AMBIENTE", null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_ANESTESIA", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_CIRUGIA", null, null, "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_CIRUGIA_QUIROFANO", null, null, "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_COD_BARRA_ALT_MUESTRA", null, null, "laboratorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_COD_BARRA_ALT_MUESTRA_ANA", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_COD_BARRA_ALT_MUESTRA_DET", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_COD_BARRA_ALT_MUESTRA_MUE", null, null, "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_DOC_DF", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_INT_CENTRO", null, null, "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_INTERNACION", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TIPO_PARTE_INSUMO", null, null, "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ADMIN_ITEM_INT_PAC", null, "ID_OBJETO", "enfermeria", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ADMIN_MONODROGA", null, "ID_OBJETO", "enfermeria", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_AGENDAS_REEMPLAZADAS", null, "ID_OBJETO", "estadisticas", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ALTAS_ENTRE_FECHAS", null, "ID_OBJETO", "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ANA_LAB_MUESTRA_PAC", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ATENCION_MEDICA", null, "ID_ATENCION", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CALCULA_DOSIS", null, "ID_OBJETO", "enfermeria", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CARGA_ARCHIVO_NEXTLAB", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CARGA_INFORME_LABORATORIO", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CENSO_CAMA", null, "ID_OBJETO", "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CENTRO_ATENCION", null, "ID_OBJETO", "atencion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CHECK_HORARIO", null, "ID_OBJETO", "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_COD_PREST_HOM", null, "ID_OBJETO", "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_COLAS_ESPERA", null, "ID_OBJETO", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_COMPARACION_COTIZA", null, "ID_OBJETO", "compras", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_COMPOS_DEUDA", null, "ID_OBJETO", "cobranzaConvenio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_COMPROBANTE", null, "ID_OBJETO", "caja", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_ATENCIONES", null, "ID_OBJETO", "panelDeControl", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_AUTOGESTION", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_DET_NECESIDAD", null, "ID_OBJETO", "compras", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_EVOLUCIONES_PROF", null, "ID_OBJETO", "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_HOUSEKEEPING", null, "ID_OBJETO", "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_PRESCRIPCIONES", null, "ID_OBJETO", "panelDeControl", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_RECURSOS_HUMANOS", null, "ID_OBJETO", "recursosHumanos", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_RENDICION_CAJA", null, "ID_OBJETO", "caja", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_RESERVA_ITEM", null, "ID_OBJETO", "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_RRHH", null, "ID_OBJETO", "turnos", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSULTA_TRIAGE", null, "ID_OBJETO", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONSUMO_DOSYS", null, "ID_OBJETO", "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONTENEDOR_LAB", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CONTROL_DOSIS_MAX", null, "ID_OBJETO", "enfermeria", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_COSTO_REPOSICION", null, "ID_OBJETO", "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_CUIT_ALTO_RIESGO_FISCAL", null, "LINEA_ARCHIVO", "configuracion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DATOS_INTERFACE_FUJI", null, "ID_OBJETO", "interfaces", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_ATENCION_MEDICA", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_BALANCE_HIDRICO_PAC", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_COSE_GRUPAL_RECEP_AMB", null, "ID_OBJETO", "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_COTIZA_PROV", null, "NRO_LINEA", "compras", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_FORM_PED_ITEM", null, "ID_OBJETO", "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_INDICA_ITEM_AMB", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_ITEM_ATENCION", null, "ID_OBJETO", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_ITEM_PRESUPUESTO", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_ITEM_RECEP_AMB", null, "ID_OBJETO", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_LIQ_HS_PERS_SERV", null, "ID_OBJETO", "liquidacionHonorario", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_PED_PREST", null, "ID_DET_PRESCRIP_PREST_AMB", "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_PREST_PRESUPUESTO", null, null, "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_PREST_RECEP_AMB", null, "ID_OBJETO", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_RECETA_ITEM_PAC", null, "ID_OBJETO", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_REG_ENF_INT", null, "ID_OBJETO", "enfermeria", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DET_REG_ENF_INT_HORA", null, "ID_DET_REG_ENF_INT_HORA", "enfermeria", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DEVOLUCION_DOSYS", null, "ID_OBJETO", "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DIAGNOSTICO_RECETA", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DIA_HORARIO_ATENCION_PERS", null, "ID_OBJETO", "turnos", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DIA_HORARIO_TURN_GRP_PERS", null, "ID_OBJETO", "turnos", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DOC_ADICIONAL", null, "ID_OBJETO", "recepcion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_DOCUMENTOS_PREFACT_INT", null, "ID_OBJETO", "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ESTADISTICA_CENSO_PACIENTE", null, "ID_OBJETO", "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ESTADISTICA_TURNO_PROF", null, "ID_OBJETO", "panelDeControl", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ESTUDIOS_PEDIDOS_INT", null, null, "paciente", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_FILTRO_CIRUGIA", null, "ID_OBJETO", "cirugia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_FILTRO_GENERICO", null, "ID_OBJETO", "compras", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_GEN_DET_ITEM_STOCK_INT", null, "ID_OBJETO", "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_GEN_DET_PRESTACION_INT", null, "ID_OBJETO", "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_GEN_ORDEN_SERV_INT", null, "ID_OBJETO", "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_IMPRESION_HC", null, "ID_OBJETO", "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_INF_POR_PROF", null, "ID_OBJETO", "informes", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_INTERCONSULTOR", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_INTERNACION", null, "ID_INTERNACION", "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ITEM_CTRL_INVENTARIO_DEP", null, "ID_OBJETO", "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_ITEMS_MODULO", null, "ID_OBJETO", "facturacionInternado", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_LISTADO_TRABAJOS", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_MONTOS_COMPROBANTE", null, "ID_OBJETO", "facturacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_MUESTRA_ANAT_PAT", null, "ID_OBJETO", "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_NECESIDAD_AUTORIZADA", null, "ID_OBJETO", "compras", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_OCUPACION_MULTIPLE", null, "ID_OBJETO", "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PARTE_QUIRURGICO", null, "ID_OBJETO", "cirugia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PED_DEP", null, "ID_OBJETO", "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PEDIDO_AUTOMATICO", null, "ID_OBJETO", "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PERSONA", null, "ID_PERSONA", "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PRACTICA_CON_INFORME", null, "ID_OBJETO", "informes", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PRESCRIPCION_PREST", null, "ID_OBJETO", "paciente", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PRESCRIP_PREST_AMB", null, "ID_PRESCRIP_PREST_AMB", "atencion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PRESTACION", null, "ID_OBJETO", "facturacionInternado", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PRESTACIONES_MODULO", null, "ID_OBJETO", "facturacionInternado", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PRESUPUESTO", null, "ID_PRESUPUESTO", "ambulatorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PROVEEDOR", null, "ID_PROVEEDOR", "compras", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_PROX_TURNO_LIBRE", null, "ID_OBJETO", "turnos", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_RECETA_PAC", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_REG_RESERVA_CTRL_INV", null, "ID_OBJETO", "farmacia", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_RENDICION", null, "ID_OBJETO", "panelDeControl", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_RESERVA_INTERNACION", null, "ID_OBJETO", "internacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_RESERVA_ITEM_PAC_INT", null, "ID_OBJETO", "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_SCORE_APACHE_3", null, "ID_OBJETO", "estadisticas", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_SERVICIO", null, "ID_OBJETO", "atencion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_TIPO_INTERFACE_LAB_PARIDAD", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_TOMA_MUESTRA_LAB_INT", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_TRABAJO_INTERFACE_LAB", null, "ID_OBJETO", "laboratorio", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_TRADUCCION_INDICACION", null, "ID_OBJETO", "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_TRIAGE_AMB", null, "ID_OBJETO", "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TMP_VALORIZACION_ITEM", null, "ID_OBJETO", "farmacia", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TRATAMIENTO_PAC_INT", null, null, "internacion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "TRIAGE_AMB", null, null, "ambulatorio", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "UNIDAD_POTENCIA", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "VADEMECUM_COMERCIAL", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "VADEMECUM_GENERICO", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "VALOR_EQUIV_FMT_ARCH_ENT", null, null, "facturacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "VALOR_EQUIV_FMT_ARCH_FMT", null, null, "facturacion", false, false);
-		//		new GeneraMapeos().genera(java, "TS", "VALORES_POSIBLE", null, null, "configuracion", true, false);
-		//		new GeneraMapeos().genera(java, "TS", "VP_SUB_TIPO_ITEM_CONV", null, null, "configuracion", false, false);
-		//TODO fin
+		try {
+			boolean java = false;
+			new GeneraMapeos().genera(java, "public", "tabla", null, null, "enfermeria", false, false);
+			//TODO fin
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -590,11 +263,12 @@ public class GeneraMapeos {
 	 * @param usaCommonFunctions Asignar usando CommonFunctions
 	 * @param generaBusiness Generar archivos IntBus e ImpBus en las carpetas del pck business
 	 */
-	private void genera (boolean java, String schema, String tabla, String mapeo, String pk, String pck, boolean usaCommonFunctions, boolean generaBusiness) {
+	private void genera (boolean java, String schema, String tabla, String mapeo, String pk, String pck, boolean usaCommonFunctions, boolean generaBusiness) throws Exception {
 		Connection connection = null;
 		try {
 			boolean mysql = false;
 			boolean oracle = false;
+			boolean postgres = false;
 			String sufijoPk = null;
 
 			if (url.contains("mysql")) {
@@ -605,7 +279,12 @@ public class GeneraMapeos {
 				oracle = true;
 				sufijoPk = "_ID";
 			}
+			else  if (url.contains("postgres")) {
+				postgres = true;
+				sufijoPk = "_ID";
+			}
 			else {
+				throw new BusinessException("No se pudo determinar el tipo de base.", SeverityBundle.FATAL);
 			}
 
 			StringBuffer mapeos = new StringBuffer();
@@ -654,6 +333,19 @@ public class GeneraMapeos {
 						"						                   and p.CONSTRAINT_TYPE = 'P') > 1 then 'SI' else 'NO' end PK_MULTIPLE " +
 						"    FROM all_tables c" +
 						"    WHERE owner='" + schema + "'";
+
+				if (tabla != null) {
+					sql += " AND TABLE_NAME like '" + tabla + "' ";
+				}
+
+				if (pk == null) {
+					sql += " UNION ALL " + sql.replace("DISTINCT TABLE_NAME", "DISTINCT concat(TABLE_NAME, '_ID')");
+				}
+			}
+			else if (postgres) {
+				sql = "SELECT DISTINCT TABLE_NAME, 'NO' PK_MULTIPLE " +
+						"    FROM information_schema.columns c" +
+						"    WHERE table_schema='" + schema + "'";
 
 				if (tabla != null) {
 					sql += " AND TABLE_NAME like '" + tabla + "' ";
@@ -829,6 +521,15 @@ public class GeneraMapeos {
 							"WHERE TABLE_SCHEMA = '" + schema + "' " +
 							"  AND TABLE_NAME = '" + tableName.replace(sufijoPk, "") + "' ";
 				}
+				else if (postgres) {
+					sql = " SELECT COLUMN_NAME, COLUMN_DEFAULT, IS_NULLABLE, upper(DATA_TYPE) as DATA_TYPE, null COLUMN_KEY, CHARACTER_MAXIMUM_LENGTH, null EXTRA, null as precission, null as scala, 'N' FK " +
+							" FROM INFORMATION_SCHEMA.COLUMNS c " +
+							"WHERE TABLE_SCHEMA = '" + schema + "' " +
+							"  AND TABLE_NAME = '" + tableName.replace(sufijoPk, "") + "' ";
+				}
+				else {
+					throw new BusinessException("No se pudo determinar el tipo de base.", SeverityBundle.FATAL);
+				}
 				System.out.println(sql);
 
 				Statement st = connection.createStatement();
@@ -850,7 +551,7 @@ public class GeneraMapeos {
 
 					boolean esFk = "S".equals(rs.getString("FK"));
 
-					String tipoDato = getTipoDato(oracle, mysql, rs.getString("DATA_TYPE"), rs.getLong("CHARACTER_MAXIMUM_LENGTH"), rs.getLong("precission"), rs.getLong("scala"));
+					String tipoDato = getTipoDato(oracle, mysql, postgres, rs.getString("DATA_TYPE"), rs.getLong("CHARACTER_MAXIMUM_LENGTH"), rs.getLong("precission"), rs.getLong("scala"));
 
 					if (customTypes.containsKey(getJavaName(rs.getString("COLUMN_NAME")))) {
 						tipoDato = customTypes.get(getJavaName(rs.getString("COLUMN_NAME"))).toString();
@@ -972,6 +673,9 @@ public class GeneraMapeos {
 									else if (mysql) {
 										atributes.append("\t@GeneratedValue(strategy=GenerationType.IDENTITY)").append(SALTO);
 									}
+									else {
+										throw new BusinessException("No se pudo determinar el tipo de base.", SeverityBundle.FATAL);
+									}
 								}
 								atributes.append("\tprivate " + tipoDato + " " + getJavaName(rs.getString("COLUMN_NAME")) + "Aux;").append(SALTO);
 								atributes.append("\t@Column(name=\"" + rs.getString("COLUMN_NAME") + "\"");
@@ -1063,7 +767,7 @@ public class GeneraMapeos {
 
 				StringBuffer idMethods = new StringBuffer();
 				if (!tableName.endsWith(sufijoPk) && Constants.STRING_SI.equals(tienePkMultiple)) {
-					if (oracle) {
+					if (oracle || postgres) {
 						equalsAtributes.append("Objects.equals(getId(), that.getId())");
 						hashAtributes.append("getId()");
 						idMethods.append("	public " + getJavaClass(mapeo) + "Id getId() {").append(SALTO);
@@ -1196,7 +900,7 @@ public class GeneraMapeos {
 						dto.append("@Table(name = \"" + tableName.toUpperCase() + "\")").append(SALTO);
 					}
 					if (Constants.STRING_SI.equals(tienePkMultiple)) {
-						if (oracle) {
+						if (oracle || postgres) {
 							dto.append("@IdClass(" + getJavaClass(mapeo) + "Id.class)").append(SALTO);
 						}
 						else if (mysql) {
@@ -1482,13 +1186,14 @@ public class GeneraMapeos {
 	 * Tipo de dato en java segun el de la base de datos.
 	 * @param oracle
 	 * @param mysql
+	 * @param postgres
 	 * @param tipoDato Tipo de dato en la base.
 	 * @param length Longitud del campo.
 	 * @param precision Precision del campo.
 	 * @param scale Escala del campo.
 	 * @return Tipo de dato en java.
 	 */
-	private String getTipoDato(boolean oracle, boolean mysql, String tipoDato, Long length, Long precision, Long scale) {
+	private String getTipoDato(boolean oracle, boolean mysql, boolean postgres, String tipoDato, Long length, Long precision, Long scale) {
 		if (oracle) {
 			tipoDato = tipoDato.toUpperCase();
 			if ("NUMBER".equals(tipoDato)
@@ -1533,6 +1238,10 @@ public class GeneraMapeos {
 			else {
 				return tipoDato;
 			}
+		}
+		else if (postgres) {
+			tipoDato = tipoDato.toUpperCase();
+			return tipoDato;
 		}
 		else {
 			return null;
