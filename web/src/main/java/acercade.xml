@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <acercade>
 	<proyecto nombre="Auto-Gestion Hospital">
-		<version nombre="RC-9.268.0.0" fecha="24/06/2020" cliente="TS"></version>
-<!-- 		DICOM: visualizador TS -->
-<!-- 		EXTERNO: InformeMedico, synapse, etc -->
-<!-- 		OVIYAM2: -->
-<!-- 		VISUALMEDICA: -->
-		<visualizador nombre="DICOM"></visualizador>
-		<agp nombre="AGP"></agp>
-		<historiaClinica nombre="HOSPITAL"></historiaClinica>
+		<version nombre="RC-1.0.0" fecha="08/08/2020" cliente="TS"></version>
 		<comentarios>
 			Advertencia: este programa est\u00E1 protegido por las leyes de
 			derechos de autor y de propiedad intelectual. La
