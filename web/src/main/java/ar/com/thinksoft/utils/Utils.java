@@ -68,7 +68,7 @@ public class Utils {
 	public static void desconectarLogin() {
 		FacesUtils.clearRequestSession();
 		FacesUtils.invalidateSession();
-		FacesUtils.redirect("/pages/loginPrescriptor.faces", true, true);
+		FacesUtils.redirect("/pages/login.faces", true, true);
 		FacesUtils.responseComplete();
 	}
 

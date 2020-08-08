@@ -70,7 +70,7 @@
 		<location>/errorHandler</location>
 	</error-page>
 	<welcome-file-list>
-		<welcome-file>pages/loginPrescriptor.faces</welcome-file>
+		<welcome-file>pages/login.faces</welcome-file>
 	</welcome-file-list>
 	<session-config>
         <session-timeout>10</session-timeout>

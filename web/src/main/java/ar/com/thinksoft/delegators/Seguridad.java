@@ -2,7 +2,12 @@ package ar.com.thinksoft.delegators;
 
 import java.util.Date;
 
+import org.hibernate.StatelessSession;
+
+import ar.com.thinksoft.business.BusinessFactory;
+import ar.com.thinksoft.dtos.seguridad.Usuario;
 import ar.com.thinksoft.exception.BusinessException;
+import ar.com.thinksoft.jdbc.Conexion;
 import ar.com.thinksoft.jdbc.HibernateSessionFactory;
 
 public class Seguridad {
@@ -31,6 +36,13 @@ public class Seguridad {
 		return HibernateSessionFactory.getInstance().selectSysdate();
 	}
 
+	// --------------------------------------------------------------------------------
+	// SEGURIDAD
+	// --------------------------------------------------------------------------------
+	public static Conexion getConexion(Usuario usuario) throws BusinessException {
+		return HibernateSessionFactory.getInstance().getConexion(usuario);
+	}
+
 	public static String selectServiceName() throws BusinessException {
 		return HibernateSessionFactory.getInstance().selectServiceName();
 	}
@@ -39,8 +51,12 @@ public class Seguridad {
 		return HibernateSessionFactory.getInstance().getUSER_NAME();
 	}
 
-	public static String getPassword() throws BusinessException{
-		return HibernateSessionFactory.getInstance().getPASSWORD();
+	// *************************************************************************************** //
+	// Usuario
+	// *************************************************************************************** //
+
+	public static Usuario loginUsuario(Usuario usuario, StatelessSession s) throws BusinessException {
+		return BusinessFactory.getIntBusUsuario().loginUsuario(usuario, s);
 	}
 
 }

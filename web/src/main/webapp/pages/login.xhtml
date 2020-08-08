@@ -13,7 +13,7 @@
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
         <link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagenes/favicon.ico" />
-	    <title>#{msg.bienvenido_completo_prescriptores}</title>
+	    <title>#{msg.bienvenido_completo}</title>
         <h:outputScript name="js/nanoscroller.js" library="#{guestPreferences.contract}-layout" />
         <h:outputScript name="js/layout.js" library="#{guestPreferences.contract}-layout" />
         <ui:insert name="head"/>
@@ -29,9 +29,9 @@
 		        <p:graphicImage library="imagenes" name="logo#{bbApplicationData.acercaDeClientNameFullTrim}.svg" />
 
 		        <br/>
-		        <h:outputText value="#{msg.bienvenido_completo_prescriptores}" styleClass="Fs20" />
+		        <h:outputText value="#{msg.bienvenido_completo}" styleClass="Fs20" />
 		        <br/>		        
-		        <h:outputText value="(#{msg.ingrese_email_contrasena})" />
+		        <h:outputText value="(#{msg.ingrese_usuario_contrasena})" />
 		        <br/>
 		        <br/>
 		        <br/>
@@ -39,27 +39,20 @@
 		
 		        <div class="login-input-wrapper">
 					<p:inputText onkeydown="javascript:tab(event,this);" autocomplete="off" id="txtUser" 
-								 value="#{bbLoginPrescriptor.email}" placeholder="#{msg.correo_electronico}">
+								 value="#{bbLogin.usuario}" placeholder="#{msg.usuario}">
 						<p:focus />
 				    </p:inputText>
 		            <i class="fa fa-user" />
 		        </div>
 
 		        <div class="login-input-wrapper">
-                    <p:password value="#{bbLoginPrescriptor.contrasena}" autocomplete="off" placeholder="#{msg.contrasena}" feedback="false" />
+                    <p:password value="#{bbLogin.contrasena}" autocomplete="off" placeholder="#{msg.contrasena}" feedback="false" />
 		            <i class="fa fa-lock" />
 		        </div>
 
                	<p:commandButton value="#{msg.ingresar}" styleClass="Wid100px"
-								 actionListener="#{bbLoginPrescriptor.onLogin()}"
-								 disabled="#{bbLoginPrescriptor.contadorIntentos eq 3}" />
-				<div class="MarTop10px">
-					<h:outputLink styleClass="Fs12" 
-								  value="#{facesContext.externalContext.requestContextPath}/pages/prescriptor/recuperarContrasena.faces">
-						<h:outputText value="#{msg.olvido_contrasena}" />
-					</h:outputLink>
-				</div>
-
+								 actionListener="#{bbLogin.onLogin()}"
+								 disabled="#{bbLogin.contadorIntentos eq 3}" />
 		    </div>
 		</h:form>
 		<!-- AGREGADOS -->

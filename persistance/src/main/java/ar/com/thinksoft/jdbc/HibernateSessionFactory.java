@@ -21,6 +21,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.hibernate.type.StandardBasicTypes;
 
+import ar.com.thinksoft.dtos.seguridad.Usuario;
 import ar.com.thinksoft.exception.BusinessException;
 import ar.com.thinksoft.persistance.storedprocedures.HibernateResult;
 import ar.com.thinksoft.utils.HandlerException;
@@ -155,6 +156,11 @@ public class HibernateSessionFactory implements SessionFactory {
 			HandlerException.getInstancia().treateException(e, getClass());
 		}
 		return retorno;
+	}
+
+	public Conexion getConexion(Usuario usuario) throws BusinessException {
+		//TODO: getConexion
+		return openPrivateConexion();
 	}
 
 	public Conexion getConexionNoSeed(String user, String pass) throws BusinessException{

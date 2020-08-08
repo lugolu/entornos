@@ -75,20 +75,17 @@
 			    </li>
 		    </ui:fragment>
 		    
-		    <ui:fragment rendered="#{UserSession.prescriptor ne null}">
+		    <ui:fragment rendered="#{UserSession.usuario ne null}">
 			    <li class="profile-item">
 			        <a href="#">                            
 			            <i class="topbar-icon material-icons">&#xE7FD;</i>
-			            <span class="topbar-item-name">#{UserSession.prescriptor.fullName}</span>
+			            <span class="topbar-item-name">#{UserSession.usuario.fullName}</span>
 			        </a>
 			        
 			        <ul class="ultima-menu animated">
 			            <li role="menuitem">
 			                <a href="#">
-			                    <div><span>#{UserSession.prescriptor.eMail}</span></div>
-			                    <div><span class="FontBold">#{UserSession.prescriptor.fullName}</span></div>
-			                    <div><span>#{UserSession.prescriptor.tipoNroMatricula}</span></div>
-			                    <div><span>#{UserSession.prescriptor.sexo}</span></div>
+			                    <div><span class="FontBold">#{UserSession.usuario.fullName}</span></div>
 			                </a>
 			            </li>
 			        </ul>

@@ -140,19 +140,7 @@ public class FacesUtils {
 
 	public static String getFullContextPathAplicacion() {
 		String aux = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURL().toString();
-		if(aux.split("entidadLiqHon").length > 1) {
-			aux = aux.split("entidadLiqHon")[0] + "entidadLiqHon/";
-		} else if(aux.split("laboratorio").length > 1) {
-			aux = aux.split("laboratorio")[0] + "laboratorio/";
-		} else if(aux.split("prescriptor").length > 1) {
-			aux = aux.split("prescriptor")[0] + "prescriptor/";
-		} else if(aux.split("proveedor").length > 1) {
-			aux = aux.split("proveedor")[0] + "proveedor/";
-		} else if(aux.split("turnos").length > 1) {
-			aux = aux.split("turnos")[0] + "turnos/";
-		} else {
-			aux = aux.split("pages").length > 1 ? aux.split("pages")[0] : (aux.split("mobile").length > 1 ? aux.split("mobile")[0] : aux);
-		}
+		aux = aux.split("pages").length > 1 ? aux.split("pages")[0] : aux;
 		return aux;
 	}
 

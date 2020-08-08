@@ -10,61 +10,12 @@
         <a class="layout-menu-button" href="#">
 			<i class="fa fa-bars" />
         </a>
-        <div class="app-name">#{msg.recetas_digitales}</div>
+        <div class="app-name">#{msg.entornos}</div>
 
         <a id="topbar-menu-button" href="#">
             <i class="fa fa-ellipsis-v"></i>
         </a>
-        <ul class="topbar-menu fadeInDown">
-            <li>
-                <a onclick="PF('$popupMensajes').show(); updateMsj(); return false;" href="javascript:void(null)">
-                    <i class="topbar-icon fa fa-fw fa-inbox"></i>
-                    <span class="topbar-item-name">Messages</span>
-                    <h:panelGroup id="ctdMsj">
-                    <ui:fragment rendered="#{UserSession.ctdMensajes gt 0}">
-	                    <span class="topbar-badge">#{UserSession.ctdMensajes}</span>
-                    </ui:fragment>
-                    </h:panelGroup>
-                </a>
-            </li>
-        </ul>
     </div>
     <h:form prependId="false">
-        <p:remoteCommand name="updateMsj" actionListener="#{UserSession.updateMensajes()}" />
 	</h:form>
-	<p:dialog id="popupMensajes"
-			  widgetVar="$popupMensajes" appendTo="@(body)"
-			  closable="true" draggable="false" dynamic="true"
-			  header="#{msg.mensajes}" maximizable="false"
-			  minimizable="false" modal="true" resizable="false"
-			  visible="#{bbRecetasDigitales.displayPopupAgregar}"
-			  onShow="positionDialogTop(this)" styleClass="MobilePopup1200x550">
-		<h:form id="formMensajes">
-			<div class="ui-g ui-fluid Hei100" >
-				<div class="ui-g-12">
-					<p:dataTable value="#{UserSession.mensajes}" var="item"
-								 emptyMessage="#{msg.no_se_encontraron_registros}" reflow="true" 
-								 rowKey="#{item.idMensajeProfAccesoWeb}" rowStyleClass="#{item.fechaHoraConfirma eq null ? 'HighlightRow' : ''}"
-								 sortBy="#{item.fechaHoraGenera}">
-						<p:column headerText="#{msg.fecha_genera}" sortBy="#{item.fechaHoraGenera}" width="150" styleClass="TexAlCenter">
-							<h:outputText value="#{item.fechaHoraGenera}" converter="fechaConverterOnlyDateYY" styleClass="nowrapOverflowHidden" />
-						</p:column>
-						<p:column headerText="#{msg.personal_genera}" sortBy="#{item.personalGenera}" width="200">
-							<h:outputText value="#{item.personalGenera}" title="#{item.personalGenera}" styleClass="nowrapOverflowHidden" />
-						</p:column>
-						<p:column headerText="#{msg.mensaje}" >
-							<p:inputTextarea value="#{item.mensaje}" title="#{item.mensaje}" styleClass="InputWid100"
-								disabled="true" rows="2" />
-						</p:column>
-						<p:column width="100" styleClass="TexAlCenter" headerText="#{msg.confirmar_recepcion}">
-							<p:commandButton icon="fa fa-check" title="#{msg.confirmar}"									 
-											 actionListener="#{UserSession.actBtnConfirmarMensaje(item)}"
-											 update=":ctdMsj,@form"
-											 disabled="#{item.fechaHoraConfirma ne null}"/>
-						</p:column>
-					</p:dataTable>
-				</div>
-			</div>
-		</h:form>
-	</p:dialog>
 </ui:composition>
