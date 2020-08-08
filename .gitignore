@@ -2,3 +2,5 @@
 target
 /dependencies.txt
 /plugin-dependencies.txt
+/analyze.txt
+/checkstyle.txt
