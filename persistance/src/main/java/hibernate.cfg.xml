@@ -33,6 +33,9 @@
 		<property name="show_sql">false</property>
 		<property name="format_sql">false</property>
 
+		<mapping class="ar.com.thinksoft.dtos.entornos.Cliente" />
+		<mapping class="ar.com.thinksoft.dtos.entornos.EntornoCliente" />
+
 		<!-- MAPEO DE DTOs -->
 		<mapping resource="ar/com/thinksoft/persistance/storedprocedures/HibernateDateResult.hbm.xml" />
 		<mapping resource="ar/com/thinksoft/persistance/storedprocedures/HibernateLongResult.hbm.xml" />

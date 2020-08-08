@@ -34,9 +34,9 @@ public class HibernateSessionFactory implements SessionFactory {
 
 	// atributos de la instancia
 	private final String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
-	private final String USER_NAME = "hibernate";
-	private final String PASSWORD = "H183R_n4%32865$sw";
-	private String USER_PASS;
+	private final String USER_NAME = "demo";
+	private final String PASSWORD = "example";
+	private String USER_PASS = "example";
 
 	private ServiceRegistry serviceRegistry;
 	private org.hibernate.SessionFactory sessionFactory;
