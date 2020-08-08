@@ -6,12 +6,11 @@
 		<!-- TS -->
 
 		<!-- HOSDESA-->
-	  	<property name="connection.url">jdbc:oracle:thin:@192.168.150.25:1521:HOSDESA2</property>
-	 	<property name="connection.security_url">jdbc:oracle:thin:@192.168.150.25:1521:firewall</property>
+	  	<property name="connection.url">jdbc:postgresql://localhost:5432/db</property>
 		
-		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 		<property name="default_schema">TS</property>
-		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="connection.driver_class">org.postgresql.Driver</property>
 		<!-- Usar el proveedor de conexiones simple -->
 		<property name="connection.provider_class">ar.com.thinksoft.hibernate.SimpleConnectionProvider</property>
 		<property name="connection.autocommit">false</property>
@@ -21,10 +20,6 @@
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 		<property name="cache.use_minimal_puts">false</property>
 		<property name="cache.use_second_level_cache">false</property>
-
-		<property name="connection.driver_class_sql_server">net.sourceforge.jtds.jdbc.Driver</property>
-
-		<property name="connection.driver_class_mysql_server">com.mysql.jdbc.Driver</property>
 
 		<!-- * Enable Hibernate's automatic session context management * If you
 			use Hibernate in a managed environment (with JBoss or some other AS that

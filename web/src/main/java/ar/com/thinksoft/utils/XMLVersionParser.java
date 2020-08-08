@@ -15,7 +15,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ar.com.thinksoft.exception.BusinessException;
-import ar.com.thinksoft.jdbc.HibernateSessionFactory;
 
 public class XMLVersionParser {
 
@@ -24,14 +23,6 @@ public class XMLVersionParser {
 	private static String VERSION_DATE;
 	private static String PROYECT_COMMENTS;
 	private static String CLIENT_NAME;
-
-	private static String HISTORIA_CLINICA;
-	private static String HISTORIA_CLINICA_URL;
-
-	private static String AGP;
-	private static String URL_AGP;
-
-	private static String VISUALIZADOR;
 
 	private static String PATH_TO_ROOT;
 	private static String PATH_TO_TMP_FILE;
@@ -92,46 +83,10 @@ public class XMLVersionParser {
 				} catch (Exception e) {
 					CLIENT_NAME = "";
 				}
-				String clientAux = HibernateSessionFactory.getInstance().getCLIENT();
-				if(clientAux != null) {
-					CLIENT_NAME = clientAux;
-				}
 				NodeList firstCommentsList = firstProjectElement.getElementsByTagName("comentarios");
 				Element firstCommentElement = (Element) firstCommentsList.item(0);
 				NodeList textCommentList = firstCommentElement.getChildNodes();
 				PROYECT_COMMENTS = (((textCommentList.item(0)) != null) ? (textCommentList.item(0)).getNodeValue() : "").trim();
-
-				NodeList firstSecuenciaList = firstProjectElement.getElementsByTagName("visualizador");
-				Element firstSecuenciaElement = (Element) firstSecuenciaList.item(0);
-				VISUALIZADOR = firstSecuenciaElement.getAttribute("nombre");
-
-				String auxVISUALIZADOR = HibernateSessionFactory.getInstance().getVISUALIZADOR();
-				if(auxVISUALIZADOR != null) {
-					VISUALIZADOR = auxVISUALIZADOR;
-				}
-				//
-				NodeList firstAgpList = firstProjectElement.getElementsByTagName("agp");
-				Element firstAgpElement = (Element) firstAgpList.item(0);
-				AGP = firstAgpElement.getAttribute("nombre");
-				URL_AGP = firstAgpElement.getAttribute("url");
-				String auxUrlAGP = HibernateSessionFactory.getInstance().getAGP_URL();
-				if(auxUrlAGP != null) {
-					URL_AGP = auxUrlAGP;
-				}
-
-				NodeList firstComprasList = firstProjectElement.getElementsByTagName("historiaClinica");
-				Element firstComprasElement = (Element) firstComprasList.item(0);
-				HISTORIA_CLINICA = firstComprasElement.getAttribute("nombre");
-				HISTORIA_CLINICA_URL = firstComprasElement.getAttribute("url");
-
-				String auxHISTORIA_CLINICA = HibernateSessionFactory.getInstance().getHISTORIA_CLINICA();
-				if(auxHISTORIA_CLINICA != null) {
-					HISTORIA_CLINICA = auxHISTORIA_CLINICA;
-				}
-				String auxURL_HISTORIA_CLINICA = HibernateSessionFactory.getInstance().getHISTORIA_CLINICA_URL();
-				if(auxURL_HISTORIA_CLINICA != null) {
-					HISTORIA_CLINICA_URL = auxURL_HISTORIA_CLINICA;
-				}
 			}
 			if (CLIENT_NAME != null && !"".equals(CLIENT_NAME)) {
 				Resources.setRedefinedResources(getClientNameFullTrim());
@@ -203,26 +158,6 @@ public class XMLVersionParser {
 
 	public static boolean esClienteTS () {
 		return "TS".equals(XMLVersionParser.getClientNameFullTrim());
-	}
-
-	public static String getVISUALIZADOR() {
-		return VISUALIZADOR;
-	}
-
-	public static String getAGP() {
-		return AGP;
-	}
-
-	public static String getUrlAGP() {
-		return URL_AGP;
-	}
-
-	public static String getHistoriaClinica() {
-		return HISTORIA_CLINICA;
-	}
-
-	public static String getUrlHistoriaClinica() {
-		return HISTORIA_CLINICA_URL;
 	}
 
 }
