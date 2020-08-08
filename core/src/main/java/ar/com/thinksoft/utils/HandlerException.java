@@ -20,7 +20,6 @@ import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.exception.SQLGrammarException;
 
 import ar.com.thinksoft.exception.BusinessException;
-import ca.uhn.hl7v2.HL7Exception;
 import jcifs.smb.SmbException;
 
 public class HandlerException {
@@ -300,8 +299,6 @@ public class HandlerException {
 			messageError.append("SMBEXCEPTION  por  " + e.getClass().getSimpleName() + causeError + stackTrace);
 			logInterfaz.error(messageError);
 			throw new BusinessException(MessageBundle.EXCEPTION_ERROR,SeverityBundle.ERROR, -9999, e.getCause());
-		} else if (e.getClass().equals(HL7Exception.class)) {
-			throw new BusinessException(e.getMessage(), SeverityBundle.ERROR, ((HL7Exception) e).getErrorCode(), e.getCause());
 		} else {
 			// Logueo del error
 			messageError.append("EXCEPTION  por  " + e.getClass().getSimpleName() + causeError + stackTrace);

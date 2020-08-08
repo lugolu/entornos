@@ -7,30 +7,13 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Writer;
 import java.sql.Blob;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.batik.transcoder.TranscoderInput;
-import org.apache.batik.transcoder.TranscoderOutput;
-import org.apache.batik.transcoder.svg2svg.SVGTranscoder;
 import org.apache.commons.io.FileUtils;
-import org.xml.sax.SAXParseException;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfCopy;
-import com.itextpdf.text.pdf.PdfReader;
 
 import ar.com.thinksoft.exception.BusinessException;
 
@@ -321,125 +304,6 @@ public class FileCommonFunctions {
 			}
 		}
 		return path;
-	}
-
-	/**
-	 *
-	 * @param imagen
-	 * @param prefijo
-	 * @param unica
-	 * @return
-	 * @throws BusinessException
-	 */
-	public static String cargarSvgImagenByte(byte[] imagen, String prefijo, boolean unica) throws BusinessException {
-		String path = null;
-		ImageOutputStream out = null;
-		try {
-			String pathToFile = FileCommonFunctions.class.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " ");
-			pathToFile = System.getProperty("file.separator").equals("/") ? "/" + pathToFile.split("WEB-INF")[0] + "/tmp/"
-					: (pathToFile.split("WEB-INF")[0] + "\\tmp\\").replace("/", "\\");
-
-			if (unica) {
-				File f = new File(pathToFile);
-				File[] ficheros = f.listFiles(new FileFilter() {
-					@Override
-					public boolean accept(File file) {
-						return file.isDirectory() || file.getName().toLowerCase().endsWith("svg");
-					}
-				});
-				for (int x = 0; x < ficheros.length; x++) {
-					if (ficheros[x].getName().contains(prefijo)) {
-						return "/tmp/" + ficheros[x].getName();
-					}
-				}
-			}
-
-			if (imagen != null) {
-				File imageFile = File.createTempFile(prefijo+"_", ".svg", new File(pathToFile));
-				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-				factory.setNamespaceAware(true);
-				DocumentBuilder builder = factory.newDocumentBuilder();
-				org.w3c.dom.Document document = builder.parse(new ByteArrayInputStream(imagen));
-				SVGTranscoder t = new SVGTranscoder();
-				TranscoderInput input = new TranscoderInput(document);
-				Writer writer = new FileWriter(imageFile);
-				TranscoderOutput output = new TranscoderOutput(writer);
-				t.transcode(input, output);
-				writer.flush();
-				writer.close();
-				path = "/tmp/" + imageFile.getName();
-			}
-			else {
-				path = null;
-			}
-		}
-		catch (Exception e) {
-			if(e instanceof SAXParseException){
-				throw new BusinessException(MessageBundle.SVG_MAL_FORMADO, ((BusinessException) e).getSeverity());
-			}
-			else{
-				throw new BusinessException(e.getMessage(), ((BusinessException) e).getSeverity());
-			}
-		}
-		finally {
-			if (out != null) {
-				try {out.close();} catch (Exception e) {}
-			}
-		}
-		return path;
-	}
-
-	/**
-	 *
-	 * @param files
-	 * @param output
-	 * @throws DocumentException
-	 * @throws IOException
-	 */
-	public static void mergePdfs (List<String> files, File output) throws DocumentException, IOException {
-		//		String[] files = { "File1.pdf", "File2.pdf" };
-		Document pdfCombineUsingJava = new Document();
-		PdfCopy copy = new PdfCopy(pdfCombineUsingJava, new FileOutputStream(output));
-		pdfCombineUsingJava.open();
-		PdfReader ReadInputPDF;
-		int number_of_pages;
-		for(String s : files) {
-			ReadInputPDF = new PdfReader(s);
-			PdfReader.unethicalreading = true;
-			number_of_pages = ReadInputPDF.getNumberOfPages();
-			for (int page = 0; page < number_of_pages; ) {
-				copy.addPage(copy.getImportedPage(ReadInputPDF, ++page));
-			}
-		}
-		pdfCombineUsingJava.close();
-	}
-
-	/**
-	 *
-	 * @param image
-	 * @param output
-	 * @return
-	 * @throws DocumentException
-	 * @throws IOException
-	 * @throws BusinessException
-	 */
-	public static File image2Pdf(Image image, File output) throws DocumentException, IOException, BusinessException {
-		try{
-			//se escala la imagen para que quepa en la hoja
-			image.scaleToFit(PageSize.A4.getWidth(),PageSize.A4.getHeight());
-			//se rota la hoja para que quede apaisada
-			com.itextpdf.text.Document pdfImg = new com.itextpdf.text.Document(PageSize.A4.rotate());
-			OutputStream salida = new FileOutputStream(output.getAbsolutePath());
-			com.itextpdf.text.pdf.PdfWriter writer = com.itextpdf.text.pdf.PdfWriter.getInstance(pdfImg, salida);
-			writer.open();
-			pdfImg.open();
-			pdfImg.add(com.itextpdf.text.Image.getInstance(image));
-			pdfImg.close();
-			writer.close();
-		}catch (Exception e) {
-			throw new BusinessException(e.getMessage(), ((BusinessException) e).getSeverity());
-		}
-		return output;
 	}
 
 	/**
