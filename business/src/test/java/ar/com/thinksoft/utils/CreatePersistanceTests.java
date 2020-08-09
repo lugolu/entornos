@@ -511,7 +511,7 @@ public class CreatePersistanceTests {
 							if (postCall != null) {
 								m.append(postCall);
 							}
-							m.append("				session.createCriteria(PersonalNotMapped.class);").append(SALTO);
+							m.append("				session.createCriteria(Usuario.class);").append(SALTO);
 
 							m.append("				transaction.rollback();").append(SALTO);
 							m.append("			} catch (Exception e) {");
@@ -579,7 +579,7 @@ public class CreatePersistanceTests {
 
 					s.append(imports);
 
-					s.append("import ar.com.thinksoft.dtos.configuracion.PersonalNotMapped;").append(SALTO);
+					s.append("import ar.com.thinksoft.dtos.seguridad.Usuario;").append(SALTO);
 					s.append("import ar.com.thinksoft.exception.BusinessException;").append(SALTO);
 					s.append("import ar.com.thinksoft.jdbc.HibernateSessionFactory;").append(SALTO);
 					s.append("import ar.com.thinksoft.persistance.PersistanceFactory;").append(SALTO);

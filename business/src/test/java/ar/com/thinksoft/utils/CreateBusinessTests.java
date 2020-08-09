@@ -471,7 +471,7 @@ public class CreateBusinessTests {
 							m.append("				BusinessFactory.get" + remapClassName + "()." + metodo + "(" + obj + ");").append(SALTO);
 							//controlar session close
 							m.append("				try {").append(SALTO);
-							m.append("					session.createCriteria(PersonalNotMapped.class);").append(SALTO);
+							m.append("					session.createCriteria(Usuario.class);").append(SALTO);
 							m.append("					throw new BusinessException(\"Session is not closed.\", SeverityBundle.WARN);").append(SALTO);
 							m.append("				} catch (Exception e) {").append(SALTO);
 							m.append("					if (!(e instanceof SessionException)) {").append(SALTO);
@@ -541,7 +541,7 @@ public class CreateBusinessTests {
 					s.append(imports);
 
 					s.append("import ar.com.thinksoft.business.BusinessFactory;").append(SALTO);
-					s.append("import ar.com.thinksoft.dtos.configuracion.PersonalNotMapped;").append(SALTO);
+					s.append("import ar.com.thinksoft.dtos.seguridad.Usuario;").append(SALTO);
 					s.append("import ar.com.thinksoft.exception.BusinessException;").append(SALTO);
 					s.append("import ar.com.thinksoft.jdbc.HibernateSessionFactory;").append(SALTO);
 					s.append("import ar.com.thinksoft.utils.Constants;").append(SALTO);

@@ -11,15 +11,15 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 @Category(Business.class)
-public class TestImpBusEntornoCliente extends TestCase {
+public class TestImpBusDependenciaAplicacion extends TestCase {
 
-	private static final String clase = "ar.com.thinksoft.business.business.entornos.TestImpBusEntornoCliente";
+	private static final String clase = "ar.com.thinksoft.business.business.entornos.TestImpBusDependenciaAplicacion";
 
 	String error = null;
 
 	private String testName = null;
 
-	public TestImpBusEntornoCliente( String testName )  {
+	public TestImpBusDependenciaAplicacion( String testName )  {
 		super( testName );
 	}
 
@@ -32,10 +32,10 @@ public class TestImpBusEntornoCliente extends TestCase {
 	}
 
 	public static Test suite() {
-		return new TestSuite( TestImpBusEntornoCliente.class );
+		return new TestSuite( TestImpBusDependenciaAplicacion.class );
 	}
 
-	public void testTestImpBusEntornoCliente() {
+	public void testTestImpBusDependenciaAplicacion() {
 		if (Commons.ignoreFailed (clase, testName)) {
 			return;
 		}
@@ -45,7 +45,7 @@ public class TestImpBusEntornoCliente extends TestCase {
 		}
 
 		try {
-			new ar.com.thinksoft.business.entornos.implementations.ImpBusEntornoCliente();
+			new ar.com.thinksoft.business.entornos.implementations.ImpBusDependenciaAplicacion();
 			Commons.logInfoSuccess(clase, testName);
 		} catch (Exception e) {
 			if (e instanceof NullPointerException) {
@@ -60,21 +60,11 @@ public class TestImpBusEntornoCliente extends TestCase {
 		assertNull(error);
 	}
 
-	public void testInsert() {
-		if (Commons.ignoreSuccess (clase, testName)) {
-			return;
-		}
-
-		Commons.logInfoSuccess(clase, testName);
-
-		assertNull(error);
-	}
-
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 
-		CustomTest a = TestImpBusEntornoCliente.class.getMethod(testName).getAnnotation(CustomTest.class);
+		CustomTest a = TestImpBusDependenciaAplicacion.class.getMethod(testName).getAnnotation(CustomTest.class);
 		Commons.logTestResult(clase + "." + testName, (a != null ? a.motivo() : null));
 	}
 

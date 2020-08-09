@@ -1263,9 +1263,6 @@ public class CreateDtoTests {
 						s.append("import ar.com.thinksoft.jdbc.HibernateSessionFactory;").append(SALTO);
 					}
 					s.append("import ar.com.thinksoft.common.Dto;").append(SALTO);
-					if (!core) {
-						s.append("import ar.com.thinksoft.dtos.compras.TmpDetLugarEntregaCompra;").append(SALTO);
-					}
 					s.append("import ar.com.thinksoft.utils.CommonFunctions;").append(SALTO);
 					s.append("import ar.com.thinksoft.utils.ConstantsTest;").append(SALTO);
 					s.append("import ar.com.thinksoft.utils.DateCommonFunctions;").append(SALTO);

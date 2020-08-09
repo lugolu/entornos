@@ -46,7 +46,7 @@ public class CreateTests {
 			else {
 				new CreateBusinessTests(java, path);
 				//				new CreateBusinessTests(java, path.replace("business", "bionexo"));
-				new CreateDtoTests(java, path.replace("business", "core"), "utils", true);//core
+				//				new CreateDtoTests(java, path.replace("business", "core"), "utils", true);//core
 				new CreateDtoTests(java, false, path.replace("business", "dtos"), path.replace("business", "dtos"));//dtos
 				new CreatePersistanceTests(java, path.replace("business", "persistance"));//persistance, dtosPersistance
 				//				new CreateValidadorTests(java, path.replace("business", "validadores"));
@@ -305,9 +305,6 @@ public class CreateTests {
 						}
 					}
 					customTests.get(parentTest).append(linea).append(SALTO);
-					if (!importCustom.toString().contains("import ar.com.thinksoft.utils.Constants.AmbIntTodos;")) {
-						importCustom.append("import ar.com.thinksoft.utils.Constants.AmbIntTodos;").append(SALTO);
-					}
 					if (!importCustom.toString().contains("import ar.com.thinksoft.utils.Constants;")) {
 						importCustom.append("import ar.com.thinksoft.utils.Constants;").append(SALTO);
 					}

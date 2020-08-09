@@ -240,8 +240,13 @@ public class GeneraMapeos {
 
 		try {
 			boolean java = false;
+			new GeneraMapeos().genera(java, "entornos", "APLICACION", null, null, "entornos", true, false);
+			new GeneraMapeos().genera(java, "entornos", "APLICACION_CLIENTE", null, null, "entornos", true, false);
 			new GeneraMapeos().genera(java, "entornos", "CLIENTE", null, null, "entornos", true, false);
+			new GeneraMapeos().genera(java, "entornos", "CONTENEDOR", null, null, "entornos", true, false);
+			new GeneraMapeos().genera(java, "entornos", "DEPENDENCIA_APLICACION", null, null, "entornos", true, false);
 			new GeneraMapeos().genera(java, "entornos", "ENTORNO_CLIENTE", null, null, "entornos", true, false);
+			new GeneraMapeos().genera(java, "entornos", "SERVIDOR", null, null, "entornos", true, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1251,8 +1256,10 @@ public class GeneraMapeos {
 		}
 		else if (postgres) {
 			tipoDato = tipoDato.toUpperCase();
-			if ("INTEGER".equals(tipoDato)
-					|| "NUMERIC".equals(tipoDato)) {
+			if ("SMALLINT".equals(tipoDato)) {
+				return "Integer";
+			}
+			else if ("INTEGER".equals(tipoDato)) {
 				return "Long";
 			}
 			else if ("CHARACTER VARYING".equals(tipoDato)) {
