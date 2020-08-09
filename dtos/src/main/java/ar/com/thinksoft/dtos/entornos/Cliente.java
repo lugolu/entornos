@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,11 +20,12 @@ public class Cliente implements Serializable, Cloneable {
 	private static final long serialVersionUID = -159686875564300001L;
 
 	@Id
-	@Column(name="id_cliente")
+	@Column(name="ID_CLIENTE")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idClienteAux;
-	@Column(name="id_cliente", insertable=false, updatable=false)
+	@Column(name="ID_CLIENTE", insertable=false, updatable=false)
 	private Long idCliente;
-	@Column(name="cliente", nullable=false)
+	@Column(name="CLIENTE", nullable=false)
 	private String cliente;
 
 	public Cliente() {

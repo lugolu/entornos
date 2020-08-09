@@ -32,7 +32,7 @@ public class EntornoCliente implements Serializable, Cloneable {
 	private Long idEntorno;
 	//FK
 	private Long idCliente;
-	@Column(name="entorno", nullable=false)
+	@Column(name="ENTORNO", nullable=false)
 	private String entorno;
 
 	public EntornoCliente() {

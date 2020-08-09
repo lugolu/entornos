@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import org.primefaces.PrimeFaces;
 
 import ar.com.thinksoft.beans.session.BBSessionData;
+import ar.com.thinksoft.beans.session.UserSession;
 
 public class FacesUtils {
 
@@ -25,6 +26,10 @@ public class FacesUtils {
 
 	public static Object getSessionValue(String key) {
 		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(key);
+	}
+
+	public static UserSession getUserSesssion() {
+		return (UserSession) getSessionValue("UserSession");
 	}
 
 	public static Object getRequestAttribute(String key) {

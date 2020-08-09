@@ -12,9 +12,9 @@ public class EntornoClienteId implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -159686978247400004L;
 
-	@Column(name="id_entorno")
+	@Column(name="ID_ENTORNO")
 	private Long idEntorno;
-	@Column(name="id_cliente")
+	@Column(name="ID_CLIENTE")
 	private Long idCliente;
 
 	public EntornoClienteId() {

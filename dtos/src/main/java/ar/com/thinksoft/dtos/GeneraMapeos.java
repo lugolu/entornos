@@ -240,8 +240,8 @@ public class GeneraMapeos {
 
 		try {
 			boolean java = false;
-			new GeneraMapeos().genera(java, "entornos", "cliente", null, null, "entornos", true, false);
-			new GeneraMapeos().genera(java, "entornos", "entorno_cliente", null, null, "entornos", true, false);
+			new GeneraMapeos().genera(java, "entornos", "CLIENTE", null, null, "entornos", true, false);
+			new GeneraMapeos().genera(java, "entornos", "ENTORNO_CLIENTE", null, null, "entornos", true, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -343,16 +343,16 @@ public class GeneraMapeos {
 				}
 			}
 			else if (postgres) {
-				sql = "SELECT DISTINCT TABLE_NAME, case when (SELECT count(*) FROM INFORMATION_SCHEMA.key_column_usage c WHERE c.TABLE_SCHEMA = x.TABLE_SCHEMA AND c.TABLE_NAME = x.TABLE_NAME) <= 1 then 'NO' else 'SI' end PK_MULTIPLE " +
+				sql = "SELECT DISTINCT upper(TABLE_NAME) TABLE_NAME, case when (SELECT count(*) FROM INFORMATION_SCHEMA.key_column_usage c WHERE c.TABLE_SCHEMA = x.TABLE_SCHEMA AND c.TABLE_NAME = x.TABLE_NAME) <= 1 then 'NO' else 'SI' end PK_MULTIPLE " +
 						"    FROM information_schema.columns x" +
 						"    WHERE table_schema='" + schema + "'";
 
 				if (tabla != null) {
-					sql += " AND TABLE_NAME like '" + tabla + "' ";
+					sql += " AND upper(TABLE_NAME) like '" + tabla + "' ";
 				}
 
 				if (pk == null) {
-					sql += " UNION ALL " + sql.replace("DISTINCT TABLE_NAME", "DISTINCT concat(TABLE_NAME, '_ID')");
+					sql += " UNION ALL " + sql.replace("DISTINCT upper(TABLE_NAME)", "DISTINCT concat(upper(TABLE_NAME), '_ID')");
 				}
 			}
 			System.out.println(sql);
@@ -522,13 +522,14 @@ public class GeneraMapeos {
 							"  AND TABLE_NAME = '" + tableName.replace(sufijoPk, "") + "' ";
 				}
 				else if (postgres) {
-					sql = " SELECT COLUMN_NAME, COLUMN_DEFAULT, IS_NULLABLE, upper(DATA_TYPE) as DATA_TYPE, " +
+					sql = " SELECT upper(COLUMN_NAME) COLUMN_NAME, COLUMN_DEFAULT, IS_NULLABLE, upper(DATA_TYPE) as DATA_TYPE, " +
 							" (select 'PRI' from information_schema.key_column_usage x WHERE c.TABLE_SCHEMA = x.TABLE_SCHEMA AND c.TABLE_NAME = x.TABLE_NAME AND c.COLUMN_NAME = x.COLUMN_NAME and exists (select 1 from information_schema.table_constraints p where p.constraint_schema = x.constraint_schema and p.table_schema = x.table_schema and p.constraint_name = x.constraint_name and p.constraint_type = 'PRIMARY KEY')) COLUMN_KEY, " +
-							" CHARACTER_MAXIMUM_LENGTH,  null EXTRA, null as precission, null as scala, " +
+							" CHARACTER_MAXIMUM_LENGTH,  " +
+							" CASE WHEN is_identity = 'YES' then 'auto_increment' else '' end EXTRA, null as precission, null as scala, " +
 							(tableName.endsWith(sufijoPk) ? " 'N' FK" : " (select coalesce(min('S'), 'N') from information_schema.key_column_usage x WHERE c.TABLE_SCHEMA = x.TABLE_SCHEMA AND c.TABLE_NAME = x.TABLE_NAME AND c.COLUMN_NAME = x.COLUMN_NAME and exists (select 1 from information_schema.table_constraints p where p.constraint_schema = x.constraint_schema and p.table_schema = x.table_schema and p.constraint_name = x.constraint_name and p.constraint_type = 'FOREIGN KEY')) FK ") +
 							" FROM INFORMATION_SCHEMA.COLUMNS c " +
 							"WHERE TABLE_SCHEMA = '" + schema + "' " +
-							"  AND TABLE_NAME = '" + tableName.replace(sufijoPk, "") + "' ";
+							"  AND upper(TABLE_NAME) = '" + tableName.replace(sufijoPk, "") + "' ";
 				}
 				else {
 					throw new BusinessException("No se pudo determinar el tipo de base.", SeverityBundle.FATAL);
@@ -674,6 +675,9 @@ public class GeneraMapeos {
 										atributes.append("\t@GeneratedValue(generator = \"CustomIdGenerator\")").append(SALTO);
 									}
 									else if (mysql) {
+										atributes.append("\t@GeneratedValue(strategy=GenerationType.IDENTITY)").append(SALTO);
+									}
+									else if (postgres) {
 										atributes.append("\t@GeneratedValue(strategy=GenerationType.IDENTITY)").append(SALTO);
 									}
 									else {
@@ -887,6 +891,9 @@ public class GeneraMapeos {
 					dto.append("import org.hibernate.annotations.Formula;").append(SALTO).append(SALTO);
 					if (oracle) {
 						dto.append("import org.hibernate.annotations.GenericGenerator;").append(SALTO).append(SALTO);
+					}
+					else if (postgres) {
+						dto.append("import javax.persistence.SequenceGenerator;").append(SALTO).append(SALTO);
 					}
 				}
 
@@ -1244,7 +1251,8 @@ public class GeneraMapeos {
 		}
 		else if (postgres) {
 			tipoDato = tipoDato.toUpperCase();
-			if ("NUMERIC".equals(tipoDato)) {
+			if ("INTEGER".equals(tipoDato)
+					|| "NUMERIC".equals(tipoDato)) {
 				return "Long";
 			}
 			else if ("CHARACTER VARYING".equals(tipoDato)) {

@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				template="/templates/contractDefault.xhtml">
+	
+	<ui:define name="pageTitle">#{msg.cliente}</ui:define>
+
+	<ui:define name="content" >
+		<h:form styleClass="Hei100" id="formPrincipal">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12">
+		           	<p:dataTable value="#{bbCliente.listClientes}" var="item"
+								 rowKey="#{item.idCliente}" emptyMessage="#{msg.no_se_encontraron_registros}" reflow="true"
+								 sortBy="#{item.cliente}"
+								 selection="#{bbCliente.selectedCliente}" selectionMode="single">
+						<p:ajax event="rowSelect" listener="#{bbCliente.onSelectCliente}" update=":formPrincipal" />
+						<f:facet name="header">#{msg.clientes}</f:facet>
+						<p:column headerText="#{msg.cliente}">
+							<p:inputText value="#{item.cliente}" styleClass="InputWid100" onkeydown="javascript:tab(event,this);" />
+							<f:facet name="footer">
+								<p:inputText value="#{bbCliente.addingCliente.cliente}" styleClass="InputWid100" onkeydown="javascript:tab(event,this);" />
+							</f:facet>
+						</p:column>
+						<p:column headerText="#{msg.acciones}" width="80" styleClass="TexAlCenter">
+							<p:commandButton icon="fa fa-save" title="#{msg.guardar}"
+											 actionListener="#{bbCliente.actBtnModificarCliente(item)}"
+											 update=":formPrincipal" />
+							<p:commandButton icon="fa fa-trash" title="#{msg.eliminar}"
+											 actionListener="#{bbCliente.actBtnEliminarCliente(item)}"
+											 onclick="javascript: if(!confirm('#{msg.desea_eliminar_el_registro}')) return false; "
+											 update=":formPrincipal" />
+							<f:facet name="footer">
+								<p:commandButton icon="fa fa-plus" title="#{msg.agregar}"									 
+												 actionListener="#{bbCliente.actBtnAgregarCliente(item)}"
+												 update=":formPrincipal" />
+							</f:facet>
+						</p:column>
+					</p:dataTable>
+		           	<p:dataTable value="#{bbCliente.listEntornos}" var="item"
+								 rowKey="#{item.id}" emptyMessage="#{msg.no_se_encontraron_registros}" reflow="true"
+								 sortBy="#{item.entorno}">
+						<f:facet name="header">#{msg.entornos}</f:facet>
+						<p:column headerText="#{msg.entorno}">
+							<p:inputText value="#{item.entorno}" styleClass="InputWid100" onkeydown="javascript:tab(event,this);" />
+							<f:facet name="footer">
+								<p:inputText value="#{bbCliente.addingEntorno.entorno}" styleClass="InputWid100" onkeydown="javascript:tab(event,this);"
+									disabled="#{bbCliente.selectedCliente eq null}" />
+							</f:facet>
+						</p:column>
+						<p:column headerText="#{msg.acciones}" width="80" styleClass="TexAlCenter">
+							<p:commandButton icon="fa fa-save" title="#{msg.guardar}" 
+											 actionListener="#{bbCliente.actBtnModificarEntorno(item)}"
+											 update=":formPrincipal" />
+							<p:commandButton icon="fa fa-trash" title="#{msg.eliminar}"
+											 actionListener="#{bbCliente.actBtnEliminarEntorno(item)}"
+											 onclick="javascript: if(!confirm('#{msg.desea_eliminar_el_registro}')) return false; "
+											 update=":formPrincipal" />
+							<f:facet name="footer">
+								<p:commandButton icon="fa fa-plus" title="#{msg.agregar}"									 
+												 actionListener="#{bbCliente.actBtnAgregarEntorno(item)}"
+												 update=":formPrincipal" />
+							</f:facet>
+						</p:column>
+					</p:dataTable>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
