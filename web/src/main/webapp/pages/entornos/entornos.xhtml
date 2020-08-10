@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:pe="http://primefaces.org/ui/extensions"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				template="/templates/contractDefault.xhtml">
+	
+	<ui:define name="pageTitle">#{msg.entornos}</ui:define>
+
+	<ui:define name="content" >
+		<h:form styleClass="Hei100">
+            <ui:include src="./topbar.xhtml" />
+            <ui:include src="./diagram.xhtml" />
+		</h:form>
+	</ui:define>
+</ui:composition>
