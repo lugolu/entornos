@@ -33,6 +33,7 @@
 		<property name="show_sql">false</property>
 		<property name="format_sql">false</property>
 
+		<mapping class="ar.com.thinksoft.dtos.entornos.Aplicacion" />
 		<mapping class="ar.com.thinksoft.dtos.entornos.Cliente" />
 		<mapping class="ar.com.thinksoft.dtos.entornos.EntornoCliente" />
 
