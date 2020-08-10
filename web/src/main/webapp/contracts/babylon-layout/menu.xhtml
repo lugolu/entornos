@@ -38,8 +38,12 @@
 						</ul>
 					</div>
 				    <ba:menu widgetVar="me">
+						<p:menuitem action="/pages/aplicacion.faces?faces-redirect=true"
+							value="#{msg.aplicacion}" />
 						<p:menuitem action="/pages/cliente.faces?faces-redirect=true"
 							value="#{msg.cliente}" />
+						<p:menuitem action="/pages/entornos/entornos.faces?faces-redirect=true"
+							value="#{msg.entornos}" />
 				    </ba:menu>
 				    <script>
 						$(function(){
