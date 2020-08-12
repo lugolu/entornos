@@ -5,8 +5,12 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ar.com.thinksoft.utils.CommonFunctions;
 
 
 @Entity
@@ -16,16 +20,25 @@ public class Aplicacion implements Serializable, Cloneable {
 	private static final long serialVersionUID = -159698751282100001L;
 
 	@Id
-	@Column(name="APLICACION")
-	private String aplicacionAux;
-	@Column(name="APLICACION", insertable=false, updatable=false)
+	@Column(name="ID_APLICACION")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long idAplicacionAux;
+	@Column(name="ID_APLICACION", insertable=false, updatable=false)
+	private Long idAplicacion;
+	@Column(name="APLICACION", nullable=false)
 	private String aplicacion;
 
 	public Aplicacion() {
 	}
 
-	public Aplicacion(String aplicacion) {
-		aplicacionAux = aplicacion;
+	public Aplicacion(Long idAplicacion) {
+		idAplicacionAux = idAplicacion;
+		this.idAplicacion = idAplicacion;
+	}
+
+	public Aplicacion(Long idAplicacion, String aplicacion) {
+		idAplicacionAux = idAplicacion;
+		this.idAplicacion = idAplicacion;
 		this.aplicacion = aplicacion;
 	}
 
@@ -33,13 +46,21 @@ public class Aplicacion implements Serializable, Cloneable {
 		return (Aplicacion) super.clone();
 	}
 
+	public Long getIdAplicacion() {
+		return idAplicacion != null ? idAplicacion : idAplicacionAux;
+	}
+
+	public void setIdAplicacion(Long idAplicacion) {
+		idAplicacionAux = idAplicacion;
+		this.idAplicacion = idAplicacion;
+	}
+
 	public String getAplicacion() {
-		return aplicacion != null ? aplicacion : aplicacionAux;
+		return aplicacion;
 	}
 
 	public void setAplicacion(String aplicacion) {
-		aplicacionAux = aplicacion;
-		this.aplicacion = aplicacion;
+		this.aplicacion = CommonFunctions.replaceAccentedChars(aplicacion);
 	}
 
 	@Override
@@ -51,12 +72,12 @@ public class Aplicacion implements Serializable, Cloneable {
 			return false;
 		}
 		Aplicacion that = (Aplicacion) o;
-		return Objects.equals(getAplicacion(), that.getAplicacion());
+		return Objects.equals(getIdAplicacion(), that.getIdAplicacion());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getAplicacion());
+		return Objects.hash(getIdAplicacion());
 	}
 
 	public static Aplicacion defaultBuilder() {

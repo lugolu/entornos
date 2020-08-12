@@ -119,7 +119,7 @@ public class TestAplicacion extends TestCase {
 				t = session.beginTransaction();
 
 				ar.com.thinksoft.dtos.entornos.Aplicacion objeto = new ar.com.thinksoft.dtos.entornos.Aplicacion();
-				objeto.setAplicacion("HOSPITAL");
+				objeto.setIdAplicacion(1L);
 				list = PersistanceFactory.getIntDomain().selectEqual(objeto, session, getClass());
 
 				if (list == null || list.size() == 0) {
@@ -173,7 +173,7 @@ public class TestAplicacion extends TestCase {
 			try {
 				session = CommonsTest.getSession();
 				ar.com.thinksoft.dtos.entornos.Aplicacion objeto = new ar.com.thinksoft.dtos.entornos.Aplicacion();
-				objeto.setAplicacion("HOSPITAL");
+				objeto.setIdAplicacion(1L);
 				list = PersistanceFactory.getIntDomain().selectEqual(objeto, session, getClass());
 			} catch (Exception e) {
 				HandlerException.getInstancia().treateException(e,getClass());

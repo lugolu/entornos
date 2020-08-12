@@ -111,7 +111,7 @@ public class TestAplicacionCliente extends TestCase {
 			try {
 				session = CommonsTest.getSession();
 				ar.com.thinksoft.dtos.entornos.AplicacionCliente objeto = new ar.com.thinksoft.dtos.entornos.AplicacionCliente();
-				objeto.setAplicacion("HOSPITAL");
+				objeto.setIdAplicacion(1L);
 				objeto.setIdCliente(1L);
 				list = PersistanceFactory.getIntDomain().selectEqual(objeto, session, getClass());
 			} catch (Exception e) {

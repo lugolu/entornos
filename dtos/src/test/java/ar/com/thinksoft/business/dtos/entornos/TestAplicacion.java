@@ -76,8 +76,39 @@ public class TestAplicacion extends TestCase {
 
 		try {
 			try {
+				Long idAplicacion = 1L;
+				new ar.com.thinksoft.dtos.entornos.Aplicacion(idAplicacion);
+				Commons.logInfoSuccess(clase, testName);
+			} catch (Exception e) {
+				HandlerException.getInstancia().treateException(e,getClass());
+			}
+		} catch (Exception e) {
+			if (e instanceof NullPointerException) {
+				error = "NullPointerException";
+			}
+			else {
+				error = e.getMessage();
+			}
+			Commons.logWarn (clase, testName, error, e);
+		}
+
+		assertNull(error);
+	}
+
+	public void testAplicacion3() {
+		if (Commons.ignoreFailed (clase, testName)) {
+			return;
+		}
+
+		if (Commons.ignoreSuccess (clase, testName)) {
+			return;
+		}
+
+		try {
+			try {
+				Long idAplicacion = 1L;
 				String aplicacion = null;
-				new ar.com.thinksoft.dtos.entornos.Aplicacion(aplicacion);
+				new ar.com.thinksoft.dtos.entornos.Aplicacion(idAplicacion, aplicacion);
 				Commons.logInfoSuccess(clase, testName);
 			} catch (Exception e) {
 				HandlerException.getInstancia().treateException(e,getClass());

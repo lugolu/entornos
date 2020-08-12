@@ -111,9 +111,9 @@ public class TestAplicacionCliente extends TestCase {
 				Long idServidor = 1L;
 				String contenedor = null;
 				Long idEntorno = 1L;
-				String aplicacion = null;
+				Long idAplicacion = 1L;
 				Integer puerto = 1;
-				new ar.com.thinksoft.dtos.entornos.AplicacionCliente(idAplicacionCliente, idCliente, idServidor, contenedor, idEntorno, aplicacion, puerto);
+				new ar.com.thinksoft.dtos.entornos.AplicacionCliente(idAplicacionCliente, idCliente, idServidor, contenedor, idEntorno, idAplicacion, puerto);
 				Commons.logInfoSuccess(clase, testName);
 			} catch (Exception e) {
 				HandlerException.getInstancia().treateException(e,getClass());

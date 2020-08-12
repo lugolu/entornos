@@ -40,8 +40,8 @@ public class AplicacionCliente implements Serializable, Cloneable {
 	@Column(name="ID_ENTORNO", nullable=false)
 	private Long idEntorno;
 	//FK
-	@Column(name="APLICACION", nullable=false)
-	private String aplicacion;
+	@Column(name="ID_APLICACION", nullable=false)
+	private Long idAplicacion;
 	@Column(name="PUERTO")
 	private Integer puerto;
 
@@ -53,13 +53,13 @@ public class AplicacionCliente implements Serializable, Cloneable {
 	}
 
 	public AplicacionCliente(Long idAplicacionCliente, Long idCliente, Long idServidor, String contenedor, 
-			Long idEntorno, String aplicacion, Integer puerto) {
+			Long idEntorno, Long idAplicacion, Integer puerto) {
 		this.idAplicacionCliente = idAplicacionCliente;
 		this.idCliente = idCliente;
 		this.idServidor = idServidor;
 		this.contenedor = contenedor;
 		this.idEntorno = idEntorno;
-		this.aplicacion = aplicacion;
+		this.idAplicacion = idAplicacion;
 		this.puerto = puerto;
 	}
 
@@ -115,12 +115,12 @@ public class AplicacionCliente implements Serializable, Cloneable {
 		this.idEntorno = idEntorno;
 	}
 
-	public String getAplicacion() {
-		return aplicacion;
+	public Long getIdAplicacion() {
+		return idAplicacion;
 	}
 
-	public void setAplicacion(String aplicacion) {
-		this.aplicacion = aplicacion;
+	public void setIdAplicacion(Long idAplicacion) {
+		this.idAplicacion = idAplicacion;
 	}
 
 	public Integer getPuerto() {
