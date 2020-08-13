@@ -60,6 +60,16 @@ public class TestImpBusServidor extends TestCase {
 		assertNull(error);
 	}
 
+	public void testInsert() {
+		if (Commons.ignoreSuccess (clase, testName)) {
+			return;
+		}
+
+		Commons.logInfoSuccess(clase, testName);
+
+		assertNull(error);
+	}
+
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
