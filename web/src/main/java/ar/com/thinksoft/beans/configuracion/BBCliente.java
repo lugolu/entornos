@@ -69,6 +69,7 @@ public class BBCliente implements Serializable {
 		try {
 			Entornos.updateCliente(item, user.getSession());
 			MessageManager.addToMessages(SeverityBundle.INFO, MessageBundle.ROW_UPDATE_INFO);
+			initListClientes();
 		} catch (Exception e) {
 			MessageManager.addToMessages(e);
 		}
@@ -78,6 +79,7 @@ public class BBCliente implements Serializable {
 		try {
 			Entornos.deleteCliente(item, user.getSession());
 			MessageManager.addToMessages(SeverityBundle.INFO, MessageBundle.ROW_DELETE_INFO);
+			initListClientes();
 		} catch (Exception e) {
 			MessageManager.addToMessages(e);
 		}
@@ -87,6 +89,7 @@ public class BBCliente implements Serializable {
 		try {
 			Entornos.insertCliente(addingCliente, user.getSession());
 			MessageManager.addToMessages(SeverityBundle.INFO, MessageBundle.ROW_INSERT_INFO);
+			initListClientes();
 			addingCliente = new Cliente();
 		} catch (Exception e) {
 			MessageManager.addToMessages(e);
