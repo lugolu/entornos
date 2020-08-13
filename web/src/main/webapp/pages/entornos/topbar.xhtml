@@ -9,7 +9,22 @@
 	<div class="ui-g">
 	    <div class="ui-g-12">
 	        <div class="card">
-	            <h1>topbar</h1>
+	            <div class="ui-g ui-fluid">
+		            <div class="ui-g-12 ui-md-2">
+		            	<h:outputText value="#{msg.cliente}" />
+		            </div>
+		            <div class="ui-g-12 ui-md-4">
+		            	<p:selectOneMenu value="#{bbEntornosTopbar.selectedCliente.idCliente}" styleClass="InputWid100" onkeydown="javascript:tab(event,this);">
+		            		<p:ajax listener="#{bbEntornosTopbar.onChangeCliente}" update="@this, @form" />
+		            		<f:selectItems value="#{bbEntornosTopbar.selItemClientes}" />
+		            	</p:selectOneMenu>
+		            </div>
+		            <div class="ui-g-12 ui-md-2">
+		            	<p:commandButton value="Agregar Servidor" update=":popupAgregarServidor"
+		            		actionListener="#{bbEntornosTopbar.agregarServidor}"
+		            		disabled="#{bbEntornosTopbar.selectedCliente.idCliente eq null}" />
+		            </div>
+	            </div>
 	        </div>
 	    </div>
 	</div>

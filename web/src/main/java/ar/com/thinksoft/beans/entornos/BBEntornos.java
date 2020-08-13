@@ -5,19 +5,32 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ar.com.thinksoft.beans.session.UserSession;
 import ar.com.thinksoft.utils.FacesUtils;
 
-@ManagedBean(name = "bbCliente")
+@ManagedBean(name = "bbEntornos")
 @ViewScoped
 public class BBEntornos implements Serializable {
 
 	private static final long serialVersionUID = -1153324977669803294L;
 
-	private UserSession user;
+	private BBEntornosDiagram bbEntornosDiagram;
+	private BBEntornosTopbar bbEntornosTopbar;
 
 	public BBEntornos() {
-		user = FacesUtils.getUserSesssion();
+		bbEntornosDiagram = (BBEntornosDiagram) FacesUtils.getBBCurrentInstance("bbEntornosDiagram");
+		bbEntornosTopbar = (BBEntornosTopbar) FacesUtils.getBBCurrentInstance("bbEntornosTopbar");
+	}
+
+	public BBEntornosDiagram getBbEntornosDiagram() {
+		return bbEntornosDiagram;
+	}
+
+	public BBEntornosTopbar getBbEntornosTopbar() {
+		return bbEntornosTopbar;
+	}
+
+	public String getDummy() {
+		return "";
 	}
 
 }

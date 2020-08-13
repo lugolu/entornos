@@ -35,6 +35,7 @@
 
 		<mapping class="ar.com.thinksoft.dtos.entornos.Cliente" />
 		<mapping class="ar.com.thinksoft.dtos.entornos.EntornoCliente" />
+		<mapping class="ar.com.thinksoft.dtos.entornos.Servidor" />
 
 		<!-- MAPEO DE DTOs -->
 		<mapping resource="ar/com/thinksoft/persistance/storedprocedures/HibernateDateResult.hbm.xml" />

@@ -1,0 +1,34 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ba="http://primefaces.org/babylon">
+
+	<p:dialog id="popupAgregarServidor"
+			  widgetVar="$popupAgregarServidor" appendTo="@(body)"
+			  closable="false" draggable="false" dynamic="true"
+			  header="#{msg.agregar_servidor}" maximizable="false"
+			  minimizable="false" modal="true" resizable="false"
+			  visible="#{bbEntornosTopbar.displayPopupAgregarServidor}"
+			  width="300">
+		<h:form id="formAgregarServidor">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{msg.servidor}: " />
+				<p:inputText styleClass="InputWid100"
+					value="#{bbEntornosTopbar.addingServidor.servidor}" onkeydown="javascript:tab(event,this);" />
+				<h:outputLabel value="#{msg.ip}: " />
+				<p:inputMask styleClass="InputWid100" mask="999.999.999.999"
+					value="#{bbEntornosTopbar.addingServidor.ip}" onkeydown="javascript:tab(event,this);" />
+			</h:panelGrid>
+			<p:spacer height="20" />
+			<h:panelGrid columns="3" styleClass="MarAuto MarAuto">
+				<p:commandButton value="#{msg.aceptar}" update="@this, @form" style="width:90px;"
+								 actionListener="#{bbEntornosTopbar.aceptarAgregarServidor}" />
+				<p:commandButton value="#{msg.cerrar}" update="@this, @form" style="width:90px;"
+								 actionListener="#{bbEntornosTopbar.cancelarAgregarServidor}" />
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</ui:composition>

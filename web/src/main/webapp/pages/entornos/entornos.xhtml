@@ -5,13 +5,16 @@
 				xmlns:pe="http://primefaces.org/ui/extensions"
 				xmlns:ui="http://java.sun.com/jsf/facelets"
 				template="/templates/contractDefault.xhtml">
-	
+
 	<ui:define name="pageTitle">#{msg.entornos}</ui:define>
 
-	<ui:define name="content" >
-		<h:form styleClass="Hei100">
+	<ui:define name="content">
+		<h:form styleClass="Hei100" id="formPrincipal">
             <ui:include src="./topbar.xhtml" />
             <ui:include src="./diagram.xhtml" />
 		</h:form>
+	</ui:define>
+	<ui:define name="popupDefault">
+		<ui:include src="./dialogs.xhtml" />
 	</ui:define>
 </ui:composition>
