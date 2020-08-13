@@ -23,7 +23,7 @@ public class Node {
 
 	@Override
 	public String toString() {
-		return "Node [data=" + data + ", position=" + position + "]";
+		return "{data: " + data + (position != null ? (", position: {" + position + "} ") : "") + " }\n";
 	}
 
 }

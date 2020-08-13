@@ -25,7 +25,7 @@ public class Diagram {
 
 	@Override
 	public String toString() {
-		return "Diagram [nodes=" + nodes + ", edges=" + edges + "]";
+		return "nodes: " + nodes + ",\nedges: " + edges + "\n";
 	}
 
 }

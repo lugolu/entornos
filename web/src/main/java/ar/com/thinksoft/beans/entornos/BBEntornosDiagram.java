@@ -7,9 +7,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import ar.com.thinksoft.beans.session.UserSession;
 import ar.com.thinksoft.delegators.Entornos;
 import ar.com.thinksoft.dtos.diagram.DataNode;
@@ -82,8 +79,7 @@ public class BBEntornosDiagram implements Serializable {
 	}
 
 	public String getJson () {
-		Gson gson = new GsonBuilder().create();
-		return gson.toJson(diagram);
+		return diagram.toString();
 	}
 
 }

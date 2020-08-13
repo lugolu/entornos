@@ -23,7 +23,7 @@ public class DataNode {
 
 	@Override
 	public String toString() {
-		return "DataNode [id=" + id + ", parent=" + parent + "]";
+		return "{id: '" + id + "'" + (parent != null ? (", parent: '" + parent + "'") : "") + "}";
 	}
 
 }

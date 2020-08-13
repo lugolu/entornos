@@ -10,8 +10,60 @@
 	    <div class="ui-g-12">
 	        <div class="card">
 	            <h1>diagram</h1>
-	            #{bbEntornosDiagram.json}
+	            <h:outputText value="#{bbEntornosDiagram.json}" escape="false" />
+	            <div id="cy"></div>
 	        </div>
 	    </div>
 	</div>
+
+<h:outputScript name="cytoscape.min.js" library="javascripts" />
+<style>
+#cy {
+  height: 365px;
+  width: 100%;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+</style>
+
+       	<script>
+var cy = window.cy = cytoscape({
+  container: document.getElementById('cy'),
+
+  boxSelectionEnabled: false,
+
+  style: [
+    {
+      selector: 'node',
+      css: {
+        'content': 'data(id)',
+        'text-valign': 'center',
+        'text-halign': 'center'
+      }
+    },
+    {
+      selector: ':parent',
+      css: {
+        'text-valign': 'top',
+        'text-halign': 'center',
+      }
+    },
+    {
+      selector: 'edge',
+      css: {
+        'curve-style': 'bezier',
+        'target-arrow-shape': 'triangle'
+      }
+    }
+  ],
+
+  elements: {
+    #{bbEntornosDiagram.json}
+  },
+  layout: {
+    name: 'grid'
+  }
+});
+	</script>
 </ui:composition>
