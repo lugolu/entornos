@@ -22,8 +22,6 @@
         <f:facet name="last">
 			<ui:insert name="customStyles" />
 			<ui:insert name="customScriptsFirst" />
-			<h:outputScript name="common.js" library="javascripts" />
-			<h:outputScript name="mascara.js" library="javascripts" />
         </f:facet>
     </h:head>
 
@@ -142,9 +140,5 @@
         
         <h:outputStylesheet name="css/nanoscroller.css" library="#{guestPreferences.contract}-layout" />
         <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="#{guestPreferences.contract}-layout" />
-        <!--  -->
-        <h:outputStylesheet name="font-awesome-animation.min.css" library="estilos" />
-       	<h:outputStylesheet name="commonV2.css" library="estilos" />
-        <h:outputStylesheet name="autogestion.css" library="estilos" />
     </h:body>
 </html>
