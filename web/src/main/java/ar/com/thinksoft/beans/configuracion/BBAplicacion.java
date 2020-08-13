@@ -47,6 +47,7 @@ public class BBAplicacion implements Serializable {
 		try {
 			Entornos.updateAplicacion(item, user.getSession());
 			MessageManager.addToMessages(SeverityBundle.INFO, MessageBundle.ROW_UPDATE_INFO);
+			initListAplicaciones();
 		} catch (Exception e) {
 			MessageManager.addToMessages(e);
 		}
@@ -56,6 +57,7 @@ public class BBAplicacion implements Serializable {
 		try {
 			Entornos.deleteAplicacion(item, user.getSession());
 			MessageManager.addToMessages(SeverityBundle.INFO, MessageBundle.ROW_DELETE_INFO);
+			initListAplicaciones();
 		} catch (Exception e) {
 			MessageManager.addToMessages(e);
 		}
@@ -66,6 +68,7 @@ public class BBAplicacion implements Serializable {
 			Entornos.insertAplicacion(addingAplicacion, user.getSession());
 			MessageManager.addToMessages(SeverityBundle.INFO, MessageBundle.ROW_INSERT_INFO);
 			addingAplicacion = new Aplicacion();
+			initListAplicaciones();
 		} catch (Exception e) {
 			MessageManager.addToMessages(e);
 		}
