@@ -4,18 +4,24 @@ const config = require('../config/config.js');
 
 const logger = require('./logger.js').logger;
 
-const dbConfig = {
-	user: 'ANUNCIADOR_TS',
-	password: 'TS#3739423415',
-	connectString: config.API_DB_SERVICE,
-	poolMin: 10,
-	poolMax: 10,
-	poolIncrement: 0
-};
-module.exports.dbConfig = dbConfig;
+const { Pool } = require('pg')
+
+let pool
 
 async function initialize() {
 	logger.info('database.initialize');
+
+	pool = new Pool({
+		user: config.DB_USER,
+		host: config.DB_HOST,
+		database: config.DB_DATABASE,
+		password: config.DB_PASS,
+		port: config.DB_PORT,
+	})
+	pool.query('SELECT NOW()', (err, res) => {
+		logger.info(res.rows)
+		logger.info(err)
+	})
 
 	console.log('base de datos iniciada');
 	logger.info('database.initialized');

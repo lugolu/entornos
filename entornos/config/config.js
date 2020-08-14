@@ -1,5 +1,9 @@
 module.exports = {
-	API_DB_SERVICE: process.env.API_DB_SERVICE || '192.168.150.25/HOSDESA2',
+	DB_USER: process.env.DB_USER || 'demo',
+	DB_HOST: process.env.DB_HOST || 'localhost',
+	DB_DATABASE: process.env.DB_DATABASE || 'db',
+	DB_PASS: process.env.DB_PASS || 'example',
+	DB_PORT: process.env.DB_PORT || 5432,
 	/**
 	 * Los siguientes parametros solo son modificables a nivel de desarrollo
 	 */
