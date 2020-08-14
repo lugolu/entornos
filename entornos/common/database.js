@@ -18,10 +18,9 @@ async function initialize() {
 		password: config.DB_PASS,
 		port: config.DB_PORT,
 	})
-	pool.query('SELECT NOW()', (err, res) => {
-		logger.info(res.rows)
-		logger.info(err)
-	})
+	await pool.query('SELECT NOW()')
+		.then(res => console.log(res.rows))
+		.catch(e => {throw new Error(e)})
 
 	console.log('base de datos iniciada');
 	logger.info('database.initialized');
@@ -36,7 +35,12 @@ async function close() {
 }
 module.exports.close = close;
 
-function simpleExecute(statement, binds = []) {
+async function simpleExecute(statement, binds = []) {
+	let ret = null
+	await pool.query(statement)
+		.then(res => ret = res)
+		.catch(e => {throw new Error(e)})
+	return ret
 }
 module.exports.simpleExecute = simpleExecute;
 

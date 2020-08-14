@@ -1,6 +1,8 @@
+const cliente = require('../../configuracion/cliente/routes.js');
 const configuracion = require('../../configuracion/routes.js');
 
 function init(app) {
+	app.use('/api', cliente);
 	app.use('/api', configuracion);
 }
 
