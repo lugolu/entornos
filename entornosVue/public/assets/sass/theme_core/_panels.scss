@@ -1,0 +1,370 @@
+body {
+    .p-panel {
+        padding: 0;
+        border: 0 none;
+
+        .p-panel-titlebar {
+            border: $panelHeaderBorder;
+            padding: $panelHeaderPadding;
+            background-color: $panelHeaderBgColor;
+            color: $panelHeaderTextColor;
+            @include border-radius-top($borderRadius);
+            @include border-radius-bottom(0);
+
+            .p-panel-title {
+                vertical-align: middle;
+                font-weight: $panelHeaderFontWeight;
+            }
+
+            .p-panel-titlebar-icon {
+                margin: 0;
+                position: relative;
+                font-size: $fontSize;
+                color: $panelHeaderIconColor;
+                border: 1px solid transparent;
+                @include border-radius($borderRadius);
+                @include transition($panelHeaderIconTransition);
+
+                &:hover {
+                    color: $panelHeaderIconHoverColor;
+                }
+
+                &:focus {
+                    @include focused();
+                }
+            }
+        }
+
+        .p-panel-content {
+            padding: $panelContentPadding;
+            border: $panelContentBorder;
+            background-color: $panelContentBgColor;
+            color: $panelContentTextColor;
+            padding: $panelContentPadding;
+            border-top: 0 none;
+            @include border-radius-bottom($borderRadius);
+        }
+
+        .p-panel-footer {
+            padding: $panelFooterPadding;
+            border: $panelFooterBorder;
+            background-color: $panelFooterBgColor;
+            color: $panelFooterTextColor;
+            border-top: 0 none;
+            margin: 0;
+        }
+    }
+
+    .p-fieldset {
+        border: $panelContentBorder;
+        background-color: $panelContentBgColor;
+        color: $panelContentTextColor;
+        @include border-radius($borderRadius);
+
+        .p-fieldset-legend {
+            a {
+                padding: $panelHeaderPadding;
+                border: $panelHeaderBorder;
+                color: $panelHeaderTextColor;
+                background-color: $panelHeaderBgColor;
+                @include border-radius($borderRadius);
+                @include transition($clickablePanelHeaderTransition);
+
+                .p-fieldset-toggler {
+                    float: none;
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: .5em;
+                    color: $panelHeaderIconColor;
+                }
+    
+                .p-fieldset-legend-text{
+                    padding: 0;
+                }
+
+                &:focus {
+                    @include focused();
+                }
+            }
+        }
+
+        &.p-fieldset-toggleable {
+            .p-fieldset-legend {
+                a {
+                    &:hover {
+                        background-color: $clickablePanelHeaderHoverBgColor;
+                        border: $clickablePanelHeaderHoverBorder;
+                        color: $clickablePanelHeaderHoverTextColor;
+    
+                        .p-fieldset-toggler {
+                            color: $clickablePanelHeaderHoverIconColor;
+                        }
+                    }
+                }
+            }
+        }
+
+        .p-fieldset-content {
+            padding: 0;
+        }
+    }
+
+    .p-accordion {
+        .p-accordion-tab {
+            margin-bottom: $accordionSpacing;
+        }
+
+        .p-accordion-header {
+            a {
+                padding: $clickablePanelHeaderPadding;
+                border: $clickablePanelHeaderBorder;
+                color: $clickablePanelHeaderTextColor;
+                background-color: $clickablePanelHeaderBgColor;
+                font-weight: $clickablePanelHeaderFontWeight;
+                @include border-radius($borderRadius);
+                @include transition($clickablePanelHeaderTransition);
+
+                .p-accordion-toggle-icon {
+                    color: $clickablePanelHeaderIconColor;
+
+                    &.pi-caret-right {
+                        @include icon_override("\e901");
+                    }
+        
+                    &.pi-caret-down {
+                        @include icon_override("\e902");
+                    }
+                }
+
+                &:not(.p-disabled):focus {
+                    @include focused();
+                }
+            }
+
+            &:not(.p-highlight):not(.p-disabled):hover {
+                a {
+                    background-color: $clickablePanelHeaderHoverBgColor;
+                    border: $clickablePanelHeaderHoverBorder;
+                    color: $clickablePanelHeaderHoverTextColor;
+
+                    .p-accordion-toggle-icon {
+                        color: $clickablePanelHeaderHoverIconColor;
+                    }
+                }
+            }
+
+            &:not(.p-disabled).p-highlight {
+                margin-bottom: 0;
+
+                a {
+                    background-color: $clickablePanelHeaderActiveBgColor;
+                    border: $clickablePanelHeaderActiveBorder;
+                    color: $clickablePanelHeaderActiveTextColor;
+                    @include border-radius-bottom(0);
+                    
+                    .p-accordion-toggle-icon {
+                        color: $clickablePanelHeaderActiveIconColor;
+                    }
+                }
+
+                &:hover {
+                    a {
+                        border: $clickablePanelHeaderActiveHoverBorder;
+                        background-color: $clickablePanelHeaderActiveHoverBgColor;
+                        color: $clickablePanelHeaderActiveHoverTextColor;
+                        
+                        .p-accordion-toggle-icon {
+                            color: $clickablePanelHeaderActiveHoverIconColor;
+                        }
+                    }
+                }
+            }
+        }
+
+        .p-accordion-content {
+            padding: $panelContentPadding;
+            border: $panelContentBorder;
+            background-color: $panelContentBgColor;
+            color: $panelContentTextColor;
+            padding: $panelContentPadding;
+            border-top: 0;
+            @include border-radius-top(0);
+            @include border-radius-bottom($borderRadius);
+        }
+    }
+
+    .p-tabview {
+        &.p-tabview-top,
+        &.p-tabview-bottom,
+        &.p-tabview-left,
+        &.p-tabview-right {
+            border: 0 none;
+
+            .p-tabview-nav {
+                padding: 0;
+                background: $tabsNavBgColor;
+                border: $tabsNavBorder;
+
+                li {
+                    a {
+                        border: $clickablePanelHeaderBorder;
+                        background-color: $clickablePanelHeaderBgColor;
+                        float: none;
+                        display: inline-block;
+                        color: $clickablePanelHeaderTextColor;
+                        padding: $clickablePanelHeaderPadding;
+                        font-weight: $clickablePanelHeaderFontWeight;
+                        @include transition($clickablePanelHeaderTransition);
+
+                        .p-tabview-left-icon {
+                            margin-right: $inlineSpacing;
+                        }
+
+                        .p-tabview-right-icon {
+                            margin-left: $inlineSpacing;
+                        }
+
+                        &:not(.p-disabled):focus {
+                            @include focused();
+                        }
+                    }
+
+                    .p-tabview-close {
+                        color: $clickablePanelHeaderIconColor;
+                        margin: 0 $inlineSpacing 0 0;
+                        vertical-align: middle;
+                    }
+
+                    &:not(.p-highlight):not(.p-disabled):hover {                        
+                        a {
+                            background-color: $clickablePanelHeaderHoverBgColor;
+                            border: $clickablePanelHeaderHoverBorder;
+                            color: $clickablePanelHeaderHoverTextColor;
+                        }
+
+                        .p-tabview-close {
+                            color: $clickablePanelHeaderHoverIconColor;
+                        }
+                    }
+
+                    &.p-highlight {
+                        a {
+                            background-color: $clickablePanelHeaderActiveBgColor;
+                            border: $clickablePanelHeaderActiveBorder;
+                            color: $clickablePanelHeaderActiveTextColor;
+                        }
+
+                        .p-tabview-close {
+                            color: $clickablePanelHeaderActiveIconColor;
+                        }
+
+                        &:hover {
+                            a {
+                                border: $clickablePanelHeaderActiveHoverBorder;
+                                background-color: $clickablePanelHeaderActiveHoverBgColor;
+                                color: $clickablePanelHeaderActiveHoverTextColor;
+                                
+                                .p-tabview-left-icon, .p-tabview-right-icon{
+                                    color: $clickablePanelHeaderActiveHoverIconColor;
+                                }
+                            }
+                        }
+                    }
+
+                    &.p-tabview-selected {
+                        a {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.p-tabview-top {
+            .p-tabview-nav {
+                margin-bottom: -1px;
+
+                li {
+                    a {
+                        margin-right: $tabHeaderSpacing;
+                        @include border-radius-top($borderRadius);
+                    }
+                }
+            }
+        }
+
+        &.p-tabview-bottom {
+            .p-tabview-nav {
+                margin-top: -1px;
+
+                li {
+                    a {
+                        margin-right: $tabHeaderSpacing;
+                        @include border-radius-bottom($borderRadius);
+                    }
+                }
+            }
+        }
+
+        &.p-tabview-left {
+            .p-tabview-nav {
+                margin-right: -px;
+
+                li {
+                    a {
+                        margin-bottom: $tabHeaderSpacing;
+                        @include border-radius-left($borderRadius);
+                    }                    
+                }
+            }
+        }
+
+        &.p-tabview-right {
+            .p-tabview-nav {
+                margin-right: -1px;
+
+                li {
+                    a {
+                        margin-bottom: $tabHeaderSpacing;
+                        @include border-radius-right($borderRadius);
+                    }
+                }
+            }
+        }     
+
+        .p-tabview-panels {
+            background-color: $panelContentBgColor;
+            padding: $panelContentPadding;
+            border: $panelContentBorder;
+            color: $panelContentTextColor;
+            @include border-radius-bottom($borderRadius);
+
+            .p-tabview-panel {
+                padding: 0;
+            }
+        }
+    }
+
+    .p-toolbar {
+        background-color: $panelHeaderBgColor;
+        border: $panelHeaderBorder;
+        padding: $panelHeaderPadding;
+        @include border-radius($borderRadius);
+
+        button {
+            vertical-align: middle;
+        }
+
+        .p-toolbar-separator {
+            vertical-align: middle;
+            color: $panelHeaderIconColor;
+            margin: 0 $inlineSpacing;
+        }
+    }
+
+    .p-card {
+        background-color: $panelContentBgColor;
+        color: $panelContentTextColor;
+        @include shadow($cardShadow);
+    } 
+}

@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    entornos:
+        build: ./entornos
+        restart: always
+        ports:
+            - '12345:12345'
+        volumes:
+        - ./configEntornos:/apps/config
+        - ./logsEntornos:/apps/logs
+    logger:
+        build: ./vueLogger
+        restart: always
+        ports:
+            - '10128:10128'
+        volumes:
+        - ./configLogger:/apps/config
+        - ./logsVue:/apps/logs
+    vue:
+        build: ./entornosVue
+        restart: always
+        ports:
+            - '80:80'
+        environment:
+            - VUE_APP_API_LOGGER_ENABLED=false
+            - VUE_APP_API_LOGGER=http://192.168.0.2:10128/api
+            - VUE_APP_API_LOGGER_DEBUG=false
+            - VUE_APP_API_ENTORNOS=http://192.168.0.2:12345/api
+        depends_on: [entornos, logger]

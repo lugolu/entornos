@@ -1,0 +1,22 @@
+{
+  "name": "vue-logger",
+  "version": "1.0.0",
+  "description": "Vue Logger API",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint --ignore-path ../.gitignore .",
+    "start": "node server.js"
+  },
+  "author": "Thinksoft Argentina S.A.",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "formidable": "^1.2.2",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.5.0"
+  }
+}

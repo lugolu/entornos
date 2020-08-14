@@ -1,0 +1,13 @@
+FROM node:12.18.2-alpine
+
+##########################################################################################
+
+WORKDIR /apps
+
+COPY package.json yarn.lock /apps/
+
+RUN yarn install
+
+ADD . /apps
+
+CMD [ "yarn", "start" ]

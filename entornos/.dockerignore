@@ -1,0 +1,7 @@
+configEntornos
+logs
+logsEntornos
+node_modules
+test
+yarn-error.log
+*.bat
