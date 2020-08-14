@@ -1,5 +1,5 @@
 # etapa de compilación
-FROM node:12.18.2-alpine as build-stage
+FROM node:12.18.3-alpine3.9 as build-stage
 WORKDIR /apps
 COPY package.json yarn.lock /apps/
 RUN yarn install
