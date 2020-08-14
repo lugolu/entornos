@@ -17,6 +17,7 @@ async function initialize() {
 		database: config.DB_DATABASE,
 		password: config.DB_PASS,
 		port: config.DB_PORT,
+		max: 20,
 	})
 	await pool.query('SELECT NOW()')
 		.then(res => console.log(res.rows))
@@ -47,3 +48,13 @@ module.exports.simpleExecute = simpleExecute;
 function simpleExecuteMulti(queries) {
 }
 module.exports.simpleExecuteMulti = simpleExecuteMulti;
+
+function status(queries) {
+	let ret = {
+		totalCount: pool.totalCount,
+		idleCount: pool.idleCount,
+		waitingCount: pool.waitingCount
+	}
+	return ret
+}
+module.exports.status = status;
