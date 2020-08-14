@@ -5,8 +5,7 @@ async function selectClientes() {
 
 	let binds = {};
 
-    let result = await database.simpleExecute(select, binds);
-    console.error(result)
+	let result = await database.simpleExecute(select, binds);
 
 	return result.rows;
 }

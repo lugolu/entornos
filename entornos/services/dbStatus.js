@@ -1,5 +1,3 @@
-const config = require('../config/config.js');
-
 const database = require('../common/database.js');
 
 function get() {

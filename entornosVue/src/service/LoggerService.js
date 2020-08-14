@@ -2,8 +2,6 @@ import axios from 'axios'
 
 import Configuration from '../../config/configuration';
 
-const querystring = require('querystring');
-
 export default class LoggerService {
 
 	async error(mje) {
@@ -13,7 +11,7 @@ export default class LoggerService {
 			await axios({
 				method: 'post',
 				url: Configuration.value('API_LOGGER') + '/log/error',
-				data: querystring.stringify(send)
+				data: send
 				});
 		}
 	}
@@ -25,7 +23,7 @@ export default class LoggerService {
 			await axios({
 				method: 'post',
 				url: Configuration.value('API_LOGGER') + '/log/debug',
-				data: querystring.stringify(send)
+				data: send
 				});
 		}
 	}
@@ -37,7 +35,7 @@ export default class LoggerService {
 			await axios({
 				method: 'post',
 				url: Configuration.value('API_LOGGER') + '/log/info',
-				data: querystring.stringify(send)
+				data: send
 				});
 		}
 	}

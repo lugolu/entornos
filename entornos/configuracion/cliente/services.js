@@ -1,7 +1,5 @@
 const constants = require('../../common/constants.js');
 
-const logger = require('../../common/logger.js').logger;
-
 const db = require('./db.js');
 
 async function getClientes() {

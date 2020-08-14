@@ -18,7 +18,7 @@
 				<InputText type="password" placeholder="Password" v-model="pass" />
 			</div>
 
-			<Button label="Sign In" icon="pi pi-check" @click="goIndex"/>
+			<Button label="Sign In" icon="pi pi-check" />
 		</div>
 	</div>
 </template>
@@ -40,12 +40,12 @@ export default {
 	},
 	created() {
 		this.loggerService = new LoggerService();
-		this.loggerService.debug('Login created');
-		this.loggerService.debug('Login created end');
+		this.loggerService.info('Login created');
+		this.loggerService.info('Login created end');
 	},
 	async mounted() {
-		this.loggerService.debug('Login mounted');
-		this.loggerService.debug('Login mounted end');
+		this.loggerService.info('Login mounted');
+		this.loggerService.info('Login mounted end');
 	},
 	methods: {
 	}

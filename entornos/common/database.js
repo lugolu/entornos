@@ -49,7 +49,7 @@ function simpleExecuteMulti(queries) {
 }
 module.exports.simpleExecuteMulti = simpleExecuteMulti;
 
-function status(queries) {
+function status() {
 	let ret = {
 		totalCount: pool.totalCount,
 		idleCount: pool.idleCount,
