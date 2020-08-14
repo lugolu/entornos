@@ -17,6 +17,7 @@ services:
         volumes:
         - ./configLogger:/apps/config
         - ./logsVue:/apps/logs
+        depends_on: [entornos]
     vue:
         build: ./entornosVue
         restart: always
@@ -27,4 +28,4 @@ services:
             - VUE_APP_API_LOGGER=http://192.168.0.2:10128/api
             - VUE_APP_API_LOGGER_DEBUG=false
             - VUE_APP_API_ENTORNOS=http://192.168.0.2:12345/api
-        depends_on: [entornos, logger]
+        depends_on: [logger]
