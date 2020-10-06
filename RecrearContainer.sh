@@ -1,4 +1,4 @@
-mydate={"FECHA":"01/01/2020", "HORA":"00:00"}
+mydate="{'FECHA':'01/01/2020', 'HORA':'00:00'}"
 echo Current time is $mydate
 
 rmdir /S /Q logsEntornos
