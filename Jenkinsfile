@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh "pwd"
+                bat "cd"
+                bat "./RecrearContainer.bat"
             }
         }
     }
