@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh './RecrearContainer.sh' 
+                sh "./RecrearContainer.sh"
             }
         }
     }
