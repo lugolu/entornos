@@ -1,17 +1,16 @@
 pipeline {
     agent any
     stages {
-            stage('Prepare') { 
-                steps {
-                    sh "pwd"
-                }
+        stage('Prepare') { 
+            steps {
+                sh "pwd"
             }
-            stage('Build') { 
-                steps {
-                    sh "pwd"
-                    sh "chmod +x -R RecrearContainer.sh"
-                    sh "./RecrearContainer.sh"
-                }
+        }
+        stage('Build') { 
+            steps {
+                sh "pwd"
+                sh "chmod +x -R RecrearContainer.sh"
+                sh "./RecrearContainer.sh"
             }
         }
     }
