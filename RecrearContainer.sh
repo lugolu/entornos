@@ -1,28 +1,24 @@
-@ECHO OFF
+mydate={"FECHA":"01/01/2020", "HORA":"00:00"}
+echo Current time is $mydate
 
-call cls
+rmdir /S /Q logsEntornos
+rmdir /S /Q logsVue
 
-for /f "tokens=2,3,4,5,6 usebackq delims=:/ " %%a in ('%date% %time%') do set mydate={"FECHA":"%%a/%%b/%%c", "HORA":"%%d:%%e"}
-echo Current time is %mydate%
+cd entornos
+yarn install
+echo $mydate > generated.json
+cd ..
 
-call rmdir /S /Q logsEntornos
-call rmdir /S /Q logsVue
+cd entornosVue
+yarn install
+echo $mydate > generated.json
+cd ..
 
-call cd entornos
-call yarn install
-call echo %mydate% > generated.json
-call cd ..
+cd vueLogger
+yarn install
+echo $mydate > generated.json
+cd ..
 
-call cd entornosVue
-call yarn install
-call echo %mydate% > generated.json
-call cd ..
+docker-compose down 
 
-call cd vueLogger
-call yarn install
-call echo %mydate% > generated.json
-call cd ..
-
-call docker-compose down 
-
-call docker-compose up --build --force-recreate --detach
+docker-compose up --build --force-recreate --detach
