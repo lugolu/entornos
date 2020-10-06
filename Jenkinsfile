@@ -4,9 +4,6 @@ pipeline {
         stage('Prepare') { 
             steps {
                 sh "pwd"
-                sh "printenv"
-                sh "env"
-                sh "$PATH"
             }
         }
         stage('Build') { 
