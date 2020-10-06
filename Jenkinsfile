@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                bat "cd"
-                bat "./RecrearContainer.bat"
+                sh "pwd"
+                sh "chmod +x -R RecrearContainer.sh"
+                sh "./RecrearContainer.sh"
             }
         }
     }
