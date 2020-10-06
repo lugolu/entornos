@@ -1,10 +1,9 @@
 pipeline {
     agent any
     stages {
-        withEnv(['PATH']) {
             stage('Prepare') { 
                 steps {
-                    sh "yarn -v"
+                    sh "pwd"
                 }
             }
             stage('Build') { 

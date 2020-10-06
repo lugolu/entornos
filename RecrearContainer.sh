@@ -5,17 +5,14 @@ rmdir /S /Q logsEntornos
 rmdir /S /Q logsVue
 
 cd entornos
-yarn install
 echo $mydate > generated.json
 cd ..
 
 cd entornosVue
-yarn install
 echo $mydate > generated.json
 cd ..
 
 cd vueLogger
-yarn install
 echo $mydate > generated.json
 cd ..
 
